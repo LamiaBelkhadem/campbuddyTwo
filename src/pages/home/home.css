@@ -1,0 +1,13 @@
+.home-container{
+    display: flex;
+    width: 100%;
+    background-color: #FAFAFA;
+
+}
+
+.main{
+    width: 20%;
+}
+.sidebar{
+    width: 20%;
+}

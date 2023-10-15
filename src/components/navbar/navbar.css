@@ -1,0 +1,152 @@
+.navbar-container{
+    z:1;
+    height:60px;
+    width: 100%;
+    background-color:#4CAF50;
+    display:flex;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index: 1000;
+    color:white;
+
+}
+.logo{
+    font-size:24px;
+    margin-left: 20px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+.navbarLeft{
+    flex:3;
+}
+.navbarCenter{
+    flex:4;
+}
+
+.searchbar{
+    width:95%;
+    height:30px;
+    background-color: white;
+    border-radius: 30px;
+    display:flex;
+    align-items: center;
+}
+
+.search-icon{
+    font-size:20px !important;
+    margin-left: 10px;
+
+}
+
+.search-input{
+    border:none;
+    width:70%;
+}
+.search-input:focus{
+    outline:none;
+    border:none;
+}
+
+
+.navbarRight{
+    flex:4;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color:white;
+}
+.navbar-link{
+    margin-right: 10px;
+    font-size: 14px;
+    cursor:pointer;
+}
+
+.navbar-icons{
+    display: flex;
+}
+
+.personIcon{
+    color: white !important;
+}
+
+.navbar-icon-item{
+    margin-right: 15px;
+    cursor: pointer;
+    position: relative;
+}
+.navbar-icon-Badge{
+    width:15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top:-5px;
+    right:-5px;
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+}
+.profile-option{
+    margin-right: 10px;
+    font-size: 14px;
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
+}
+.profile-option:hover{
+    color: darkkhaki;
+}
+.profile-name{
+    margin-left: 5px;
+}
+.navbar-profilepic{
+    width:33px;
+    height:32px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+
+}
+.dropdown {
+    position: absolute;
+    top: 100%;
+    color:black !important;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 200px;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    right: 24px;
+    left: 0;
+
+}
+
+.dropdown-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #88e09b;
+
+}
+
+.dropdown-option:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-option:last-child {
+    border-bottom: none;
+}
+.dropdown-icon{
+    margin-top: 5px;
+    scale: 1.2;
+    color: white !important;
+}
