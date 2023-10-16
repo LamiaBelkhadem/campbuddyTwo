@@ -1,8 +1,8 @@
 
 import Home from "./pages/home/Home"
-import {Person} from "@mui/icons-material"
+import Landing from "./pages/landing/Landing";
 function App() {
-  return <Home/>
+  return <Landing/>
 
 
 }
