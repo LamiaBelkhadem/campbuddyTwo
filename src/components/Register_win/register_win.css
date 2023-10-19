@@ -1,0 +1,125 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    background: url("../../../public/assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #ff6a85 );
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.9); /* slightly transparent to let the background image subtly show through */
+    padding: 40px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px ;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #E8E8E8 ;
+}
+.input-box{
+    margin-bottom:30px;
+
+}
+.remember-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+}
+label{
+    width: 200px;
+}
+
+.or-section {
+    text-align: center;
+    margin:10px;
+}
+
+
+.input-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-icon > input {
+    padding-left: 35px;
+}
+
+.input-icon > span {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+.input-box:focus {
+    outline: none;
+    border-color: #ff6a85;
+}
+
+.login-btn {
+    width: 100%;
+    background: #ff6a85;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom:15px;
+}
+
+.input-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-icon > input {
+    padding-left: 45px;
+}
+
+.input-icon  .icon {
+    position: absolute;
+    left: 10px;
+    top: 30%;
+    transform: translateY(-50%);
+}
+
+.login-btn:hover {
+    background-color: #ff5070; /* slightly darker on hover */
+}
+
+.input-box:focus {
+    outline: none;
+    border-color: #ff6a85;
+}
+
+.register-btn {
+    width: 100%;
+    background: white;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: black solid 1px;
+    margin-bottom: 20px;
+}
+
+.register-btn:hover{
+    background: #DADADA;
+}
