@@ -6,12 +6,15 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Diversity2TwoToneIcon from '@mui/icons-material/Diversity2TwoTone';
 import PersonTwoToneIcon from '@mui/icons-material/PersonTwoTone';
 import Diversity3TwoToneIcon from '@mui/icons-material/Diversity3TwoTone';
+import {Link} from "react-router-dom";
 export default function Navbar(){
     const [dropdownOpen, setDropdownOpen] = useState(false);
     return(
         <div className="navbar-container">
             <div className="navbarLeft">
+                <Link to="/home/:username" style={{textDecoration:"none"}}>
                 <span className="logo">CampBuddy</span>
+                </Link>
             </div>
             <div className="navbarCenter">
                 <div className="searchbar">
@@ -41,7 +44,7 @@ export default function Navbar(){
                     </div>
                 </div>
                 <div className="profile-option" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                    <img src="/assets/people/me.png" alt="" className="navbar-profilepic"/>
+                    <img src="/assets/me.png" alt="" className="navbar-profilepic"/>
                     <div className="profile-name">Lamia Bel Khadem</div>
                     {dropdownOpen && (
                         <div className="dropdown">

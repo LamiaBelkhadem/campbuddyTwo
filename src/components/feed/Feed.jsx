@@ -2,67 +2,41 @@ import "./feed.css"
 import Lobby from "../Lobbies/Lobby"
 import {containerClasses} from "@mui/material";
 import Diversity2TwoToneIcon from '@mui/icons-material/Diversity2TwoTone';
+import {useState, useEffect} from "react";
+import axios from "axios";
 
 export default function Feed(){
-    const lobbies = [
-        {
-            title: "Mountain Hiking",
-            hostName: "John Doe",
-            participants: 6,
-            maxParticipants: 10,
-            location: "Mountain Peak",
-            dateTime: "2023-10-20T14:00:00"
-        },
-        {
-            title: "Beach Camping",
-            hostName: "Alice Smith",
-            participants: 3,
-            maxParticipants: 8,
-            location: "Sunny Beach",
-            dateTime: "2023-10-22T11:00:00"
-        },
-        {
-            title: "Beach Camping",
-            hostName: "Alice Smith",
-            participants: 3,
-            maxParticipants: 8,
-            location: "Sunny Beach",
-            dateTime: "2023-10-22T11:00:00"
-        },
-        {
-            title: "Beach Camping",
-            hostName: "Alice Smith",
-            participants: 3,
-            maxParticipants: 8,
-            location: "Sunny Beach",
-            dateTime: "2023-10-22T11:00:00"
-        },
-        {
-            title: "Beach Camping",
-            hostName: "Alice Smith",
-            participants: 3,
-            maxParticipants: 8,
-            location: "Sunny Beach",
-            dateTime: "2023-10-22T11:00:00"
-        },
-        // ... add more lobbies as needed
-    ];
+    const [lobbies, setLobbies]=useState([]);
 
+    useEffect(()=>{
+        const fetchLobbies = async () => {
+            try {
+                const res = await axios.get("http://localhost:8080/api/lobbies");
+                setLobbies(res.data); // Assuming the data you need is in res.data
+                console.log(res);
+            } catch (error) {
+                console.error("Error fetching lobbies:", error);
+                // Handle the error appropriately
+            }
+        };
+        fetchLobbies();
+    },[]);
     return(
         <div className="feed-container">
             <div className="heading">
                 <h2><Diversity2TwoToneIcon/> Available Camping Lobbies</h2>
+
             </div>
 
-            {lobbies.map((lobby, index) => (
+            { lobbies.map((l) => (
                 <Lobby
-                    key={index}
-                    title={lobby.title}
-                    hostName={lobby.hostName}
-                    participants={lobby.participants}
-                    maxParticipants={lobby.maxParticipants}
-                    location={lobby.location}
-                    dateTime={lobby.dateTime}
+                    key={l._id}
+                    title={l.name}
+                    participants={l.participants}
+                    maxParticipants={l.maximumParticipants}
+                    location={l.address}
+                    date={l.date}
+                    time={l.time}
                 />
             ))}
         </div>

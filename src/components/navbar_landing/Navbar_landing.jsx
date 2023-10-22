@@ -6,12 +6,15 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Diversity2TwoToneIcon from '@mui/icons-material/Diversity2TwoTone';
 import PersonTwoToneIcon from '@mui/icons-material/PersonTwoTone';
 import Diversity3TwoToneIcon from '@mui/icons-material/Diversity3TwoTone';
+import {Link} from "react-router-dom";
 export default function Navbar_landing(){
     const [dropdownOpen, setDropdownOpen] = useState(false);
     return(
         <div className="navbar-container">
             <div className="navbarLeft">
-                <span className="logo">CampBuddy</span>
+                <Link to="/" style={{textDecoration:"none"}}>
+                    <span className="logo">CampBuddy</span>
+                </Link>
             </div>
             <div className="navbarCenter">
 

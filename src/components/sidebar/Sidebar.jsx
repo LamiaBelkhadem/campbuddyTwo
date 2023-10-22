@@ -8,7 +8,7 @@ export default function Sidebar() {
                 <div className="sidebar-wrapper">
                     <div className="title"><h3>Profile Status</h3></div>
                     <div className="profilepic-container">
-                        <img src="/assets/people/me.png" alt="" className="sidebar-profilepic"/>
+                        <img src="/assets/me.png" alt="" className="sidebar-profilepic"/>
                         <div className="name">Lamia</div>
                         <div className="info">
                             <div className="info-container">
