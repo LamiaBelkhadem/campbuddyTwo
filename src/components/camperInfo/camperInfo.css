@@ -1,0 +1,35 @@
+.camper-info{
+    margin-left: 10px;
+
+}
+.camper-info-container{
+     width: 50vw;
+     left: 7px;
+     top: 4px;
+     border-radius: 5px;
+    margin-top: -30px;
+     margin-left: 10px;
+     overflow: hidden;
+ }
+
+.top-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge{
+    scale:1.1;
+    margin-right: 17px;
+}
+.interests-tag {
+    display: inline-block;
+    background-color: #f3bcbb;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 0 5px 5px 0;
+    font-size: 0.85em;
+    color: #555;
+    margin-top: -10px;
+
+}

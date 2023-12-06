@@ -1,0 +1,109 @@
+.reviews-container {
+    margin-top: 20px;
+}
+.reviews-container .section-header{
+    margin-top:30px;
+    margin-bottom:10px;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    margin-bottom: 20px;
+}
+.star-filled {
+    color: gold;
+}
+
+.star-empty {
+    color: gray;
+}
+
+.star-filled, .star-empty {
+    cursor: pointer; /* To indicate the stars are clickable */
+    font-size: 20px; /* Adjust the size as needed */
+}
+
+/* You can also handle hover state in CSS if preferred */
+.star-empty:hover {
+    color: #f0ad4e; /* Or any color you prefer */
+}
+
+.review-btn{
+    font-size: 15px;
+    height: 50px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #4cae50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.review-btn:hover{
+    background-color: #b6aaaa;
+    outline: none;
+}
+.review-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: #333333 0.5px solid;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.section-header-container{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reviewer-name {
+    font-weight: bold;
+}
+
+.review-rating {
+    display: flex;
+    align-items: center;
+}
+
+.star-filled {
+    color: #ffc107; /* Gold color for filled stars */
+}
+
+.star-empty {
+    color: #e4e5e9; /* Light gray for empty parts of stars */
+}
+
+.review-rating-text {
+    margin-left: 8px;
+    font-style: italic;
+}
+
+.review-text {
+    margin-top: 10px;
+    line-height: 1.5;
+}
+camper-details-center{
+    margin-left: 80px;
+
+}
+.reviews-container .loading{
+    font-size: 15px;
+}
+
+.modal-footer .btn-primary{
+    background-color: #4cae50 !important;
+    border:none;
+}
+.modal-footer .btn-primary:hover{
+    background-color: #1d6220 !important;
+}

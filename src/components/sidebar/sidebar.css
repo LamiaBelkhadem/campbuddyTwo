@@ -6,11 +6,12 @@
     height: 100%;
     margin:10px;
     margin-right: 10px;
+    width: 20vw;
 }
-.sidebar-wrapper {
+.sidebar .sidebar-wrapper {
     width: 90%;
-    height: 600px;
     left: 7px;
+    padding-bottom:10px;
     top: 4px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -28,7 +29,7 @@
 }
 .profilepic-container{
     margin:30px;
-    margin-top:20px;
+    margin-top:10px;
 }
 .sidebar-profilepic{
     width:100px;
@@ -71,7 +72,7 @@
 }
 
 
-.info-caption {
+.sidebar .info-caption {
     font-weight: bold;
     color: #333;
     font-size: 16px;
@@ -82,5 +83,24 @@
     color: #007bff;
     font-size: 18px;
     margin-left: 10px;
+    margin-right: 10px;
+}
+
+.create-lobby-btn{
+    background-color: #a65d5d;
+    color: white;
+    width: 80%;
+    border-radius: 5px;
+    height: 40px;
+
+}
+.create-btn-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.create-lobby-btn .fa{
     margin-right: 10px;
 }

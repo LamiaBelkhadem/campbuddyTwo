@@ -12,7 +12,7 @@ export default function Home(){
             <div className="home-container">
 
                 <Sidebar className="sidebar"/>
-                <Feed/>
+                <Feed className="center"/>
                 <Rightbar/>
 
             </div>

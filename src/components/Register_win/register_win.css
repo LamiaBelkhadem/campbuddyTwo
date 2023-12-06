@@ -1,26 +1,45 @@
-.login-container {
+.register-win-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95vh;
+
+
     background: url("../../../public/assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #ff6a85 );
 }
+.input-box::placeholder {
+    color: #757575;
+}
+.desc{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.register-win-container input[type="date"]:before {
+    content: 'Date of Birth';
+    display: inline;
+   color: #757575;
+}
 
-.login-box {
+input[type="date"]:focus:before {
+    content: '';
+}
+
+.register-box {
     background: rgba(255, 255, 255, 0.9); /* slightly transparent to let the background image subtly show through */
-    padding: 40px;
+    padding: 30px;
     border-radius: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     width: 400px;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
 }
 
-.title {
+.register-box .title {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 
 }
 
-input {
+.register-win-container .input {
     width: 100%;
     padding: 12px;
     margin: 10px ;
@@ -122,4 +141,12 @@ label{
 
 .register-btn:hover{
     background: #DADADA;
+}
+.modal-footer .btn{
+    background-color: #4cae50;
+
+}
+.modal-footer .btn:hover{
+    background-color: #19491a;
+
 }

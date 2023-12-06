@@ -43,6 +43,8 @@
 .search-input{
     border:none;
     width:70%;
+    height: 99%;
+    background-color: white;
 }
 .search-input:focus{
     outline:none;
@@ -54,13 +56,20 @@
     flex:4;
     display: flex;
     align-items: center;
-    justify-content: space-around;
     color:white;
 }
 .navbar-link{
     margin-right: 10px;
     font-size: 14px;
     cursor:pointer;
+    color:white !important;
+}
+.navbar-link:hover{
+    color:dimgrey !important;
+}
+
+
+.navbar-links{
 }
 
 .navbar-icons{
@@ -100,7 +109,8 @@
     position: relative;
 }
 .profile-option:hover{
-    color: darkkhaki;
+    color:dimgray !important;
+
 }
 .profile-name{
     margin-left: 5px;
@@ -113,17 +123,18 @@
     cursor: pointer;
 
 }
-.dropdown {
+.profile-option .dropdown {
     position: absolute;
     top: 100%;
-    color:black !important;
+    color: black;
     border: 1px solid #ccc;
     background-color: #fff;
     width: 200px;
     z-index: 10;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    right: 24px;
-    left: 0;
+    right: 0;
+    left: auto;
+
 
 }
 
@@ -135,11 +146,13 @@
     align-items: center;
     justify-content: space-around;
     border-bottom: 1px solid #88e09b;
+    color: black !important;
 
 }
 
-.dropdown-option:hover {
-    background-color: #f1f1f1;
+.navbar-container .dropdown-option:hover {
+    background-color: #868686 !important;
+    border:none;
 }
 
 .dropdown-option:last-child {

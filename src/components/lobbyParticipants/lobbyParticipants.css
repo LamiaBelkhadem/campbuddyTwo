@@ -1,0 +1,125 @@
+.participants-container {
+    width: 20vw;
+    margin-right: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    border: 2px solid #4CAF50;
+
+}
+.host-header {
+     padding: 15px;
+     color: #000000;
+     border-top-left-radius: 8px;
+     border-top-right-radius: 8px;
+    background-color: #a65e5d;
+    color: white;
+ }
+
+.host-header h1 {
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+.participants-header {
+     padding: 15px;
+     color: #000000;
+     border-top-left-radius: 8px;
+     border-top-right-radius: 8px;
+    background-color: #a65e5d;
+    color: white;
+ }
+
+.participants-header h1 {
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+.host-details-card{
+    padding: 20px;
+    background-color: #FAFAFA;
+    border-top: 2px solid #4CAF50;
+
+
+}
+host{
+    text-align: center;
+    display: block;
+}
+
+.host-img{
+    width:80px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    display: block;
+    margin: auto;}
+
+.host-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjusts content to each end of the container */
+    padding: 10px;
+    margin-bottom: 10px; /* Space between each container */
+    background-color: #f0f0f0; /* Light grey background for visibility */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+
+
+ .detail-header {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Styling for the variable */
+.detail-text {
+    color: #007bff;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.more-details {
+    text-align: center;
+    color: #4CAF50;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 15px;
+    display: block;
+}
+
+.more-details:hover {
+    text-decoration: underline;
+}
+.host-name{
+    margin:10px;
+    text-align: center;
+}
+
+.joined-participants{
+    border-top: 2px solid #4CAF50 ;
+    max-height: 500px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.participants-img{
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+}
+.participants-list{
+    margin-top: 20px;
+}
+.participants-name{
+    margin-left: 20px;
+}
+
+

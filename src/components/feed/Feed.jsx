@@ -12,11 +12,11 @@ export default function Feed(){
         const fetchLobbies = async () => {
             try {
                 const res = await axios.get("http://localhost:8080/api/lobbies");
-                setLobbies(res.data); // Assuming the data you need is in res.data
+                setLobbies(res.data);
                 console.log(res);
             } catch (error) {
                 console.error("Error fetching lobbies:", error);
-                // Handle the error appropriately
+
             }
         };
         fetchLobbies();
@@ -31,6 +31,7 @@ export default function Feed(){
             { lobbies.map((l) => (
                 <Lobby
                     key={l._id}
+                    id={l._id}
                     title={l.name}
                     participants={l.participants}
                     maxParticipants={l.maximumParticipants}

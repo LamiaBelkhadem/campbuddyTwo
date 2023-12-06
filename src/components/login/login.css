@@ -103,6 +103,11 @@ label{
     background-color: #ff5070; /* slightly darker on hover */
 }
 
+.login-btn:disabled {
+cursor:not-allowed;
+
+}
+
 .input-box:focus {
     outline: none;
     border-color: #ff6a85;

@@ -6,7 +6,7 @@ export default function Rightbar(){
         <div className="rightbar">
             <div className="rightbarWrapper">
                 <img className="rightbar-img" src={`${CF}campersList.png`} alt=""/>
-                <h4 className="rightbar-Title">Online Campers</h4>
+                <h4 className="rightbar-Title">Online Campers:</h4>
                 <ul className="rightbar-campersList">
                     <li className="rightbar-Camper">
                         <div className="rightbar-img-Container">

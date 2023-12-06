@@ -26,8 +26,10 @@ export default function Navbar_landing(){
                         <span className="navbar-link">FAQ</span>
                     </div>
                 <div className="buttons">
+                    <Link to="/register" style={{textDecoration:"none"}}>
                     <button className="register-button">REGISTER</button>
-                    <button className="login-button">LOGIN</button>
+                    </Link>
+                    <Link to="/login" style={{textDecoration:"none"}}> <button className="login-button">LOGIN</button> </Link>
                 </div>
             </div>
         </div>

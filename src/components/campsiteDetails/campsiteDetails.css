@@ -1,0 +1,200 @@
+.campsite-details-container {
+    display: flex;
+    padding-top: 80px;
+    padding-right: 80px;
+}
+.campsite-details{
+    margin-left: 80px;
+}
+
+.campsite-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.campsite-details-container .campsite-details-text {
+
+    margin-left: 40px;
+    margin-top: 10px;
+
+}
+
+.campsite-details .section-header {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 20px !important;
+    font-weight: bold !important;
+
+}
+
+.campsite-details-container .campsite-img {
+
+    width: 400px;
+    height: auto;
+}
+
+.campsite-details-text .campsite-name {
+    font-size: 35px;
+}
+
+.campsite-details-text .campsite-desc {
+    text-align: justify;
+    margin-top: 20px;
+    width: 35vw;
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.8em;
+}
+
+.campsite-details-text .campsite-detail-type {
+
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.campsite-details-text .campsite-detail-row {
+    display: flex;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.campsite-details-text .campsite-detail {
+    margin-left: 15px;
+}
+
+.carousel {
+    position: relative;
+    width: 60vw;
+    padding-left: 80px;
+    padding-right: 80px;
+
+}
+
+.camper-details-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.carousel-slides .slide {
+    display: none; /* Hide slides by default */
+    width: 100%;
+}
+
+.carousel-slides .active {
+    display: block; /* Show the active slide */
+}
+
+.carousel-slides {
+    overflow: hidden;
+}
+
+.slide {
+    display: none; /* hide all slides by default */
+    position: relative;
+}
+
+.slide.active {
+    display: block; /* show the active slide */
+}
+
+.slide img {
+    width: 100%; /* make images full width of the container */
+    height: 30vw; /* set a fixed height */
+    object-fit: cover; /* cover the area without stretching */
+}
+
+/* Controls (next/prev) */
+.carousel-control {
+    position: absolute;
+    top: 50%; /* center vertically */
+    transform: translateY(-50%); /* adjust the position to truly center it */
+    z-index: 10;
+    cursor: pointer;
+}
+
+.carousel-control.prev {
+    left: 10px;
+}
+
+.carousel-control.next {
+    right: 10px;
+}
+
+.carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.2);
+}
+
+.favourite-btn {
+    font-size: 15px;
+    height: 50px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #4cae50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.favourite-btn:hover{
+    background-color: #b6aaaa;
+    outline: none;
+}
+
+.favourite-btn.active {
+    background-color: #AD5D5D;
+    color: white;
+}
+
+.favourite-btn i {
+    transition: color 0.3s;
+}
+
+.favourite-btn.active i {
+    color: white;
+}
+
+.category-tag {
+    display: inline-block;
+    background-color: #f3bcbb;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 0 5px 5px 0;
+    font-size: 0.85em;
+    color: #555;
+    margin-top: -10px;
+
+}
+
+.amenities-tag {
+    display: inline-block;
+    background-color: #90b287;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 0 5px 5px 0;
+    font-size: 0.85em;
+    color: #555;
+    margin-top: -10px;
+
+}
+.camper-details-center{
+    margin-top: 40px;
+    width: 91%;
+
+}
+.star-filled {
+    color: #ffc107; /* Gold color for filled stars */
+}
+
+.star-empty {
+    color: #e4e5e9; /* Light gray for empty parts of stars */
+}

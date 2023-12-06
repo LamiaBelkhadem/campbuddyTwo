@@ -1,0 +1,16 @@
+.profile{
+}
+
+
+.profile1-container{
+    display: flex;
+    width: 100%;
+    background: url("../../../public/assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #ff6a85 );
+
+
+}
+
+.center-bottom{
+    display: flex;
+
+}

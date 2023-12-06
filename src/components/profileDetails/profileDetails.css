@@ -1,0 +1,41 @@
+
+.camper-details {
+    width: 50vw;
+    left: 7px;
+    top: 4px;
+    border-radius: 5px;
+    margin-top: 40px;
+    margin-left: 10px;
+    overflow: hidden;
+
+}
+.mb-0{
+font-size: 15px;
+    color: #757575;
+}
+.details-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px !important;
+}
+.edit-icon{
+    cursor:pointer;
+    margin-top:5px;
+}
+.icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+}
+.edit-icon:hover{
+    color:grey !important;
+}
+.col-lg-8{
+    width: 100% !Important;
+}
+.card-body{
+    border: var(--bs-card-border-width) solid #3DAE63 !important;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+.col-sm-3{
+}
