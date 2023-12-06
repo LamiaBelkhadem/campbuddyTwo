@@ -1,5 +1,4 @@
-import "./accountDetails.css"
-import EditIcon from '@mui/icons-material/Edit';
+import "./accountDetails.css";
 
 export default function AccountDetails() {
 
