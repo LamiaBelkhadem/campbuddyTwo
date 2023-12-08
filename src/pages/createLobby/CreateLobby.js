@@ -22,8 +22,10 @@ import ExplicitIcon from '@mui/icons-material/Explicit';
 import TitleIcon from '@mui/icons-material/Title';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-
 export default function CreateLobby() {
+    const {user} = useContext(ContextAuth);
+    const host=user._id;
+    console.log(user._id);
     const [name, setTitle] = useState('');
     const [start, setStartDate] = useState('');
     const [end, setEndDate] = useState('');
@@ -41,6 +43,8 @@ export default function CreateLobby() {
     const [transport, setTransportOption] = useState('');
     const PF = process.env.REACT_APP_COMMON_FOLDER;
     const navigate = useNavigate();
+    const modalRef = useRef(null); // Ref for the modal element
+    const [bootstrapModal, setBootstrapModal] = useState(null);
 
     const [equipmentNeeded, setEquipmentNeeded] = useState(new Set());
     const [equipmentProvided, setEquipmentProvided] = useState(new Set());
@@ -49,6 +53,7 @@ export default function CreateLobby() {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef();
     const dropdownRef1 = useRef();
+
     const handleEquipmentNeededChange = (item) => {
         setEquipmentNeeded((prevEquipment) => {
             const newEquipment = new Set(prevEquipment);
@@ -60,6 +65,28 @@ export default function CreateLobby() {
             return newEquipment;
         });
     };
+
+    useEffect(() => {
+        // Check if modalRef.current is not null before trying to create a new Modal instance
+        if (modalRef.current) {
+            const bsModal = new Modal(modalRef.current);
+            setBootstrapModal(bsModal);
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log(user);
+      }, [user]);
+
+
+     
+    
+    const handleClose = () => {
+        bootstrapModal.hide();
+        navigate("/");
+    };
+
+
     const handleStartDateChange = (e) => {
         setStartDate(e.target.value);
     };
@@ -141,6 +168,7 @@ export default function CreateLobby() {
         console.log("lobby info", kids)
         // Construct the lobby object with all the form inputs and selected equipment
         const lobbyData = {
+            host,
             name,
             start,
             end,
@@ -160,12 +188,14 @@ export default function CreateLobby() {
             equipmentProvided: Array.from(equipmentProvided),
         };
 
-
+        console.log("user is", host);
         try {
-            // Send the POST request to the backend
             const response = await axios.post('http://localhost:8080/api/lobbies', lobbyData);
-            console.log(response.data);
-            // Handle the response, e.g., show a success message or redirect
+        console.log(response.data);
+        if (bootstrapModal) {
+            bootstrapModal.show(); 
+        }
+           
         } catch (error) {
             console.error('Error creating lobby:', error);
             // Handle errors, e.g., show an error message
@@ -312,6 +342,8 @@ export default function CreateLobby() {
                                 <option value="Young Adults">Young Adults</option>
                                 <option value="Adults">Adults</option>
                                 <option value="Seniors">Seniors</option>
+                                <option value="All">All</option>
+
                             </select>
                         </div>
                         <div className="input-lobby-icon">
@@ -430,7 +462,6 @@ export default function CreateLobby() {
                                         id="food-required"
                                         name="food"
                                         value="required"
-                                        checked={food === 'required'}
                                         onChange={handleFoodOptionChange}
                                     />
                                     <label htmlFor="food-required">Required</label>
@@ -441,7 +472,6 @@ export default function CreateLobby() {
                                         id="food-provided"
                                         name="food"
                                         value="provided"
-                                        checked={food === 'provided'}
                                         onChange={handleFoodOptionChange}
                                     />
                                     <label htmlFor="food-provided">Provided</label>
@@ -459,7 +489,6 @@ export default function CreateLobby() {
                                         id="transport-not-provided"
                                         name="transport"
                                         value="not-provided"
-                                        checked={transport === 'not-provided'}
                                         onChange={handleTransportOptionChange}
                                     />
                                     <label htmlFor="transport-not-provided">Not provided</label>
@@ -470,14 +499,13 @@ export default function CreateLobby() {
                                         id="transport-provided"
                                         name="transport"
                                         value="provided"
-                                        checked={transport === 'provided'}
                                         onChange={handleTransportOptionChange}
                                     />
                                     <label htmlFor="transport-provided">Provided</label>
                                 </div>
                             </div>
                         </div>
-
+                       
 
                         <div className="equipments">
                             <div className="dropdown-container" ref={dropdownRef}>
@@ -533,20 +561,20 @@ export default function CreateLobby() {
                         <button className="skip-btn">Cancel</button>
                     </div>
                 </div>
-                <div className="modal fade" tabIndex="-1" id="verificationModal" aria-hidden="true">
+                <div className="modal fade" ref={modalRef} tabIndex="-1" id="lobbyCreationConfirmModal" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Email Verification</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                <h5 className="modal-title">Lobby Created!</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}
                                 ></button>
                             </div>
                             <div className="modal-body">
-                                Your email is not verified. Please check your email to verify your account.
+                               You have successfully created a new lobby. Other campers can now see it and request to join.
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"
-                                >Okay
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}
+                                >Close
                                 </button>
                             </div>
                         </div>
