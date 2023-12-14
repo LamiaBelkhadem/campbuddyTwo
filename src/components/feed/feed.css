@@ -1,0 +1,12 @@
+.feed{
+    flex:4;
+    width: 40vw;
+}
+
+.feed-container{
+    padding: 40px;
+}
+.heading{
+    display: flex;
+    align-items: start;
+}

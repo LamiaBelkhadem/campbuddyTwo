@@ -1,0 +1,199 @@
+*{
+    font-size:15px;
+}
+.lobby-page{
+    display:flex;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 10px;
+}
+.lobby-page-container {
+    width: 80vw;
+    height: auto;
+    margin: 20px ;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid #4CAF50;
+
+}
+
+.lobby-header {
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display:flex;
+    background-color: #a65e5d;
+    color: white;
+    justify-content: space-between;
+}
+
+.lobby-header h1 {
+    font-size: 20px;
+    margin-top: 10px;
+
+}
+
+.lobby-body {
+    padding: 15px;
+    line-height: 1.6;
+    color: #333;
+}
+.lobby-details-card {
+    padding: 20px;
+    background-color: #FAFAFA;
+    border-top: 2px solid #4CAF50;
+
+}
+
+.lobby-details-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+.lobby-details-container-right{
+    width: 100%;
+}
+
+
+.lobby-details-container .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.lobby-details-card h3 {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+}
+
+.lobby-details-card .lobby-info {
+    display: flex;
+    align-items: center;
+}
+
+.lobby-details-card .lobby-info p {
+    margin-left: 10px;
+}
+
+.lobby-details-card .days-from-now {
+    text-align: left;
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+
+}
+
+.lobby-info p {
+    margin-left: 10px;
+    color: black;
+}
+
+.MuiSvgIcon-root {
+    color: black !important;
+}
+
+.capacity {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.lobby-page .join-btn
+{
+    width: 20vw;
+    height: 80px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.0 rem;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.lobby-page .join-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.view-btn {
+    background-color: transparent;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.join-btn:hover {
+    background-color: #333;
+}
+
+.view-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.lobby-image img {
+    width: 22vw;
+    height: 100%;
+    margin-right: 25px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.lobby-owner-img{
+    width:25px;
+    height:24px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    margin-top: -12px;
+    margin-left: 10px;}
+
+.lobby-page .join-btn{
+
+    font-size: 20px;
+}
+.preferences-header{
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display:flex;
+    color: black;
+    justify-content: space-between;
+    font-size: 20px;
+    margin-top: 40px;
+}
+.preferences-header h1{
+    font-size: 20px;
+    text-decoration: underline;
+}
+.preferences-details{
+    margin-left: 50px;
+    display:flex;
+    justify-content: space-between;
+    margin-right: 80px;
+
+}
+.preferences-details_bottom{
+    margin-left: 50px;
+    argin-right: 80px;
+ }
+
+.preference{
+
+}

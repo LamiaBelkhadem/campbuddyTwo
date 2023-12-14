@@ -1,0 +1,63 @@
+.rightbar{
+    flex: 4;
+    width: 30vw;
+}
+
+.rightbarWrapper{
+    padding: 20px 20px 0 0 ;
+}
+
+.rightbar-img{
+    width: 100%;
+    border-radius:10px;
+    margin:10px 0;
+}
+
+.rightbar-Title{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+
+.rightbar-campersList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.rightbar-Camper{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+}
+
+.rightbar-img-Container{
+    margin-right: 10px;
+    position: relative;
+}
+
+.rightbar-profile-img{
+    width: 40px;
+    height: 40px;
+    border-radius:50% ;
+    object-fit: cover;
+}
+
+.rightbar-Online{
+    width:12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: limegreen;
+    position: absolute;
+    top: -2px;
+    right: 0;
+    border: 2px solid white;
+
+}
+.rightbar-Username{
+    font-weight: 500;
+
+}
+

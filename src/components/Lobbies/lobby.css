@@ -1,0 +1,127 @@
+.lobby-card {
+    border: 2px solid #4CAF50;
+    padding: 20px;
+    border-radius: 5px;
+    width: 50vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: white;
+    color: #4CAF50;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.lobby-card-container {
+    display: flex;
+}
+.lobby-card-container-right{
+    width: 100%;
+}
+.lobby-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lobby-card h3 {
+    font-weight: bold;
+    font-size: 25px;
+    margin: 0;
+}
+
+.lobby-card .lobby-info {
+    display: flex;
+    align-items: center;
+}
+
+.lobby-card .lobby-info p {
+    margin-left: 10px;
+}
+
+.lobby-card .days-from-now {
+    text-align: left;
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+
+}
+
+.lobby-info p {
+    margin-left: 10px;
+    color: black;
+}
+
+.MuiSvgIcon-root {
+    color: black !important;
+}
+
+.capacity {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+
+}
+
+.lobby-card .action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.lobby-card .join-btn,
+.view-btn {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+}
+
+.join-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.view-btn {
+    background-color: transparent;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.join-btn:hover {
+    background-color: #333;
+}
+
+.view-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.campsite-lobby-image img {
+    width: 12vw;
+    height: 100%;
+    margin-right: 25px;
+}
+.lobby-owner-img{
+width:25px;
+height:24px;
+border-radius: 50%;
+object-fit: cover;
+cursor: pointer;
+margin-top: -12px;
+margin-left: 10px;}

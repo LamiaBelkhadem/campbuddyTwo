@@ -1,0 +1,37 @@
+.socials{
+    margin-left: 15px;
+    margin-top: 40px;
+
+}
+.socials-container{
+    width: 20vw;
+    left: 7px;
+    top: 4px;
+    border-radius: 5px;
+    margin-left: 30px;
+    overflow: hidden;
+
+}
+
+.top-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge{
+    scale:1.1;
+    margin-right: 17px;
+}
+.rows{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.cols-sm-9{
+text-align:right;}
+
+.social .btn{
+    width:100px;
+}
