@@ -6,19 +6,17 @@ import PersonIcon from "@mui/icons-material/Person";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import EventIcon from "@mui/icons-material/Event";
 import LobbyParticipants from "../../components/lobbyParticipants/LobbyParticipants";
+import {useGetOneLobby} from "../../hooks/api/lobbies/useGetOneLobby.jsx";
+import LoadingPage from "../../components/common/loading/LoadingPage.jsx";
+import {getImageURL} from "../../../utils/getImageURL.js";
 
 export default function LobbyPage() {
-    const params = useParams();
+    const {lobbyId} = useParams();
+    const {data: lobby, isLoading} = useGetOneLobby(lobbyId);
 
-    const lobbyId = params.lobbyId;
-    const PF = process.env.REACT_APP_COMMON_FOLDER;
-
-    const LobbyInfoItem = ({icon: Icon, children}) => (
-        <div className="lobby-info flex">
-            <Icon/>
-            <p>{children}</p>
-        </div>
-    );
+    if (isLoading) {
+        return <LoadingPage/>
+    }
 
     return (
         <>
@@ -26,12 +24,12 @@ export default function LobbyPage() {
             <div className="lobby-page">
                 <div className="lobby-page-container">
                     <div className="lobby-header">
-                        <h1>Lobby Title - Details</h1>
+                        <h1>Lobby {lobby.name} - Details</h1>
                     </div>
                     <div className="lobby-details-card">
                         <div className="lobby-details-container">
                             <div className="lobby-image">
-                                <img src={`${PF}bniMtir.jpg`} alt=""/>
+                                <img src={getImageURL("bnimtir.png")} alt=""/>
                             </div>
 
                             <div className="lobby-details-container-right">
@@ -40,11 +38,11 @@ export default function LobbyPage() {
                                         <PersonIcon/>
                                         <p>Hosted by:</p>
                                         <img
-                                            src={`${PF}me.png`}
+                                            src={getImageURL(lobby.user.profile.profilePic)}
                                             alt=""
                                             className="lobby-owner-img"
                                         />
-                                        <p>Lamia</p>
+                                        <p>{lobby.owner.username}</p>
                                     </div>
                                     <div className="capacity">
                                         <GroupIcon/>
@@ -54,7 +52,7 @@ export default function LobbyPage() {
 
                                 <div className="lobby-info">
                                     <LocationOnIcon/>
-                                    <p>location</p>
+                                    <p>{lobby.campsite}</p>
                                 </div>
                                 <div className="lobby-info">
                                     <LocationOnIcon/>
@@ -62,16 +60,11 @@ export default function LobbyPage() {
                                 </div>
                                 <div className="lobby-info">
                                     <EventIcon/>
-                                    <p> Start Date : day/month/year</p>
+                                    <p> Start Date : {lobby.start}</p>
                                 </div>
                                 <div className="lobby-info">
                                     <EventIcon/>
-                                    <p> End Date : day/month/year</p>
-                                </div>
-
-                                <div className="lobby-info">
-                                    <EventIcon/>
-                                    <p>Duration : 1 day</p>
+                                    <p> End Date : {lobby.end}</p>
                                 </div>
 
                                 <div className="action-buttons">
@@ -90,34 +83,34 @@ export default function LobbyPage() {
                                 <div className="preference">
                                     <div className="lobby-info">
                                         <EventIcon/>
-                                        <p>Age group : Young Adults</p>
+                                        <p>Age group : {lobby.age}</p>
                                     </div>
 
                                     <div className="lobby-info">
                                         <EventIcon/>
-                                        <p>Ambiance : Family-friendly</p>
+                                        <p>Ambiance : {lobby.ambiance}</p>
                                     </div>
                                 </div>
                                 <div className="preference">
                                     <div className="lobby-info">
                                         <EventIcon/>
-                                        <p>Experience : Beginner</p>
+                                        <p>Experience : {lobby.experience}</p>
                                     </div>
 
                                     <div className="lobby-info">
                                         <EventIcon/>
-                                        <p>Gender: Any</p>
+                                        <p>Gender: {lobby.gender}</p>
                                     </div>
                                 </div>
                                 <div className="preference">
                                     <div className="lobby-info">
                                         <EventIcon/>
-                                        <p>Kid-Friendly : Yes</p>
+                                        <p>Kid-Friendly : {lobby.kids ? "Yes" : "No"}</p>
                                     </div>
 
                                     <div className="lobby-info">
                                         <EventIcon/>
-                                        <p>Pet-Friendly : Yes</p>
+                                        <p>Pet-Friendly : {lobby.pet ? "Yes" : "No"}</p>
                                     </div>
                                 </div>
                             </div>
@@ -131,23 +124,23 @@ export default function LobbyPage() {
                             <div className="preferences-details">
                                 <div className="lobby-info">
                                     <EventIcon/>
-                                    <p>Food and Drinks : Bring your own</p>
+                                    <p>Food and Drinks : {lobby.food ? "Included" : "Bring your own"}</p>
                                 </div>
 
                                 <div className="lobby-info">
                                     <EventIcon/>
-                                    <p>Transportation: Not Provided</p>
+                                    <p>Transportation: {lobby.transport ? "Provided" : "Not Provided"}</p>
                                 </div>
                             </div>
                             <div className="preferences-details_bottom">
                                 <div className="lobby-info">
                                     <EventIcon/>
-                                    <p>Equipment Provided : Tent, Campfire, Knife</p>
+                                    <p>Equipment Provided : {lobby.equipmentProvided.join(", ")}</p>
                                 </div>
 
                                 <div className="lobby-info">
                                     <EventIcon/>
-                                    <p>Equipment Needed : Bring your own</p>
+                                    <p>Equipment Needed : {lobby.equipmentNeeded.join(", ")}</p>
                                 </div>
                             </div>
                         </div>

@@ -1,343 +1,372 @@
 .create-lobby-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background:
-    url("assets/background_landing.png") center/cover no-repeat,
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("assets/background_landing.png") center/cover no-repeat,
     linear-gradient(to bottom, white, #ff6a85);
 }
+
 .create-lobby-container .create-lobby-box {
-  margin-bottom: 60px;
-  margin-top: 50px;
-  width: 60vw;
+    margin-bottom: 60px;
+    margin-top: 50px;
+    width: 60vw;
 }
+
 .title1 {
-  font-family: "Arial", sans-serif;
-  font-size: 35px;
-  font-weight: bold;
-  color: #2c3e50;
-  text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
+    font-family: "Arial", sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
 }
+
 .create-lobby-box h5 {
-  margin-bottom: 10px;
-  margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: 20px;
 }
+
 .input-lobby-box {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
+
 .username1 {
-  text-align: center;
-  margin: 10px;
-  font-size: 22px;
-  font-weight: bold;
+    text-align: center;
+    margin: 10px;
+    font-size: 22px;
+    font-weight: bold;
 }
+
 .box1 {
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
 }
+
 .box1 .input-lobby-box {
-  width: 270px;
+    width: 270px;
 }
+
 .input-lobby-box::placeholder {
-  color: #757575;
+    color: #757575;
 }
+
 .create-lobby-container .create-lobby-pic-container {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
+
 .create-lobby-pic {
-  width: 8vw;
-  height: 8vw;
-  border-radius: 50%;
-  object-fit: cover;
-  transition: filter 0.2s ease-in-out;
-  cursor: pointer;
+    width: 8vw;
+    height: 8vw;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: filter 0.2s ease-in-out;
+    cursor: pointer;
 }
+
 .overlay-text {
-  position: absolute;
-  top: 19%;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  color: black;
-  cursor: pointer;
+    position: absolute;
+    top: 19%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    color: black;
+    cursor: pointer;
 }
+
 .create-lobby-icon {
-  font-size: 30px !important;
-  margin-right: 20px;
-  margin-top: -10px;
+    font-size: 30px !important;
+    margin-right: 20px;
+    margin-top: -10px;
 }
+
 .create-lobby-pic:hover {
-  filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
 .create-lobby-pic:hover + .overlay-text {
-  opacity: 1;
+    opacity: 1;
 }
+
 .textarea-container {
-  width: 100%;
-  position: relative;
+    width: 100%;
+    position: relative;
 }
 
 .character-counter {
-  position: absolute;
-  right: 0;
-  bottom: 5px;
-  background-color: rgba(255, 255, 255, 0.8); /* semi-transparent background */
-  font-size: 0.8em;
-  z-index: 1;
-  color: #fff;
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    background-color: rgba(255, 255, 255, 0.8); /* semi-transparent background */
+    font-size: 0.8em;
+    z-index: 1;
+    color: #fff;
 }
+
 textarea {
-  outline: none;
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  padding: 14px;
-  margin: 12px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #e8e8e8;
+    outline: none;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e8e8e8;
 }
 
 .create-lobby-container .desc {
-  text-align: center;
-  font-size: 18px;
-  margin-bottom: 25px;
-  color: #4d4d4d;
-  margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #4d4d4d;
+    margin-top: 20px;
 }
 
 input[type="date"]:before {
-  content: "Date of Birth";
-  color: #757575;
+    color: #757575;
 }
 
 .create-lobby-box {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 35px;
-  border-radius: 12px;
-  width: 45vw;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 35px;
+    border-radius: 12px;
+    width: 45vw;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .register-box .title {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 30px;
-  color: #333;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 30px;
+    color: #333;
 }
 
 .input-lobby-box:focus {
-  outline: none;
-  border-color: #ff6a85;
+    outline: none;
+    border-color: #ff6a85;
 }
 
 .submit-lobby-btn {
-  width: 100%;
-  background: #ff6a85;
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  transition: 0.3s;
-  margin-top: 20px;
+    width: 100%;
+    background: #ff6a85;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+    margin-top: 20px;
 }
 
 .submit-lobby-btn:hover {
-  background-color: #ff5070;
+    background-color: #ff5070;
 }
 
 .skip-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .skip-btn {
-  width: 22%;
-  background: white;
-  color: black;
-  padding: 12px;
-  border: 1px solid black;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
+    width: 22%;
+    background: white;
+    color: black;
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .skip-btn:hover {
-  background: #dadada;
+    background: #dadada;
 }
 
 .create-lobby-container .input-lobby-icon {
-  position: relative;
-  display: flex;
-  align-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .input-lobby-icon > input,
 .input-lobby-icon > select {
-  padding-left: 45px;
-  flex-grow: 1;
+    padding-left: 45px;
+    flex-grow: 1;
 }
 
 .create-lobby-container .input-lobby-icon .icon {
-  position: absolute;
-  left: 10px;
-  top: 40%;
-  transform: translateY(-50%);
+    position: absolute;
+    left: 10px;
+    top: 40%;
+    transform: translateY(-50%);
 }
 
 .tags-input {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: #e8e8e8;
-  cursor: text;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #e8e8e8;
+    cursor: text;
 }
 
 .tags-input input {
-  border: none;
-  background: none;
-  outline: none;
-  flex-grow: 1;
+    border: none;
+    background: none;
+    outline: none;
+    flex-grow: 1;
 }
 
 .tag {
-  display: inline-flex;
-  align-items: center;
-  background: #ff6a85;
-  color: white;
-  padding: 5px 10px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    background: #ff6a85;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 .tag span {
-  margin-left: 5px;
-  cursor: pointer;
+    margin-left: 5px;
+    cursor: pointer;
 }
+
 .input-lobby-box-radio {
-  display: flex; /* Use flexbox */
-  justify-content: space-around; /* Space out the radio options evenly */
-  align-items: center; /* Align items vertically in the center */
-  padding: 10px; /* Add some padding for better spacing */
-  margin-bottom: 20px;
+    display: flex; /* Use flexbox */
+    justify-content: space-around; /* Space out the radio options evenly */
+    align-items: center; /* Align items vertically in the center */
+    padding: 10px; /* Add some padding for better spacing */
+    margin-bottom: 20px;
 }
 
 .radio-option {
-  display: flex; /* Use flexbox for the radio options */
-  align-items: center; /* Align label and radio button vertically in the center */
-  margin-right: 20px;
-  padding-right: 20px;
+    display: flex; /* Use flexbox for the radio options */
+    align-items: center; /* Align label and radio button vertically in the center */
+    margin-right: 20px;
+    padding-right: 20px;
 }
 
 .radio-option label {
-  margin-left: 5px; /* Add some space between the radio button and the label */
+    margin-left: 5px; /* Add some space between the radio button and the label */
 }
 
 /* Optional: Add some additional styling as needed */
 .radio-option input[type="radio"] {
-  cursor: pointer; /* Change cursor to pointer when hovering over the radio button */
+    cursor: pointer; /* Change cursor to pointer when hovering over the radio button */
 }
 
 .input-label {
-  margin-left: 30px;
-  margin-right: 80px;
+    margin-left: 30px;
+    margin-right: 80px;
 }
+
 .dropdown-container {
-  width: 50vw;
-  position: relative; /* Needed to position the dropdown list absolutely relative to this container */
+    width: 50vw;
+    position: relative; /* Needed to position the dropdown list absolutely relative to this container */
 }
+
 .dropdown-button {
-  cursor: pointer;
-  height: 50px;
-  width: 220px;
-  border-radius: 5px;
-  /* Rest of your styling */
+    cursor: pointer;
+    height: 50px;
+    width: 220px;
+    border-radius: 5px;
+    /* Rest of your styling */
 }
 
 .dropdown-list {
-  position: absolute;
-  display: flex;
-  flex-direction: column; /* Stack the items vertically */
-  align-items: flex-start;
-  background-color: #e7e7e7;
-  max-height: 200px; /* Set a max height for your dropdown */
-  overflow-y: auto; /* Allows vertical scrolling if content overflows */
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+    position: absolute;
+    display: flex;
+    flex-direction: column; /* Stack the items vertically */
+    align-items: flex-start;
+    background-color: #e7e7e7;
+    max-height: 200px; /* Set a max height for your dropdown */
+    overflow-y: auto; /* Allows vertical scrolling if content overflows */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 
-  /* Rest of your styling */
+    /* Rest of your styling */
 }
 
 .dropdown-list-item {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  /* No need to set a fixed width here if you want it to match the dropdown list */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    /* No need to set a fixed width here if you want it to match the dropdown list */
 }
+
 .dropdown-list-item input[type="checkbox"] {
-  margin-right: 10px;
+    margin-right: 10px;
 }
+
 .dropdown-list-item:hover {
-  background-color: #f1f1f1;
+    background-color: #f1f1f1;
 }
+
 .dropdown-container button {
-  height: 50px;
-  width: 220px;
-  border-radius: 5px;
+    height: 50px;
+    width: 220px;
+    border-radius: 5px;
 }
+
 .icon-equipment {
-  margin-right: 10px;
+    margin-right: 10px;
 }
+
 .equipments {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
+
 .create-lobby-page h5 {
-  margin-top: 20px;
+    margin-top: 20px;
 }
+
 .separator {
-  border: #bdbdbd 0.5px solid;
-  width: 70%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+    border: #bdbdbd 0.5px solid;
+    width: 70%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
+
 .separator-container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
+
 .dropdown-list label {
-  display: flex;
-  width: 300px;
+    display: flex;
+    width: 300px;
 }
+
 .dropdown-list-item label {
-  flex-grow: 1; /* Allows the label to fill the space */
-  white-space: nowrap; /* Prevents the text from wrapping */
-  overflow: hidden; /* Hides any overflow */
-  text-overflow: ellipsis; /* Adds an ellipsis if the text overflows */
+    flex-grow: 1; /* Allows the label to fill the space */
+    white-space: nowrap; /* Prevents the text from wrapping */
+    overflow: hidden; /* Hides any overflow */
+    text-overflow: ellipsis; /* Adds an ellipsis if the text overflows */
 }
+
 .dropdown-list input {
-  width: 50%;
+    width: 50%;
 }
+
 .radio-option input {
-  width: 50px;
+    width: 50px;
 }
+
 .radio-option label {
-  width: 100px;
+    width: 100px;
 }

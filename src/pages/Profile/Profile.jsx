@@ -6,15 +6,13 @@ import ProfileDetails from "../../components/profileDetails/ProfileDetails.jsx";
 import SidebarProfil from "../../components/SidebarProfile/SidebarProfil.jsx";
 import Socials from "../../components/socials/Socials.jsx";
 import "./profile.css";
-
-import axios from "axios";
-import {useEffect, useState} from "react";
 import {useAuth} from "../../hooks/useAuth.jsx";
 import {useGetMyProfile} from "../../hooks/api/profile/useGetMyProfile.jsx";
 import LoadingPage from "../../components/common/loading/LoadingPage.jsx";
 
 export default function Profile() {
     const {data: profile, isLoading} = useGetMyProfile()
+    const {user} = useAuth()
 
     if (isLoading) return <LoadingPage/>
 
@@ -40,7 +38,7 @@ export default function Profile() {
                                 lname={profile.lname}
                                 area={profile.area}
                                 age={profile.age}
-                                email={profile.email}
+                                email={user.email}
                             />
                         )}
                         {profile && (

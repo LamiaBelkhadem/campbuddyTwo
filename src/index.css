@@ -133,7 +133,6 @@ label {
 }
 
 .auth-ctr input[type="date"]:before {
-  content: "Date of Birth";
   display: inline;
   color: #757575;
 }
