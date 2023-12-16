@@ -6,16 +6,16 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Footer from "../../components/common/footer";
 
 export default function Home() {
-  return (
-    <>
-      <Navbar />
-      <div className="home-container">
-        <Sidebar className="sidebar" />
-        <Feed className="center" />
-        <Rightbar />
-      </div>
+    return (
+        <>
+            <Navbar/>
+            <div className="home-container">
+                <Sidebar className="sidebar"/>
+                <Feed className="center"/>
+                <Rightbar/>
+            </div>
 
-      <Footer />
-    </>
-  );
+            <Footer/>
+        </>
+    );
 }

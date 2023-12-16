@@ -25,7 +25,7 @@ export default function SidebarCampsite() {
     setActiveOption(activeOption === option ? null : option);
   };
   const activeCampsiteDetails = campsites.find(
-    (campsite) => campsite._id === activeOption
+    (campsite) => campsite._id === activeOption,
   );
 
   return (

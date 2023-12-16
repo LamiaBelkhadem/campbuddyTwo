@@ -45,11 +45,15 @@ export default function CampsiteDetails({ details }) {
     for (let i = 1; i <= 5; i++) {
       if (i <= ratingNumber) {
         stars.push(
-          <i key={i} className="fa fa-star star-filled" aria-hidden="true"></i>
+          <i key={i} className="fa fa-star star-filled" aria-hidden="true"></i>,
         ); // Filled star
       } else {
         stars.push(
-          <i key={i} className="fa fa-star-o star-empty" aria-hidden="true"></i>
+          <i
+            key={i}
+            className="fa fa-star-o star-empty"
+            aria-hidden="true"
+          ></i>,
         ); // Empty star
       }
     }
@@ -71,7 +75,7 @@ export default function CampsiteDetails({ details }) {
           `http://localhost:8080/api/users/removeFavourites/${user._id}`,
           {
             favorites: details._id,
-          }
+          },
         );
         setIsFavourite(!isFavourite);
       } else {
@@ -80,7 +84,7 @@ export default function CampsiteDetails({ details }) {
           `http://localhost:8080/api/users/addFavourites/${user._id}`,
           {
             favorites: details._id,
-          }
+          },
         );
         setIsFavourite(isFavourite);
       }

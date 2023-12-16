@@ -1,37 +1,41 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { verifyEmailApi } from "../../lib/api/auth";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import "./verify-email.css";
+import {useVerifyEmail} from "../../hooks/api/useVerifyEmail";
+import {useAuth} from "../../hooks/useAuth";
 
 function VerifyEmail() {
-  const { token } = useParams();
-  const navigate = useNavigate();
-  const [verificationStatus, setVerificationStatus] = useState(
-    "Verifying your email...",
-  );
+    const {token} = useParams();
 
-  useEffect(() => {
-    const verifyEmail = async () => {
-      try {
-        await verifyEmailApi(token);
-      } catch (error) {
-        console.error(error.response || error);
-      }
-    };
-
-    setVerificationStatus(
-      "Email successfully verified! Redirecting to home...",
+    console.log(token);
+    const navigate = useNavigate();
+    const [verificationStatus, setVerificationStatus] = useState(
+        "Verifying your email..."
     );
-    setTimeout(() => navigate("/home"), 5000);
 
-    verifyEmail();
-  }, [token, navigate]);
+    const {logout} = useAuth();
 
-  return (
-    <div className="verify-email-container">
-      <h1>{verificationStatus}</h1>
-    </div>
-  );
+    const {data, isLoading, error} = useVerifyEmail(token);
+
+    useEffect(() => {
+        if (data && !isLoading) {
+            setVerificationStatus(
+                "Email successfully verified! Redirecting to home..."
+            );
+            setTimeout(() => navigate("/"), 5000);
+        } else if (error) {
+            setVerificationStatus("Something went wrong! Redirecting to home...");
+            logout();
+            setTimeout(() => navigate("/"), 5000);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, isLoading]);
+
+    return (
+        <div className="verify-email-container">
+            <h1>{verificationStatus}</h1>
+        </div>
+    );
 }
 
 export default VerifyEmail;

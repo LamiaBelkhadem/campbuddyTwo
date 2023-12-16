@@ -77,7 +77,7 @@ export default function CampsiteRating({ reviewIds, userId, campsiteId }) {
         }
       }
     } catch (error) {
-      // Handle any errors, such as displaying a message to the user
+      // Handle any errors, such as displaying a message to the profile
       console.error("Error submitting review:", error);
       alert(
         "There was an error submitting your review. Please try again later.",
@@ -110,7 +110,7 @@ export default function CampsiteRating({ reviewIds, userId, campsiteId }) {
         overallRating = totalRating / reviews.length;
         console.log("overall rating:", overallRating);
       }
-      // Fetch each user individually and handle possible null values
+      // Fetch each profile individually and handle possible null values
       const usersPromises = reviews.map((review) =>
         axios.get(`http://localhost:8080/api/users?userId=${review.userId}`),
       );
@@ -122,11 +122,11 @@ export default function CampsiteRating({ reviewIds, userId, campsiteId }) {
         .filter((response) => response.status === 200 && response.data != null)
         .map((res) => res.data);
 
-      // Create a map for userId to user
+      // Create a map for userId to profile
       const userMap = {};
       users.forEach((user) => {
         if (user) {
-          // Check if the user is not null
+          // Check if the profile is not null
           userMap[user._id] = user;
         }
       });

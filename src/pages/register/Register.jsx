@@ -7,9 +7,9 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import AppModal from "../../components/common/Modal";
 import useDisclosure from "../../hooks/useDisclosure";
 import { register } from "../../lib/api/auth";
-import EmailConfirmationModal from "./EmailConfirmationModal";
 
 const registerSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -140,7 +140,12 @@ export default function Register() {
           <button className="other-btn">Sign In</button>
         </Link>
       </div>
-      <EmailConfirmationModal isOpen={isOpen} onClose={onCloseHandler} />
+      <AppModal
+        isOpen={isOpen}
+        onClose={onCloseHandler}
+        body="Please check your email to verify your account."
+        title="Email verification"
+      />
     </div>
   );
 }

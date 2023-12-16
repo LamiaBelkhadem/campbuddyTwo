@@ -1,10 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
-import { useAxios } from "../useAxios";
+import {useMutation} from "@tanstack/react-query";
+import axios from "axios";
 
 export const useLogin = () => {
-  const { axios } = useAxios();
-  return useMutation({
-    mutationFn: async (data) =>
-      axios.post("/auth/login", data).then((res) => res.data),
-  });
+    return useMutation({
+        mutationFn: async (data) =>
+            axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, data).then((res) => res.data),
+    });
 };

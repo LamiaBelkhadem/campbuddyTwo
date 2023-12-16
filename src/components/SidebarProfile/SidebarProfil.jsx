@@ -1,12 +1,11 @@
 import StarIcon from "@mui/icons-material/Star";
-import { useAuth } from "../../hooks/useAuth";
 import "./sidebarProfil.css";
+import useAuth from "../../hooks/useAuth";
 
-export default function SidebarProfil({ username, lobbies }) {
-  const name = "Lamia";
+const SidebarProfil = ({ username, lobbies }) => {
   const lobbies_created = lobbies.length;
-
   const { user } = useAuth();
+
   console.log(user.profilepic);
   return (
     <div className="profile-sidebar">
@@ -60,4 +59,6 @@ export default function SidebarProfil({ username, lobbies }) {
       </div>
     </div>
   );
-}
+};
+
+export default SidebarProfil;

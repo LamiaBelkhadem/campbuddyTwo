@@ -2,7 +2,6 @@ import "./lobbyParticipants.css";
 import React from "react";
 
 export default function LobbyParticipants() {
-
   return (
     <>
       <div className="participants-container">
