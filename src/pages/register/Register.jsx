@@ -17,13 +17,13 @@ const registerSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
   passwordCon: Yup.string().oneOf(
     [Yup.ref("password"), null],
-    "Passwords must match"
+    "Passwords must match",
   ),
   dob: Yup.string()
     .required("Date of Birth is required")
     .matches(
       /^[0-9]{4}\/[0-9]{2}\/[0-9]{2}$/,
-      "Date of Birth must be in YYYY-MM-DD format"
+      "Date of Birth must be in YYYY-MM-DD format",
     ),
 });
 

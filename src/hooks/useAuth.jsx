@@ -9,5 +9,4 @@ export const useAuth = () => {
   return data;
 };
 
-
-export default useAuth
+export default useAuth;

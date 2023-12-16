@@ -1,13 +1,12 @@
-import {useMutation} from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import useAxios from "../../useAxios";
-import {createLobby} from "../../../lib/api/lobbies/index.js";
+import { createLobby } from "../../../lib/api/lobbies/index.js";
 
 export const useCreateLobby = () => {
-    const {axios} = useAxios();
+  const { axios } = useAxios();
 
-    return useMutation({
-        mutationFn: (data) => createLobby(data, axios)
-        ,
-        mutationKey: ["lobbies"],
-    });
+  return useMutation({
+    mutationFn: (data) => createLobby(data, axios),
+    mutationKey: ["lobbies"],
+  });
 };

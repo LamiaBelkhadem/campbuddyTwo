@@ -5,7 +5,7 @@ import "./feed.css";
 
 export default function Feed() {
   const { data: lobbies } = useAllLobbies();
-  console.log(lobbies)
+  console.log(lobbies);
 
   return (
     <div className="feed-container">

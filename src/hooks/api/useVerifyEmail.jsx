@@ -6,6 +6,6 @@ export const useVerifyEmail = (token) => {
     queryKey: ["verify-email"],
     queryFn: () => verifyEmailApi(token),
     enabled: !!token,
-    retry:false
+    retry: false,
   });
 };
