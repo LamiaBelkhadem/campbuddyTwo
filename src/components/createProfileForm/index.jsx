@@ -49,7 +49,9 @@ const _initialValues = {
 };
 
 function ProfileForm({ profile }) {
+
   const initialValues = { ..._initialValues, ...profile };
+  console.log({initialValues})
   const [selectedImage, setSelectedImage] = useState({
     picturePath: initialValues.profilePic ?? "/assets/defaultpp.jpg",
     pictureFile: null,

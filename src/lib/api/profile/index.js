@@ -5,6 +5,6 @@ export const viewUserProfile = (id, client) =>
 export const getProfiles = (client) =>
   client.get("/profiles").then((res) => res.data);
 export const getMyProfile = (client) =>
-  client.get("/profiles/my-profile").then((res) => res.data);
+  client.get("/profiles/my-profile").then((res) => res.data.profile);
 export const deleteProfile = (id, client) =>
   client.delete(`/profiles/${id}`).then((res) => res.data);

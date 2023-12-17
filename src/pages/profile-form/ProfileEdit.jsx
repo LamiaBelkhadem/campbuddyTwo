@@ -6,9 +6,7 @@ import AppSkeleton from "../../components/common/loading/Skeleton.jsx";
 import { getImageURL } from "../../../utils/getImageURL.js";
 
 export default function ProfileEdit() {
-  const { data, isLoading } = useGetMyProfile();
-
-  console.log(data, isLoading);
+  const { data:profile, isLoading } = useGetMyProfile();
   return (
     <>
       <Navbar />
@@ -17,10 +15,10 @@ export default function ProfileEdit() {
           <AppSkeleton />
         ) : (
           <ProfileForm
-            initialValues={{
-              ...data.profile,
+            profile={{
+              ...profile,
 
-              profilePic: data.profile? getImageURL(data.profile.profilePic): "defaultpp.jpg",
+              profilePic: profile? getImageURL(profile.profilePic): "defaultpp.jpg",
             }}
           />
         )}
