@@ -25,12 +25,6 @@ export const useUserInfo = () => {
     }
   };
 
-  useEffect(() => {
-    if (data) {
-      setLoading(false);
-    }
-  }, [data]);
-
   return {
     isLoading,
     error,
