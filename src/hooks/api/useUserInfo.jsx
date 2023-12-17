@@ -21,6 +21,7 @@ export const useUserInfo = () => {
     } catch (e) {
       setError(e);
     } finally {
+      setLoading(false);
     }
   };
 

@@ -5,6 +5,7 @@ import LoadingPage from "./loading/LoadingPage";
 
 const PrivateRoute = ({ children }) => {
   const { user, isLoggingIn } = useAuth();
+  console.log({ user, isLoggingIn });
 
   if (isLoggingIn) {
     return <LoadingPage />;

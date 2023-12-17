@@ -25,30 +25,18 @@ import {
   Stack,
   TextareaAutosize,
 } from "@mui/material";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Footer from "../../components/common/footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./create-lobby.css";
-import * as Yup from "yup";
 import { useGetAllCampsites } from "../../hooks/api/campsites/useGetAllCampsites.jsx";
 import AppModal from "../../components/common/Modal/index.jsx";
 import useDisclosure from "../../hooks/useDisclosure.jsx";
 import { useCreateLobby } from "../../hooks/api/lobbies/useCreateLobby.jsx";
 import { Field, Form, Formik } from "formik";
 import { toast } from "react-toastify";
-
-const equipmentList = [
-  "Tent",
-  "Utensils",
-  "Sleeping Bag",
-  "Camp Stove",
-  "First Aid Kit",
-  "Flashlight",
-  "Portable Charger",
-  "Maps and Compass",
-  "Water Bottle",
-  "Fire Starter",
-];
+import { createLobbySchema } from "../../lib/api/lobbies/validation.js";
+import { equipmentList } from "../../lib/constants.js";
 
 const initialValues = {
   name: "",
@@ -58,7 +46,7 @@ const initialValues = {
   maximumParticipants: 5,
   campsite: "asdfasdf",
   desc: "",
-  age: "18 - 30",
+  age: "Adults",
   experience: "",
   gender: "All",
   kids: false,
@@ -69,28 +57,6 @@ const initialValues = {
   equipmentNeeded: [],
   equipmentProvided: [],
 };
-
-const createLobbySchema = Yup.object().shape({
-  name: Yup.string().required("Lobby Title is required"),
-  start: Yup.string().required("Start Date is required"),
-  end: Yup.string().required("End Date is required"),
-  time: Yup.string().required("Time is required"),
-  maximumParticipants: Yup.number().required(
-    "Maximum number of participants is required",
-  ),
-  campsite: Yup.string().required("Campsite is required"),
-  desc: Yup.string().required("Description is required"),
-  age: Yup.string().required("Age Group is required"),
-  experience: Yup.string().required("Experience is required"),
-  gender: Yup.string().required(),
-  kids: Yup.bool().required(),
-  pets: Yup.bool().required(),
-  ambiance: Yup.string().required("Ambiance is required"),
-  food: Yup.bool().required(),
-  transport: Yup.bool().required(),
-  equipmentNeeded: Yup.array().of(Yup.string()),
-  equipmentProvided: Yup.array().of(Yup.string()),
-});
 
 export default function CreateLobby() {
   const { isOpen, onClose } = useDisclosure();
@@ -104,8 +70,6 @@ export default function CreateLobby() {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
-    return;
     createLobby(values, {
       onError: () => {
         toast.error("Error creating lobby");
@@ -127,7 +91,7 @@ export default function CreateLobby() {
             onSubmit={handleSubmit}
             validationSchema={createLobbySchema}
           >
-            {({ values, errors, isSubmitting }) => (
+            {({ values, errors }) => (
               <Form
                 style={{
                   display: "flex",
@@ -435,7 +399,7 @@ export default function CreateLobby() {
                 <Stack
                   className="equipments"
                   sx={{ width: "100%", columnGap: 20 }}
-                  direction={"row"}
+                  direction="row"
                 >
                   <FormControl sx={{ m: 1, width: "100%" }}>
                     <InputLabel id="equipment-needed">

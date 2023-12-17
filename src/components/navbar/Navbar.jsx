@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import "./navbar.css";
+import { getImageURL } from "../../../utils/getImageURL.js";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -52,8 +53,8 @@ export default function Navbar() {
           <img
             src={
               user?.profile.profilePic
-                ? user.profile.profilePic
-                : `defaultpp.jpg`
+                ? getImageURL(user.profile.profilePic)
+                : getImageURL(`defaultpp.jpg`)
             }
             alt=""
             className="navbar-profilepic"

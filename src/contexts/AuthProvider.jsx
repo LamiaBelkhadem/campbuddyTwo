@@ -19,13 +19,17 @@ function reducer(state, action) {
       };
     case "LOGOUT":
       return initialState;
+    case "REFRESH_USER":
+      return {
+        ...state,
+        user: action.payload,
+      };
   }
 }
 
 export const AuthProvider = ({ children, loadingElement }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { mutate: login, isPending: isLoggingIn } = useLogin();
-
   const [token, setToken] = useLocalStorage("token", undefined);
 
   const { data, isLoading: isLoadingUser, fetchData } = useUserInfo();
@@ -38,12 +42,13 @@ export const AuthProvider = ({ children, loadingElement }) => {
           type: "LOGIN",
           payload: data,
         });
-        console.log("Token is set");
         setToken(data.accessToken);
         if (onSuccess) onSuccess();
       },
     });
   }
+
+  console.log({ isLoadingUser });
 
   function handeLogout() {
     dispatch({
@@ -63,6 +68,14 @@ export const AuthProvider = ({ children, loadingElement }) => {
       value={{
         user: data?.user ?? state.user,
         accessToken: token,
+        refetchUser: async () => {
+          const user = await fetchData(token);
+          console.log({ user });
+          dispatch({
+            type: "REFRESH_USER",
+            paylaod: user,
+          });
+        },
         isLoggingIn,
         login: handleLogin,
         logout: handeLogout,

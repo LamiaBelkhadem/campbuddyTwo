@@ -1,4 +1,4 @@
-import SidebarCampsite from "../../components/sidebarCampsite/SidebarCampsite";
+import CampsiteView from "../../components/CampsiteView";
 import Navbar from "../../components/navbar/Navbar";
 import "./campsites.css";
 export default function Campsites() {
@@ -6,7 +6,7 @@ export default function Campsites() {
     <div className="campsite-page">
       <Navbar />
       <div className="campsites-container">
-        <SidebarCampsite />
+        <CampsiteView />
       </div>
     </div>
   );

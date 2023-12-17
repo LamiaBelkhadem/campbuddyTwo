@@ -2,7 +2,7 @@ import Footer from "../../components/common/footer";
 import ProfileForm from "../../components/createProfileForm";
 import Navbar from "../../components/navbar/Navbar";
 import { useGetMyProfile } from "../../hooks/api/profile/useGetMyProfile.jsx";
-import MySkeleton from "../../components/common/loading/Skeleton.jsx";
+import AppSkeleton from "../../components/common/loading/Skeleton.jsx";
 import { getImageURL } from "../../../utils/getImageURL.js";
 
 export default function ProfileEdit() {
@@ -14,7 +14,7 @@ export default function ProfileEdit() {
       <Navbar />
       <div className="window">
         {isLoading ? (
-          <MySkeleton />
+          <AppSkeleton />
         ) : (
           <ProfileForm
             initialValues={{

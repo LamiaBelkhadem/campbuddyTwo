@@ -6,26 +6,10 @@ import { Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import * as Yup from "yup";
 import AppModal from "../../components/common/Modal";
 import useDisclosure from "../../hooks/useDisclosure";
 import { register } from "../../lib/api/auth";
-
-const registerSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().required("Password is required"),
-  passwordCon: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match",
-  ),
-  dob: Yup.string()
-    .required("Date of Birth is required")
-    .matches(
-      /^[0-9]{4}\/[0-9]{2}\/[0-9]{2}$/,
-      "Date of Birth must be in YYYY-MM-DD format",
-    ),
-});
+import { registerSchema } from "../../lib/api/auth/validation.js";
 
 const initialValues = {
   username: "",

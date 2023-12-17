@@ -1,18 +1,18 @@
-import Person from "@mui/icons-material/Person";
+import { Man, Woman } from "@mui/icons-material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EmailIcon from "@mui/icons-material/Email";
 import HttpsIcon from "@mui/icons-material/Https";
+import Person from "@mui/icons-material/Person";
 import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useUpdateProfile } from "../../hooks/api/profile/useUpdateProfile";
 import useAuth from "../../hooks/useAuth";
 import useDisclosure from "../../hooks/useDisclosure";
 import AppModal from "../common/Modal";
 import "./create-profile.css";
-import { toast } from "react-toastify";
-import { Man, Woman } from "@mui/icons-material";
 
 const createProfileSchema = Yup.object().shape({
   gender: Yup.string(),

@@ -1,7 +1,5 @@
-import "./camperInfo.css";
 import EditIcon from "@mui/icons-material/Edit";
-import { experimental_extendTheme } from "@mui/material";
-import React from "react";
+import "./camperInfo.css";
 
 export default function CamperInfo({
   gender,
@@ -11,7 +9,6 @@ export default function CamperInfo({
   equipment,
   favourites,
 }) {
-  const interestsTags = interests.split(",").map((tag) => tag.trim());
   return (
     <div className="camperInfo">
       <div className="camper-info-container">
@@ -49,7 +46,7 @@ export default function CamperInfo({
                   <p className="mb-0">Interests/Hobbies</p>
                 </div>
                 <div className="col-sm-9">
-                  {interestsTags.map((tag, index) => (
+                  {interests.map((tag, index) => (
                     <span key={index} className="interests-tag">
                       {tag}
                     </span>

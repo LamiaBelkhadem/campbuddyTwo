@@ -1,32 +1,28 @@
 import { useEffect, useState } from "react";
-import "./sidebarCampsite.css";
-import CampsiteDetails from "../campsiteDetails/CampsiteDetails";
+import { getImageURL } from "../../../utils/getImageURL.js";
+import { useGetAllCampsites } from "../../hooks/api/campsites/useGetAllCampsites.jsx";
+import CampsiteDetails from "../campsiteDetails/CampsiteDetails.jsx";
+import AppSkeleton from "../common/loading/Skeleton.jsx";
+import "./campsite-view.css";
 
 export default function SidebarCampsite() {
-  const [campsites, setCampsites] = useState([]);
   const [activeOption, setActiveOption] = useState(null);
 
-  useEffect(() => {
-    fetchCampsites();
-  }, []);
+  const { data: campsites, isLoading } = useGetAllCampsites();
 
-  const fetchCampsites = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/campsites");
-      const data = await response.json();
-      setCampsites(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching campsites:", error);
-      // Handle the error according to your needs
-    }
-  };
   const handleOptionClick = (option) => {
     setActiveOption(activeOption === option ? null : option);
   };
-  const activeCampsiteDetails = campsites.find(
-    (campsite) => campsite._id === activeOption,
-  );
+  const activeCampsiteDetails = () =>
+    campsites.find((campsite) => campsite._id === activeOption);
+
+  useEffect(() => {
+    if (!isLoading && campsites && campsites.length > 0) {
+      setActiveOption(campsites[0]._id);
+    }
+  }, [campsites, isLoading]);
+
+  if (isLoading) return <AppSkeleton />;
 
   return (
     <div className="sidebar-campsite-page">
@@ -47,7 +43,7 @@ export default function SidebarCampsite() {
               >
                 <div className="option-img-wrapper">
                   <img
-                    src={campsite.mainImg}
+                    src={getImageURL(campsite.mainImg)}
                     alt={campsite.name}
                     className="option-img"
                   />
@@ -61,8 +57,8 @@ export default function SidebarCampsite() {
           </ul>
         </nav>
       </div>
-      {activeCampsiteDetails && (
-        <CampsiteDetails details={activeCampsiteDetails} />
+      {activeCampsiteDetails() && (
+        <CampsiteDetails campsite={activeCampsiteDetails()} />
       )}
     </div>
   );

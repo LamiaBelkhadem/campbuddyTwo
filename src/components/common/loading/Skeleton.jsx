@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Button, Typography, Skeleton } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Button, Skeleton, Typography } from "@mui/material";
 
-const MySkeleton = () => {
+const AppSkeleton = () => {
   const [loading, setLoading] = useState(true);
 
   // Simulate an API call or some asynchronous operation
@@ -41,4 +41,4 @@ const MySkeleton = () => {
   );
 };
 
-export default MySkeleton;
+export default AppSkeleton;

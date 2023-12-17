@@ -9,3 +9,8 @@ export const useVerifyEmail = (token) => {
     retry: false,
   });
 };
+
+/**
+ * Caching mechanism
+ * verify-email
+ */

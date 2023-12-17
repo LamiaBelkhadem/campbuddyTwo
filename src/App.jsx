@@ -1,15 +1,25 @@
+import { Box, Container } from "@mui/material";
 import {
-  BrowserRouter as Router,
   Outlet,
   Route,
+  BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  CampsiteCreate,
+  CampsiteEdit,
+} from "./components/CampsiteEdit/index.jsx";
+import AdminRoute from "./components/common/AdminRoute.jsx";
+import IsProfileSet from "./components/common/IsProfileSet";
 import PrivateRoute from "./components/common/PrivateRoute";
 import PublicRoute from "./components/common/PublicRoute";
+import AuthenticatedLayout from "./components/common/layouts/AuthenticatedLayout.jsx";
 import UnAuthenticatedLayout from "./components/common/layouts/UnauthenticatedLayout";
 import { AuthProvider } from "./contexts/AuthProvider";
+import NotFoundPage from "./pages/404.jsx";
+import Dashboard from "./pages/admin/Dashboard.jsx";
 import Campsites from "./pages/campsites/Campsites";
 import Home from "./pages/home/Home";
 import Landing from "./pages/landing/Landing";
@@ -17,11 +27,9 @@ import LobbyPage from "./pages/lobby/LobbyPage";
 import Login from "./pages/login/Login";
 import CreateLobby from "./pages/new-lobby/CreateLobby";
 import ProfileForm from "./pages/profile-form/ProfileEdit.jsx";
+import Profile from "./pages/profile/Profile.jsx";
 import Register from "./pages/register/Register";
 import VerifyEmail from "./pages/verify-email/VerifyEmail";
-import IsProfileSet from "./components/common/IsProfileSet";
-import Profile from "./pages/profile/Profile.jsx";
-import NotFoundPage from "./pages/404.jsx";
 
 function App() {
   return (
@@ -30,7 +38,14 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route element={<UnAuthenticatedLayout />} path={"/"}>
+            <Route
+              element={
+                <UnAuthenticatedLayout>
+                  <Outlet />
+                </UnAuthenticatedLayout>
+              }
+              path={"/"}
+            >
               <Route
                 index
                 element={
@@ -98,8 +113,33 @@ function App() {
                   </IsProfileSet>
                 }
               />
-
               <Route path="campsites" element={<Campsites />} />
+              <Route
+                path={"admin"}
+                element={
+                  <AdminRoute>
+                    <Outlet />
+                  </AdminRoute>
+                }
+              >
+                <Route element={<Dashboard />} index />
+                <Route
+                  element={
+                    <AuthenticatedLayout sidebar={false}>
+                      <Box sx={{ height: 50 }} />
+                      <Container fluid maxWidth="xl">
+                        <Outlet />
+                      </Container>
+                    </AuthenticatedLayout>
+                  }
+                >
+                  <Route element={<CampsiteCreate />} path={"campsite/new"} />
+                  <Route
+                    element={<CampsiteEdit />}
+                    path={"campsite/edit/:id"}
+                  />
+                </Route>
+              </Route>
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

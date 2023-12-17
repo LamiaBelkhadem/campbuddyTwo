@@ -6,11 +6,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useAuth } from "../../hooks/useAuth";
-
-const loginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().required("Password is required"),
-});
+import { loginSchema } from "../../lib/api/auth/validation.js";
 
 const initialValues = {
   email: "",

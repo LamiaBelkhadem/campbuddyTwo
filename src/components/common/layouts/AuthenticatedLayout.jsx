@@ -1,16 +1,21 @@
 import Navbar from "../../navbar/Navbar";
-import { Outlet } from "react-router-dom";
 import Sidebar from "../../sidebar/Sidebar";
+import { Box } from "@mui/material";
 
-const AuthenticatedLayout = (sidebar) => {
+const AuthenticatedLayout = ({ sidebar = true, children }) => {
   return (
-    <>
+    <Box
+      sx={{
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
       <Navbar />
       <div className="window">
         {sidebar && <Sidebar />}
-        <Outlet />
+        {children}
       </div>
-    </>
+    </Box>
   );
 };
 

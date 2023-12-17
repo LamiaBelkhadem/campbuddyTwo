@@ -1,14 +1,14 @@
+import SidebarProfil from "../../components/SidebarProfile/SidebarProfil.jsx";
 import AccountDetails from "../../components/accountDetails/AccountDetails.jsx";
 import CamperInfo from "../../components/camperInfo/CamperInfo.jsx";
 import Footer from "../../components/common/footer/index.jsx";
+import LoadingPage from "../../components/common/loading/LoadingPage.jsx";
 import Navbar from "../../components/navbar/Navbar.jsx";
 import ProfileDetails from "../../components/profileDetails/ProfileDetails.jsx";
-import SidebarProfil from "../../components/SidebarProfile/SidebarProfil.jsx";
 import Socials from "../../components/socials/Socials.jsx";
-import "./profile.css";
-import { useAuth } from "../../hooks/useAuth.jsx";
 import { useGetMyProfile } from "../../hooks/api/profile/useGetMyProfile.jsx";
-import LoadingPage from "../../components/common/loading/LoadingPage.jsx";
+import { useAuth } from "../../hooks/useAuth.jsx";
+import "./profile.css";
 
 export default function Profile() {
   const { data: profile, isLoading } = useGetMyProfile();
