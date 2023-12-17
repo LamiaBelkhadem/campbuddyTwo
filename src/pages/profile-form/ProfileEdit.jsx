@@ -19,7 +19,8 @@ export default function ProfileEdit() {
           <ProfileForm
             initialValues={{
               ...data.profile,
-              profilePic: getImageURL(data.profile.profilePic),
+
+              profilePic: data.profile? getImageURL(data.profile.profilePic): "defaultpp.jpg",
             }}
           />
         )}

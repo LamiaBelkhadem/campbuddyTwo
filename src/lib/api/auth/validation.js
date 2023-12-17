@@ -12,7 +12,7 @@ export const registerSchema = Yup.object().shape({
     .required("Date of Birth is required")
     .matches(
       /^[0-9]{4}\/[0-9]{2}\/[0-9]{2}$/,
-      "Date of Birth must be in YYYY-MM-DD format",
+      "Date of Birth must be in YYYY/MM/DD format",
     ),
 });
 

@@ -48,7 +48,8 @@ const _initialValues = {
   equipment: "",
 };
 
-function ProfileForm({ initialValues = _initialValues }) {
+function ProfileForm({ profile }) {
+  const initialValues = { ..._initialValues, ...profile };
   const [selectedImage, setSelectedImage] = useState({
     picturePath: initialValues.profilePic ?? "/assets/defaultpp.jpg",
     pictureFile: null,
@@ -56,7 +57,7 @@ function ProfileForm({ initialValues = _initialValues }) {
 
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen } = useDisclosure();
   const { mutate: updateProfile, isLoading: isUpdatingProfile } =
     useUpdateProfile();
 
@@ -68,7 +69,6 @@ function ProfileForm({ initialValues = _initialValues }) {
   }, [user]);
 
   const handleClose = () => {
-    onClose();
     logout();
     navigate("/login");
   };

@@ -2,6 +2,7 @@ import { createContext, useEffect, useReducer } from "react";
 import { useLogin } from "../hooks/api/useLogin";
 import { useUserInfo } from "../hooks/api/useUserInfo";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import LoadingPage from "../components/common/loading/LoadingPage";
 
 const initialState = {};
 // LOGIN = "LOGIN",
@@ -27,12 +28,15 @@ function reducer(state, action) {
   }
 }
 
-export const AuthProvider = ({ children, loadingElement }) => {
+export const AuthProvider = ({
+  children,
+  loadingElement = <LoadingPage />,
+}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { mutate: login, isPending: isLoggingIn } = useLogin();
   const [token, setToken] = useLocalStorage("token", undefined);
 
-  const { data, isLoading: isLoadingUser, fetchData } = useUserInfo();
+  const { data, isLoading: isLoadingUser, fetchData,clearState } = useUserInfo();
 
   function handleLogin({ data, onError, onSuccess }) {
     login(data, {
@@ -51,11 +55,10 @@ export const AuthProvider = ({ children, loadingElement }) => {
   console.log({ isLoadingUser });
 
   function handeLogout() {
+    setToken(undefined);
     dispatch({
       type: "LOGOUT",
     });
-    // TODO: manage setting and unsetting token in the LOGOUT reducer
-    setToken(undefined);
   }
 
   useEffect(() => {

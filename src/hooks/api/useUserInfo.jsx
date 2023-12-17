@@ -35,6 +35,7 @@ export const useUserInfo = () => {
     isLoading,
     error,
     fetchData: fetchUser,
+    clearState: () =>setData(null),
     data,
   };
 };

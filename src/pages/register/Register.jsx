@@ -3,8 +3,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EmailIcon from "@mui/icons-material/Email";
 import HttpsIcon from "@mui/icons-material/Https";
 import { Field, Form, Formik } from "formik";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AppModal from "../../components/common/Modal";
 import useDisclosure from "../../hooks/useDisclosure";
@@ -29,13 +28,13 @@ export default function Register() {
     navigate("/login");
   };
 
-  const registerHandler = async (values, options) => {
-    console.log({ values, options });
+  const registerHandler = async (values) => {
     try {
       await register(values);
       onOpen(); // Show modal on successful registration
     } catch (err) {
-      toast.error(err.response.data.error);
+      console.log(err)
+      toast.error(err.response.data.error.message);
     }
   };
 

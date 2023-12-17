@@ -11,9 +11,9 @@ const PrivateRoute = ({ children }) => {
     return <LoadingPage />;
   } else if (!user) {
     return <Navigate to={`/`} />;
-  } else {
-    return <Fragment>{children}</Fragment>;
   }
+
+  return <Fragment>{children}</Fragment>;
 };
 
 export default PrivateRoute;
