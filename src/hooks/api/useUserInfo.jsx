@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 
 export const useUserInfo = () => {
   const [isLoading, setLoading] = useState(true);
@@ -29,7 +29,7 @@ export const useUserInfo = () => {
     isLoading,
     error,
     fetchData: fetchUser,
-    clearState: () =>setData(null),
+    clearState: () => setData(null),
     data,
   };
 };

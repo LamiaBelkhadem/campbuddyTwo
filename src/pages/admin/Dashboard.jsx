@@ -1,4 +1,4 @@
-import React from "react";
+import { Add } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -8,9 +8,8 @@ import {
   CardHeader,
   Container,
 } from "@mui/material";
-import { Add } from "@mui/icons-material";
-import CampsitesList from "../../components/CampsiteList";
 import { Link } from "react-router-dom";
+import CampsitesList from "../../components/CampsiteList";
 import AuthenticatedLayout from "../../components/common/layouts/AuthenticatedLayout.jsx";
 
 const Dashboard = () => {

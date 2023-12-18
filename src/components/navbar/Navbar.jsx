@@ -52,8 +52,7 @@ export default function Navbar() {
         >
           <img
             src={
-              user.profile&&
-              user.profile.profilePic
+              user.profile && user.profile.profilePic
                 ? getImageURL(user.profile.profilePic)
                 : getImageURL(`defaultpp.jpg`)
             }

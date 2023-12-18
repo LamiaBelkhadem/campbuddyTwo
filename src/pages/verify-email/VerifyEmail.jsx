@@ -10,7 +10,7 @@ function VerifyEmail() {
   console.log(token);
   const navigate = useNavigate();
   const [verificationStatus, setVerificationStatus] = useState(
-    "Verifying your email..."
+    "Verifying your email...",
   );
 
   const { logout } = useAuth();
@@ -20,7 +20,7 @@ function VerifyEmail() {
   useEffect(() => {
     if (data && !isLoading) {
       setVerificationStatus(
-        "Email successfully verified! Redirecting to home..."
+        "Email successfully verified! Redirecting to home...",
       );
       setTimeout(() => navigate("/"), 5000);
     } else if (!isLoading && error) {

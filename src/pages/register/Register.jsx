@@ -33,7 +33,7 @@ export default function Register() {
       await register(values);
       onOpen(); // Show modal on successful registration
     } catch (err) {
-      console.log(err)
+      console.log(err);
       toast.error(err.response.data.error.message);
     }
   };

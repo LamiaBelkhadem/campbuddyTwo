@@ -200,7 +200,7 @@ export default function CreateLobby() {
                     Campsite
                   </MenuItem>
                   {campsites?.map((campsite) => (
-                    <MenuItem key={campsite.id} value={campsite.id}>
+                    <MenuItem key={campsite._id} value={campsite._id}>
                       {campsite.name}
                     </MenuItem>
                   ))}

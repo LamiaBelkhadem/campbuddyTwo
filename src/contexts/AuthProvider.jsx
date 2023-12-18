@@ -36,7 +36,12 @@ export const AuthProvider = ({
   const { mutate: login, isPending: isLoggingIn } = useLogin();
   const [token, setToken] = useLocalStorage("token", undefined);
 
-  const { data, isLoading: isLoadingUser, fetchData,clearState } = useUserInfo();
+  const {
+    data,
+    isLoading: isLoadingUser,
+    fetchData,
+    clearState,
+  } = useUserInfo();
 
   function handleLogin({ data, onError, onSuccess }) {
     login(data, {

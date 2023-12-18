@@ -6,7 +6,7 @@ import { getImageURL } from "../../../utils/getImageURL.js";
 
 export default function Sidebar() {
   const { user } = useAuth();
-  const lobbies_created = user.lobbies.length;
+  const lobbies_created = 0;
 
   return (
     <div className="sidebar">

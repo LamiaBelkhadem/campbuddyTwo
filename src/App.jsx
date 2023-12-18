@@ -1,4 +1,5 @@
 import { Box, Container } from "@mui/material";
+import Profile from "./pages/profile";
 import {
   Outlet,
   Route,
@@ -27,7 +28,7 @@ import LobbyPage from "./pages/lobby/LobbyPage";
 import Login from "./pages/login/Login";
 import CreateLobby from "./pages/new-lobby/CreateLobby";
 import ProfileForm from "./pages/profile-form/ProfileEdit.jsx";
-import Profile from "./pages/profile/Profile.jsx";
+import MyProfile from "./pages/my-profile/MyProfile.jsx";
 import Register from "./pages/register/Register";
 import VerifyEmail from "./pages/verify-email/VerifyEmail";
 
@@ -109,10 +110,11 @@ function App() {
                 path="my-profile"
                 element={
                   <IsProfileSet>
-                    <Profile />
+                    <MyProfile />
                   </IsProfileSet>
                 }
               />
+              <Route path="profile/:id" element={<Profile />} />
               <Route path="campsites" element={<Campsites />} />
               <Route
                 path={"admin"}

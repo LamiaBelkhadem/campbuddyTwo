@@ -7,11 +7,11 @@ export const useVerifyEmail = (token) => {
     queryFn: () => verifyEmailApi(token),
     enabled: !!token,
     retry: false,
-    refetchOnMount:false
+    refetchOnMount: false,
   });
 };
 
 /**
- * Caching mechanism 
- * verify-email 
+ * Caching mechanism
+ * verify-email
  */

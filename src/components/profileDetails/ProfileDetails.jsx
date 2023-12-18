@@ -1,7 +1,7 @@
-import "./profileDetails.css";
 import EditIcon from "@mui/icons-material/Edit";
+import "./profileDetails.css";
 
-export default function ProfileDetails({ fname, lname, email, area, age }) {
+export default function ProfileDetails({ fname, lname, area, age }) {
   return (
     <div className="profile-details">
       <div className="camper-details">
@@ -23,15 +23,6 @@ export default function ProfileDetails({ fname, lname, email, area, age }) {
                   <p className="text-muted mb-0">
                     {fname} {lname}
                   </p>
-                </div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">Email</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{email}</p>
                 </div>
               </div>
               <hr />

@@ -6,7 +6,7 @@ import AppSkeleton from "../../components/common/loading/Skeleton.jsx";
 import { getImageURL } from "../../../utils/getImageURL.js";
 
 export default function ProfileEdit() {
-  const { data:profile, isLoading } = useGetMyProfile();
+  const { data: profile, isLoading } = useGetMyProfile();
   return (
     <>
       <Navbar />
@@ -18,7 +18,9 @@ export default function ProfileEdit() {
             profile={{
               ...profile,
 
-              profilePic: profile? getImageURL(profile.profilePic): "defaultpp.jpg",
+              profilePic: profile
+                ? getImageURL(profile.profilePic)
+                : "defaultpp.jpg",
             }}
           />
         )}

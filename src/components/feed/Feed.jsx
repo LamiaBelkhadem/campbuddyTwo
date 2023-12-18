@@ -5,7 +5,6 @@ import "./feed.css";
 
 export default function Feed() {
   const { data: lobbies } = useAllLobbies();
-  console.log(lobbies);
 
   return (
     <div className="feed-container">
@@ -16,16 +15,7 @@ export default function Feed() {
       </div>
 
       {lobbies?.map((l) => (
-        <Lobby
-          key={l._id}
-          id={l._id}
-          title={l.name}
-          participants={l.participants}
-          maxParticipants={l.maximumParticipants}
-          location={l.address}
-          date={l.date}
-          time={l.time}
-        />
+        <Lobby key={l._id} lobby={l} />
       ))}
     </div>
   );

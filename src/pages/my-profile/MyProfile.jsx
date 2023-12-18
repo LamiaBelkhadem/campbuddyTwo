@@ -7,12 +7,10 @@ import Navbar from "../../components/navbar/Navbar.jsx";
 import ProfileDetails from "../../components/profileDetails/ProfileDetails.jsx";
 import Socials from "../../components/socials/Socials.jsx";
 import { useGetMyProfile } from "../../hooks/api/profile/useGetMyProfile.jsx";
-import { useAuth } from "../../hooks/useAuth.jsx";
-import "./profile.css";
+import "./my-profile.css";
 
-export default function Profile() {
+export default function MyProfile() {
   const { data: profile, isLoading } = useGetMyProfile();
-  const { user } = useAuth();
 
   if (isLoading) return <LoadingPage />;
 
@@ -24,7 +22,7 @@ export default function Profile() {
           {profile && (
             <SidebarProfil
               className="sidebar"
-              username={profile.username}
+              username={profile.fname + " " + profile.lname}
               lobbies={profile.lobbies}
             />
           )}
@@ -38,7 +36,6 @@ export default function Profile() {
                 lname={profile.lname}
                 area={profile.area}
                 age={profile.age}
-                email={user.email}
               />
             )}
             {profile && (

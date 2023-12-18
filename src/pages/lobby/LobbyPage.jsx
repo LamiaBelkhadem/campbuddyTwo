@@ -1,18 +1,34 @@
-import "./lobbyPage.css";
-import Navbar from "../../components/navbar/Navbar";
-import { useParams } from "react-router-dom";
-import GroupIcon from "@mui/icons-material/Group";
-import PersonIcon from "@mui/icons-material/Person";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import EventIcon from "@mui/icons-material/Event";
-import LobbyParticipants from "../../components/lobbyParticipants/LobbyParticipants";
-import { useGetOneLobby } from "../../hooks/api/lobbies/useGetOneLobby.jsx";
-import LoadingPage from "../../components/common/loading/LoadingPage.jsx";
+import GroupIcon from "@mui/icons-material/Group";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PersonIcon from "@mui/icons-material/Person";
+import { useParams } from "react-router-dom";
 import { getImageURL } from "../../../utils/getImageURL.js";
+import LoadingPage from "../../components/common/loading/LoadingPage.jsx";
+import LobbyParticipants from "../../components/lobbyParticipants/LobbyParticipants";
+import Navbar from "../../components/navbar/Navbar";
+import { useGetOneLobby } from "../../hooks/api/lobbies/useGetOneLobby.jsx";
+import { useJoinLobby } from "../../hooks/api/lobbies/useJoinLobby.jsx";
+import { useLeaveLobby } from "../../hooks/api/lobbies/useLeaveLobby.jsx";
+import useAuth from "../../hooks/useAuth.jsx";
+import "./lobbyPage.css";
+
+const getEventDate = (date) => {
+  const eventDate = new Date(date);
+  const year = eventDate.getFullYear();
+  const month = eventDate.getMonth() + 1; // Because months are 0-indexed
+  const day = eventDate.getDate();
+  const today = new Date();
+  const daysFromNow = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
+  return { eventDate, untilEvent: `${day}/${month}/${year}`, daysFromNow };
+};
 
 export default function LobbyPage() {
-  const { lobbyId } = useParams();
-  const { data: lobby, isLoading } = useGetOneLobby(lobbyId);
+  const { id } = useParams();
+  const { user } = useAuth();
+  const { data: lobby, isLoading } = useGetOneLobby(id);
+  const { mutate: joinLobby, isPending: isJoining } = useJoinLobby(id);
+  const { mutate: leaveLobby, isPending: isLeaving } = useLeaveLobby(id);
 
   if (isLoading) {
     return <LoadingPage />;
@@ -29,7 +45,7 @@ export default function LobbyPage() {
           <div className="lobby-details-card">
             <div className="lobby-details-container">
               <div className="lobby-image">
-                <img src={getImageURL("bnimtir.png")} alt="" />
+                <img src={getImageURL(lobby.campsite.mainImg)} alt="" />
               </div>
 
               <div className="lobby-details-container-right">
@@ -38,7 +54,7 @@ export default function LobbyPage() {
                     <PersonIcon />
                     <p>Hosted by:</p>
                     <img
-                      src={getImageURL(lobby.user.profile.profilePic)}
+                      src={getImageURL(lobby.owner.profile.profilePic)}
                       alt=""
                       className="lobby-owner-img"
                     />
@@ -52,7 +68,7 @@ export default function LobbyPage() {
 
                 <div className="lobby-info">
                   <LocationOnIcon />
-                  <p>{lobby.campsite}</p>
+                  <p>{lobby.campsite.location}</p>
                 </div>
                 <div className="lobby-info">
                   <LocationOnIcon />
@@ -69,7 +85,8 @@ export default function LobbyPage() {
 
                 <div className="action-buttons">
                   <p className="days-from-now">
-                    daysFromNow ? `daysFromNow days from now` : 'Invalid Date'
+                    {getEventDate(lobby.start).daysFromNow +
+                      ` daysFromNow days from now`}
                   </p>
                 </div>
               </div>
@@ -157,9 +174,25 @@ export default function LobbyPage() {
 
         <div className="lobby-page-right">
           <div>
-            <button className="join-btn">Join Trip</button>
+            {!lobby.joined.find((u) => u._id === user._id) ? (
+              <button
+                className="join-btn"
+                disabled={isJoining}
+                onClick={() => joinLobby()}
+              >
+                Join Trip
+              </button>
+            ) : (
+              <button
+                className="join-btn"
+                disabled={isLeaving}
+                onClick={() => leaveLobby()}
+              >
+                Leave Trip
+              </button>
+            )}
           </div>
-          <LobbyParticipants />
+          <LobbyParticipants participants={lobby.joined} host={lobby.owner} />
         </div>
       </div>
     </>

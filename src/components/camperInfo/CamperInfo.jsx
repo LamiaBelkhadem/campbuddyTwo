@@ -69,20 +69,11 @@ export default function CamperInfo({
                 <div className="col-sm-3">
                   <p className="mb-0">Equipment/Gear</p>
                 </div>
-                <div className="col-sm-9">
-                  <p className="badge rounded-pill text-bg-secondary">
-                    2-Person Tent
-                  </p>
-                  <p className="badge rounded-pill text-bg-secondary">
-                    -10°C Sleeping Bag
-                  </p>
-                  <p className="badge rounded-pill text-bg-secondary">
-                    -10°C Sleeping Bag
-                  </p>
-                  <p className="badge rounded-pill text-bg-secondary">
-                    -10°C Sleeping Bag
-                  </p>
-                </div>
+                {equipment.map((e) => (
+                  <div className="col-sm-9" key={e}>
+                    <p className="badge rounded-pill text-bg-secondary">{e}</p>
+                  </div>
+                ))}
               </div>
               <hr />
 
