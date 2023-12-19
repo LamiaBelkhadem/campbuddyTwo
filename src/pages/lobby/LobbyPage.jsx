@@ -12,6 +12,8 @@ import { useJoinLobby } from "../../hooks/api/lobbies/useJoinLobby.jsx";
 import { useLeaveLobby } from "../../hooks/api/lobbies/useLeaveLobby.jsx";
 import useAuth from "../../hooks/useAuth.jsx";
 import "./lobbyPage.css";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import AddIcon from '@mui/icons-material/Add';
 
 const getEventDate = (date) => {
   const eventDate = new Date(date);
@@ -179,17 +181,19 @@ export default function LobbyPage() {
                 className="join-btn"
                 disabled={isJoining}
                 onClick={() => joinLobby()}
-              >
+                          >
+                              <AddIcon className="leave-icon" />
                 Join Trip
               </button>
             ) : (
-              <button
-                className="join-btn"
-                disabled={isLeaving}
-                onClick={() => leaveLobby()}
-              >
-                Leave Trip
-              </button>
+                              <button
+                                  className="leave-btn"
+                                  disabled={isLeaving}
+                                  onClick={() => leaveLobby()}>
+                                  <ExitToAppIcon className="leave-icon" />
+                                  Leave Trip
+                              </button>
+
             )}
           </div>
           <LobbyParticipants participants={lobby.joined} host={lobby.owner} />

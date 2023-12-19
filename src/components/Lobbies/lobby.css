@@ -28,6 +28,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom:20px
 }
 
 .lobby-card h3 {
@@ -39,6 +40,7 @@
 .lobby-card .lobby-info {
     display: flex;
     align-items: center;
+    margin-bottom:10px;
 }
 
 .lobby-card .lobby-info p {
@@ -82,6 +84,7 @@
 
 .lobby-card .join-btn,
 .view-btn {
+    width:80px;
     padding: 5px 15px;
     border: none;
     border-radius: 5px;
@@ -89,17 +92,35 @@
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s;
+    border: 2px solid #4CAF50 !important;
     margin-left: 10px;
 }
-
-.join-btn {
-    background-color: #4CAF50;
+.leave-btn {
+    width: 80px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    border: 2px solid #A21D02 !important;
+    margin-left: 10px;
+    background-color: #A21D02;
     color: white;
 }
+    .leave-btn:hover {
+        background-color: #5F1203;
+    }
+
+    .join-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: 2px solid #4CAF50;
+    }
 
 .view-btn {
     background-color: transparent;
-    border: 2px solid #4CAF50;
     color: #4CAF50;
 }
 
@@ -123,5 +144,5 @@ height:24px;
 border-radius: 50%;
 object-fit: cover;
 cursor: pointer;
-margin-top: -12px;
+margin-top: 5px !important;
 margin-left: 10px;}

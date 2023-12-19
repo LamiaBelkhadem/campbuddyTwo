@@ -13,4 +13,10 @@ export const joinLobby = (id, client) =>
   client.post(`/lobbies/${id}/join`).then((res) => res.data.lobby);
 
 export const leaveLobby = (id, client) =>
-  client.delete(`/lobbies/${id}/leave`).then((res) => res.data.lobby);
+    client.delete(`/lobbies/${id}/leave`).then((res) => res.data.lobby);
+
+export const getLobbyByOwner = (id, client) =>
+    client.get(`/lobbies/byOwner/${id}`).then((res) => res.data.lobbies);
+
+export const getLobbyByParticipants = (id, client) =>
+    client.get(`/lobbies/byParticipant/${id}`).then((res) => res.data.lobbies);

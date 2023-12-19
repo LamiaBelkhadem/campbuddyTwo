@@ -123,7 +123,7 @@ export default function Register() {
           <button className="other-btn">Sign In</button>
         </Link>
       </div>
-      <AppModal
+          <AppModal
         isOpen={isOpen}
         onClose={onCloseHandler}
         body="Please check your email to verify your account."

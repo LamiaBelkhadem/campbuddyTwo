@@ -36,16 +36,28 @@ export default function CampsiteDetails({ campsite }) {
     setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  const categoryTags = campsite.category.split(",").map((tag) => tag.trim());
+    const calculateAverageRating = (reviews) => {
+        if (!reviews || reviews.length === 0) return 0;
+        const total = reviews.reduce((acc, review) => acc + (review.rate || 0), 0);
+        return total / reviews.length;
+    };
+    const averageRating = calculateAverageRating(campsite.reviews);
 
-  const renderStars = (rating) => {
+
+  const categoryTags = campsite.category.split(",").map((tag) => tag.trim());
+    const amenitiesTags = campsite.amenities.split(",").map((tag) => tag.trim());
+
+    const renderStars = (rating) => {
+        console.log("rating", rating)
+
     // If rating is not available, return "N/A"
     if (rating === 0) {
       return <span>N/A</span>;
     }
 
     // Convert the rating to a number and round it to the nearest whole number if necessary
-    const ratingNumber = Number(rating);
+      const ratingNumber = Number(rating);
+      console.log("ratingNumber:",ratingNumber)
     let stars = [];
 
     // Loop from 1 to 5 and push either a filled star for ratings or an empty star
@@ -118,13 +130,13 @@ export default function CampsiteDetails({ campsite }) {
           <div className="campsite-detail-row">
             <div className="campsite-detail-type">Users Rating:</div>
             <div className="campsite-detail">
-              {renderStars(campsite.rating)}
+              {renderStars(averageRating)}
             </div>
           </div>
           <div className="campsite-detail-row">
             <div className="campsite-detail-type">Amenities:</div>
             <div className="campsite-detail">
-              {campsite.amenities.map((tag, index) => (
+              {amenitiesTags.map((tag, index) => (
                 <span key={index} className="amenities-tag">
                   {tag}
                 </span>

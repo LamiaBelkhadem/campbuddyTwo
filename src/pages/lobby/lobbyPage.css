@@ -112,8 +112,7 @@
     margin-top: 10px;
 }
 
-.lobby-page .join-btn
-{
+.lobby-page .join-btn {
     width: 20vw;
     height: 80px;
     padding: 5px 15px;
@@ -124,12 +123,39 @@
     outline: none;
     transition: background-color 0.3s;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-right: 50px;
+}
+.lobby-page .leave-btn {
+    width: 20vw;
+    height: 80px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    background-color: #A21D02;
+    color: white;
+    font-size: 20px;
+    margin-left:0px !important;
+    display:flex;
+    align-items:center;
+    justify-content: space-around;
+    padding-right:50px;
 }
 
-.lobby-page .join-btn {
-    background-color: #4CAF50;
-    color: white;
-}
+    .lobby-page .leave-btn:hover {
+        background-color: #5F1203;
+    }
+
+    .lobby-page .join-btn {
+        background-color: #4CAF50;
+        color: white;
+    }
 
 .view-btn {
     background-color: transparent;
@@ -196,4 +222,8 @@
 
 .preference{
 
+}
+.leave-icon{
+    color:white !important;
+    font-size:30px !important;
 }

@@ -21,15 +21,14 @@
     margin-top: 30px;
 
 }
-.title{
-    font-size: 25px;
+.title-profile-status h3 {
+    font-size: 20px !important;
     text-align: center;
     margin-top: 30px;
-
 }
-.profilepic-container{
-    margin:30px;
-    margin-top:10px;
+.profilepic-container {
+    margin: 30px;
+    margin-top: 10px;
 }
 .sidebar-profilepic{
     width:100px;
@@ -40,12 +39,16 @@
     display: block;
     margin: auto;
 }
-.name{
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-size: 20px;
+.profilepic-container img {
+    width: 100px;
+    height: 100px;
 }
+    .profile-username {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top:10px;
+        font-size: 16px;
+    }
 .stars-container{
     display: flex;
     align-items: center;

@@ -30,12 +30,14 @@ const addReviewSchema = Yup.object().shape({
 
 export default function CampsiteRating({ campsiteId }) {
   const { data: reviews, isLoading } = useGetOneCampsiteWithReviews(campsiteId);
-  const { mutate: addReview } = useAddCampsiteReview(campsiteId);
+    const { mutate: addReview } = useAddCampsiteReview(campsiteId);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const submitReview = async (values) => {
-    const review = {
-      rating: values.rating,
+      console.log("rating:", values.rating);
+      const review = {
+      rate: values.rating,
       content: values.content,
     };
 
@@ -46,6 +48,7 @@ export default function CampsiteRating({ campsiteId }) {
     });
   };
 
+    console.log("reviews",reviews)
   if (isLoading) {
     return (
       <div className="reviews-container">
@@ -67,7 +70,7 @@ export default function CampsiteRating({ campsiteId }) {
           onClick={onOpen}
           variant="contained"
         >
-          Leave a Review
+          Add a Review
         </Button>
 
         <div
@@ -127,7 +130,7 @@ export default function CampsiteRating({ campsiteId }) {
                         <MenuItem value={0} disabled>
                           Choose a rating
                         </MenuItem>
-                        {Array(4)
+                        {Array(5)
                           .fill(0)
                           .map((_, i) => (
                             <MenuItem key={i} value={i + 1}>
@@ -173,13 +176,13 @@ export default function CampsiteRating({ campsiteId }) {
         reviews.map((review, index) => (
           <div className="review-card" key={index}>
             <div className="review-header">
-              <span className="reviewer-name">{review.user.username}</span>
+                    <span className="reviewer-name">{review.user?.username}</span>
               <div className="review-rating">
                 {[...Array(5)].map((star, i) => (
                   <i
                     key={i}
                     className={
-                      i < review.rating
+                      i < review.rate
                         ? "fa fa-star star-filled"
                         : "fa fa-star-o star-empty"
                     }

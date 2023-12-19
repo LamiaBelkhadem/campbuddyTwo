@@ -3,16 +3,45 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import "./sidebar.css";
 import { getImageURL } from "../../../utils/getImageURL.js";
+import { useGetLobbiesByOwner } from "../../hooks/api/lobbies/useGetLobbiesByOwner.jsx";
+import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
 
 export default function Sidebar() {
   const { user } = useAuth();
   const lobbies_created = 0;
+    const { data: getCreatedLobbies, isPending } = useGetLobbiesByOwner(user._id);
+    const { data: getJoinedLobbies, isLoading } = useGetLobbiesByParticipants(user._id);
+    console.log(getJoinedLobbies?.length)
+    console.log(getCreatedLobbies?.length)
+
+    
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for consistent date comparison
+
+    const completedLobbiesCount = getJoinedLobbies
+        ?  getJoinedLobbies.filter(lobby => {
+            const endDate = new Date(lobby.end);
+            return endDate < today; // Check if the end date is before today
+        }).length
+        : 0;
+
+    console.log("Number of completed lobbies:", completedLobbiesCount);
+
+    const upcomingLobbiesCount = getJoinedLobbies
+        ? getJoinedLobbies.filter(lobby => {
+            const startDate = new Date(lobby.start);
+            return startDate > today; // Check if the end date is before today
+        }).length
+        : 0;
+
+    console.log("Number of upcoming lobbies:", upcomingLobbiesCount);
 
   return (
     <div className="sidebar">
       <div className="sidebar-container">
         <div className="sidebar-wrapper">
-          <div className="title">
+          <div className="title-profile-status">
             <h3>Profile Status</h3>
           </div>
           <div className="profilepic-container">
@@ -27,7 +56,8 @@ export default function Sidebar() {
                 className="sidebar-profilepic"
               />
             </Link>
-            <div className="name">{user?.username}</div>
+                      <div className="profile-username">{user?.username}
+                      </div>
             <div className="info">
               <div className="info-container">
                 <div className="info-caption"> Rating:</div>
@@ -43,22 +73,22 @@ export default function Sidebar() {
 
             <div className="info-container">
               <div className="info-caption">Upcoming Events:</div>
-              <div className="info-var"> 3</div>
+                          <div className="info-var"> {upcomingLobbiesCount}</div>
             </div>
 
             <div className="info-container">
               <div className="info-caption">Lobbies Created</div>
-              <div className="info-var"> {lobbies_created}</div>
+                          <div className="info-var">{getCreatedLobbies?.length} </div>
             </div>
 
             <div className="info-container">
               <div className="info-caption">Lobbies Joined</div>
-              <div className="info-var"> 3</div>
+                          <div className="info-var">{getJoinedLobbies?.length}  </div>
             </div>
 
             <div className="info-container">
               <div className="info-caption">Adventures Completed</div>
-              <div className="info-var"> 3</div>
+                          <div className="info-var"> {completedLobbiesCount}</div>
             </div>
           </div>
           <div

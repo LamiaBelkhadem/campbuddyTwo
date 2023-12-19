@@ -202,26 +202,22 @@ function ProfileForm({ profile }) {
 
                 <div className="input-icon">
                   <CalendarMonthIcon className="icon" />
-                  <Field as="select" name="experience" className="input-box">
-                    <option value="" disabled defaultValue="beginner">
-                      Experience
-                    </option>
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
-                  </Field>
+                                  <Field as="select" name="experience" className="input-box">
+                                      <option value="beginner">Beginner</option>
+                                      <option value="intermediate">Intermediate</option>
+                                      <option value="advanced">Advanced</option>
+                                  </Field>
+                                  
                 </div>
 
                 <div className="input-icon">
                   <Man className="icon" />
                   <Woman className="icon" />
-                  <Field as="select" name="gender" className="input-box">
-                    <option value="" disabled defaultValue="Not specified">
-                      Gender
-                    </option>
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                  </Field>
+                                  <Field as="select" name="gender" className="input-box">
+                                      {/* The 'value' prop is controlled by Formik's state */}
+                                      <option value="M">Male</option>
+                                      <option value="F">Female</option>
+                                  </Field>
                 </div>
               </div>
               <div className="input-icon">
@@ -245,20 +241,14 @@ function ProfileForm({ profile }) {
               </div>
               <div className="input-icon">
                 <EmailIcon className="icon" />
-                <Field
-                  as="select"
-                  name="equipment"
-                  className="input-box"
-                  selected="backpack"
-                >
-                  <option value="" disabled>
-                    Equipment
-                  </option>
-                  <option value="tent">Tent</option>
-                  <option value="backpack">Backpack</option>
-                  <option value="campstove">Camp Stove</option>
-                </Field>
-              </div>
+                              <Field as="select" name="equipment" className="input-box">
+                                  {/* The 'value' prop is controlled by Formik's state */}
+                                  <option value="tent">Tent</option>
+                                  <option value="backpack">Backpack</option>
+                                  <option value="campstove">Camp Stove</option>
+                              </Field>
+
+                          </div>
 
               <div className="textarea-container">
                 <Field
