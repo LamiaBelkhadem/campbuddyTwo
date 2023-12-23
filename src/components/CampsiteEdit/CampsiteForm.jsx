@@ -16,6 +16,7 @@ import {
   RadioGroup,
   Stack,
   TextareaAutosize,
+  Typography,
 } from "@mui/material";
 import { Check } from "@mui/icons-material";
 import { useUploadCampsiteImage } from "../../hooks/api/campsites/useUploadCampsiteImage.jsx";
@@ -76,6 +77,8 @@ export const CampsiteForm = ({
   };
 
   return (
+    <div className="campsite-form"
+    style={{backgroundColor: '#e8e8e8', borderRadius:'5px', height:'1350px' , margin: 100, padding:'50px'}}>
     <Formik
       initialValues={{
         ...initialValues,
@@ -83,13 +86,16 @@ export const CampsiteForm = ({
       }}
       validationSchema={campsiteSchema}
       onSubmit={onSubmit}
+      
     >
       {({ errors, values, setFieldValue }) => (
         <Form
           style={{
-            paddingBottom: 32,
+           
+
           }}
         >
+      
           <ImageUpload
             mainImg={getImageURL(mainImg)}
             setImages={setImages}
@@ -97,7 +103,7 @@ export const CampsiteForm = ({
             setMainImg={setMainImg}
             onUpload={onUpload}
           />
-          <Stack direction="row" columnGap={8} mt={12}>
+          <Stack direction="row" columnGap={8} mt={7}>
             <Box mb={4} sx={{ flex: 1 }}>
               <InputLabel htmlFor="name">Name</InputLabel>
               <Field
@@ -125,7 +131,7 @@ export const CampsiteForm = ({
               as={TextareaAutosize}
               name={"desc"}
               label={"Description"}
-              minRows={12}
+              minRows={6}
             />
           </Box>
 
@@ -181,17 +187,19 @@ export const CampsiteForm = ({
             </Stack>
           </Box>
 
-          {JSON.stringify(errors)}
-          <Button
-            type="submit"
-            startIcon={<Check />}
-            disabled={isLoading}
-            sx={{ mt: 10 }}
-          >
-            {submitButtonText}
-          </Button>
+          <Box sx={{ textAlign: 'center', mt: 5, backgroundColor: '#ff6a85', height:'40px', marginBottom:'50px'}}>
+  <Button
+    type="submit"
+    startIcon={<Check />}
+    disabled={isLoading}
+    sx={{color:'white !important', fontSize:'15px'}}
+  >
+    Create Campsite
+  </Button>
+</Box>
         </Form>
       )}
     </Formik>
+    </div>
   );
 };

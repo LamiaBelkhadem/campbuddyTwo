@@ -19,7 +19,7 @@ export default function Navbar() {
         </div>
         <div className="buttons">
           <Link to="/register" style={{ textDecoration: "none" }}>
-            <button className="register-button">Signup</button>
+            <button className="register-button">Register</button>
           </Link>
           <Link to="/login" style={{ textDecoration: "none" }}>
             <button className="login-button">Login</button>{" "}

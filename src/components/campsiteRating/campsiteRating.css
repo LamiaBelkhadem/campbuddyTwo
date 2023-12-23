@@ -8,6 +8,9 @@
     font-weight: bold !important;
     margin-bottom: 20px;
 }
+.reviews-container .review-rating .MuiSvgIcon-root{
+    color: gold !important;
+}
 .star-filled {
     color: gold;
 }
@@ -59,6 +62,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.section-header-container .MuiSvgIcon-root{
+    color: white !important;
+}
+.rating-field-campsite{
+    display: flex;
+    align-items: center;
+}
+.form-select{
+    margin-bottom: 20px;
 }
 .review-header {
     display: flex;

@@ -1,7 +1,9 @@
 import { Man, Woman } from "@mui/icons-material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import EmailIcon from "@mui/icons-material/Email";
-import HttpsIcon from "@mui/icons-material/Https";
+
+import InterestsIcon from '@mui/icons-material/Interests';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import {Box, InputLabel,Input,Stack,Chip} from "@mui/material";
 import Person from "@mui/icons-material/Person";
 import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
@@ -74,6 +76,30 @@ function ProfileForm({ profile }) {
     navigate("/login");
   };
 
+  const [equipment, setEquipment] = useState('');
+  const [equipmentList, setEquipmentList] = useState(initialValues.equipment ? initialValues.equipment.split(',') : []);
+
+  const handleEquipmentKeyDown = ({ key }) => {
+    if (key === "Enter" && equipment.trim() !== '') {
+      event.preventDefault(); // Prevent the default form submit action
+
+      setEquipmentList(prev => [...prev, equipment]);
+      setEquipment('');
+    }
+  };
+
+  const [interest, setInterest] = useState('');
+  const [interestList, setInterestList] = useState(initialValues.interest ? initialValues.interest.split(',') : []);
+
+  const handleInterestKeyDown = ({ key }) => {
+    if (key === "Enter" && interest.trim() !== '') {
+      event.preventDefault(); // Prevent the default form submit action
+
+      setInterestList(prev => [...prev, interest]);
+      setInterest('');
+    }
+  };
+
   const submitHandler = async (values) => {
     console.log("Here", { selectedImage });
     if (!selectedImage) {
@@ -81,7 +107,6 @@ function ProfileForm({ profile }) {
       toast.error("Please set your profile picture");
       return;
     }
-
     const formData = new FormData();
     if (selectedImage.pictureFile) {
       formData.append("file", selectedImage.pictureFile, {
@@ -90,18 +115,16 @@ function ProfileForm({ profile }) {
         filename: "profile-pic.jpg",
       });
     }
-
     formData.append("desc", values.desc);
-    formData.append("equipment", values.equipment);
+    formData.append("equipment", equipmentList.join(','));
     formData.append("age", values.age);
     formData.append("bio", values.bio);
-    formData.append("interests", values.interests);
+    formData.append("interests",  interestList.join(','));
     formData.append("area", values.area);
     formData.append("experience", values.experience);
     formData.append("fname", values.fname);
     formData.append("gender", values.gender);
     formData.append("lname", values.lname);
-
     updateProfile(formData, {
       onSuccess: () => {
         navigate("/app/my-profile");
@@ -221,7 +244,7 @@ function ProfileForm({ profile }) {
                 </div>
               </div>
               <div className="input-icon">
-                <HttpsIcon className="icon" />
+                <LocationOnIcon className="icon" />
                 <Field
                   name="area"
                   className="input-box"
@@ -230,26 +253,88 @@ function ProfileForm({ profile }) {
                   placeholder="Where do you live?"
                 />
               </div>
-              <div className="input-icon">
-                <Person className="icon" />
-                <Field
-                  name="interests"
-                  className="input-box"
-                  type="text"
-                  placeholder="Interests"
-                />
-              </div>
-              <div className="input-icon">
-                <EmailIcon className="icon" />
-                              <Field as="select" name="equipment" className="input-box">
-                                  {/* The 'value' prop is controlled by Formik's state */}
-                                  <option value="tent">Tent</option>
-                                  <option value="backpack">Backpack</option>
-                                  <option value="campstove">Camp Stove</option>
-                              </Field>
 
-                          </div>
+              <Box sx={{ mt: 2 , mb:3}}>
+        <InputLabel htmlFor="interest">Interest</InputLabel>
+        <Input
+          fullWidth
+          name="interest"
+          placeholder="Please type your interests one at a time and hit enter"
+          value={interest}
+          onChange={(e) => setInterest(e.target.value)}
+          onKeyDown={handleInterestKeyDown}
+          id="interest"
+          sx={{
+            border: '1px solid #e0e0e0', // light grey border
+            backgroundColor:'#E8E8E8',
+            borderRadius: '4px', // rounded corners
+            padding: '10px 12px', // some padding inside the input
+            fontSize: '0.875rem', // smaller font size
+            '&::placeholder': { // styles for the placeholder
+              color: 'grey.500',
+              opacity: 1,
+            },
+            '&:hover': {
+              borderColor: 'grey.400', // darker border on hover
+            },
+            '&:focus': {
+              borderColor: 'primary.main', // primary color border on focus
+              boxShadow: `0 0 0 2px rgba(25, 118, 210, 0.3)`, // optional - add a subtle shadow effect on focus
+            },
+          }}
+        />
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          columnGap={2}
+          sx={{ marginTop: 1 }}
+        >
+          {interestList.map((item, i) => (
+            <Chip label={item} key={i} />
+          ))}
+        </Stack>
+      </Box>
 
+              <Box sx={{ mt: 2 , mb:2}}>
+        <InputLabel htmlFor="equipment">Equipment</InputLabel>
+        <Input
+          fullWidth
+          name="equipment"
+          placeholder="Please type the equipments you own one at a time and hit enter"
+          value={equipment}
+          onChange={(e) => setEquipment(e.target.value)}
+          onKeyDown={handleEquipmentKeyDown}
+          id="equipment"
+          sx={{
+            border: '1px solid #e0e0e0', // light grey border
+            backgroundColor:'#E8E8E8',
+            borderRadius: '4px', // rounded corners
+            padding: '10px 12px', // some padding inside the input
+            fontSize: '0.875rem', // smaller font size
+            '&::placeholder': { // styles for the placeholder
+              color: 'grey.500',
+              opacity: 1,
+            },
+            '&:hover': {
+              borderColor: 'grey.400', // darker border on hover
+            },
+            '&:focus': {
+              borderColor: 'primary.main', // primary color border on focus
+              boxShadow: `0 0 0 2px rgba(25, 118, 210, 0.3)`, // optional - add a subtle shadow effect on focus
+            },
+          }}
+        />
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          columnGap={2}
+          sx={{ marginTop: 1 }}
+        >
+          {equipmentList.map((item, i) => (
+            <Chip label={item} key={i} />
+          ))}
+        </Stack>
+      </Box>
               <div className="textarea-container">
                 <Field
                   as="textarea"
@@ -258,28 +343,28 @@ function ProfileForm({ profile }) {
                   cols="50"
                   placeholder="Describe yourself for other campers. You can mention your past experiences, favourite campsites and more..."
                 />
+                <div className="character-counter">
                 <p
                   style={{
-                    color: values.desc.length >= 500 ? "red" : "black",
+                    color: values.desc.length >= 500 ? "red" : "black", 
                   }}
                 >
                   {values.desc.length}/500
                 </p>
+                </div>
               </div>
-              {JSON.stringify({ errors })}
+            
               <button
                 className="update-btn submit-btn"
                 type="submit"
                 disabled={isUpdatingProfile}
               >
-                Edit Profile
+                Update Profile
               </button>
             </Form>
           )}
         </Formik>
-        <div className="or-section">Set up your profile later?</div>
         <div className="skip-container">
-          <button className="skip-btn">Skip for now</button>
         </div>
       </div>
       <AppModal
@@ -288,6 +373,8 @@ function ProfileForm({ profile }) {
         body="Your email is not verified. Please check your email to verify your account."
         title="Email Verification"
       />
+
+
     </div>
   );
 }

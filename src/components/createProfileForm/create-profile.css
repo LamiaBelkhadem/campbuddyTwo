@@ -1,15 +1,22 @@
+*{
+    font-family: 'Roboto Slab', serif !important;
+
+}
 .profile-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: auto;
-    height: 95vh;
-    background: url("assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #ff6a85 );
+    background: url("../../assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #ff6a85 );
 }
 .profile-container .profile-box{
-    margin-top:20%;
+    height: fit-content;
+    margin-top:50px;
     margin-bottom: 60px;
+    width: 50vw;
 
+}
+.MuiFormLabel-root{
+color: black !important;
 }
 .title1{
     font-family: 'Arial', sans-serif;
@@ -34,7 +41,7 @@
     justify-content: space-between;
 }
 .box1 .input-box{
-    width: 200px;
+    border: none !important;
 }
 .input-box::placeholder {
     color: #757575;
@@ -71,16 +78,19 @@
 .textarea-container {
     width: 100%;
     position: relative;
+
 }
 
-.character-counter {
+.profile-container .character-counter p {
     position: absolute;
     right: 0;
     bottom: 5px;
     background-color: rgba(255, 255, 255, 0.8); /* semi-transparent background */
-    font-size: 0.8em;
+    font-size: 1.2em;
     z-index: 1;
     color: #fff;
+    margin-top: -20px;
+    padding-left: 10px;
 }
 textarea {
     outline: none;
@@ -129,7 +139,7 @@ input[type="date"]:before {
     border-color: #ff6a85;
 }
 
-.update-btn {
+.profile-box .update-btn {
     width: 100%;
     background: #ff6a85;
     color: #fff;
@@ -140,10 +150,11 @@ input[type="date"]:before {
     margin-top: 15px;
     margin-bottom: 15px;
     transition: 0.3s;
+    height: 50px  !important;
 }
 
-.update-btn:hover {
-    background-color: #ff5070;
+.profile-box .update-btn:hover {
+    background-color: #9b1a31 !important;
 }
 
 .skip-container{
@@ -212,4 +223,8 @@ input[type="date"]:before {
 .tag span {
     margin-left: 5px;
     cursor: pointer;
+}
+verify-email-modal{
+    width: 60vw !important;
+    text-align: center;
 }

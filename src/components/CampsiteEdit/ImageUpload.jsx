@@ -96,14 +96,17 @@ export const ImageUpload = ({
         <Grid item xs={5}>
           {mainImg && (
             <Box sx={{ height: 400, overflow: "hidden" }}>
-              <Typography variant="subtitle1">Main Image:</Typography>
+            <Typography variant="h6" gutterBottom>
+            Main Campsite Image:
+          </Typography>
               <img
                 src={mainImg}
                 alt="Main"
                 style={{
-                  marginTop: theme.spacing(2),
                   display: "flex",
                   flexWrap: "wrap",
+                  alignItems:"center",
+                  justifyContent:"center",
                   width: "100%",
                 }}
               />

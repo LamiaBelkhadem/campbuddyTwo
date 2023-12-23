@@ -5,6 +5,8 @@ import { useAuth } from "../../hooks/useAuth";
 import CampsiteRating from "../campsiteRating/CampsiteRating";
 import { useAddCampsiteToFavourite } from "../../hooks/api/campsites/useAddCampsiteToFavourite.jsx";
 import { useRemoveCampsiteFromFavorites } from "../../hooks/api/campsites/useRemoveCampsiteFromFavorites.jsx";
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function CampsiteDetails({ campsite }) {
   const { user, refetchUser } = useAuth();
@@ -105,10 +107,12 @@ export default function CampsiteDetails({ campsite }) {
               onClick={toggleFavorite}
             >
               <i
-                className={`fa ${isFavourite ? "fa-heart" : "fa-plus"}`}
                 aria-hidden="true"
-              ></i>
-              {isFavourite ? " Remove from Favourites" : " Add to Favourites"}
+                className="heart-icon"
+              >
+                {isFavourite ? <HeartBrokenIcon className="heart-icon"/> : <FavoriteIcon className="heart-icon"/>}
+              </i>
+              {isFavourite ?  "Remove from Favourites" : " Add to Favourites"}
             </button>
           </div>
 

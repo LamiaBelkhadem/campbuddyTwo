@@ -7,6 +7,7 @@ import { useCreateCampsite } from "../../hooks/api/campsites/useCreateCampsite.j
 import { useUpdateCampsite } from "../../hooks/api/campsites/useUpdateCampsite.jsx";
 import { toast } from "react-toastify";
 import { CampsiteForm } from "./CampsiteForm.jsx";
+import AddIcon from '@mui/icons-material/Add';
 
 export const CampsiteEdit = () => {
   const { id } = useParams();
@@ -27,8 +28,9 @@ export const CampsiteEdit = () => {
 
   return (
     <Box>
-      <Typography variant="h3">Edit campsite {campsite.name}</Typography>
-      <Box style={{ height: "4rem" }} />
+ <Typography variant="h4" align="center" sx={{ my: 4 }}>
+            Edit Campsite 
+          </Typography>      <Box style={{ height: "4rem" }} />
       <CampsiteForm
         campsite={campsite}
         isLoading={isPending}
@@ -45,9 +47,12 @@ export const CampsiteCreate = () => {
   return (
     <Box>
       {" "}
-      <Typography variant="h3">Create a new campsite</Typography>
-      <Box style={{ height: "4rem" }} />
+     
+      <Typography variant="h4" align="center" sx={{mb:-10  }}>
+            <AddIcon />   Create a new Campsite
+          </Typography>  
       <CampsiteForm
+      
         mutate={mutate}
         isLoading={isPending}
         submitButtonText={"Create campsite"}

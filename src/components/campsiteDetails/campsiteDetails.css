@@ -28,7 +28,9 @@
     font-weight: bold !important;
 
 }
-
+.heart-icon .MuiSvgIcon-root{
+    color: white !important;
+}
 .campsite-details-container .campsite-img {
 
     width: 400px;

@@ -15,6 +15,10 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useAddCampsiteReview } from "../../hooks/api/campsites/useAddCampsiteReview.jsx";
 import { useGetOneCampsiteWithReviews } from "../../hooks/api/campsites/useGetOneCampsiteWithReviews.jsx";
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
+import 'font-awesome/css/font-awesome.min.css';
+
 import useDisclosure from "../../hooks/useDisclosure.jsx";
 import "./campsiteRating.css";
 
@@ -72,7 +76,7 @@ export default function CampsiteRating({ campsiteId }) {
         >
           Add a Review
         </Button>
-
+        </div>
         <div
           className="modal fade"
           id="reviewModal"
@@ -92,14 +96,11 @@ export default function CampsiteRating({ campsiteId }) {
                 variant={"h5"}
                 className="modal-title"
                 id="reviewModalLabel"
+                style={{fontWeight:'bold'}}
               >
-                Leave a Review
+              Review Campsite              
               </Typography>
-              <Button
-                type="button"
-                className="btn-close"
-                aria-label="Close"
-              ></Button>
+            
             </DialogTitle>
             <DialogContent
               sx={{
@@ -114,9 +115,11 @@ export default function CampsiteRating({ campsiteId }) {
                 {({}) => (
                   <Form>
                     <Stack direction="row">
+                      <div className="rating-field-campsite">
                       <InputLabel
                         htmlFor="review-rating"
                         className="col-form-label"
+                        style={{marginBottom:'10px'}}
                       >
                         Rating:
                       </InputLabel>
@@ -126,6 +129,7 @@ export default function CampsiteRating({ campsiteId }) {
                         className="form-select"
                         id="review-rating"
                         name="rating"
+                        style={{height:'50px', marginTop:'15px'}}
                       >
                         <MenuItem value={0} disabled>
                           Choose a rating
@@ -134,12 +138,13 @@ export default function CampsiteRating({ campsiteId }) {
                           .fill(0)
                           .map((_, i) => (
                             <MenuItem key={i} value={i + 1}>
-                              {i + 1} Stars
+                              {i + 1} Star(s)
                             </MenuItem>
                           ))}
                       </Field>
+                      </div>
                     </Stack>
-                    <div className="mb-3">
+                    <div className="mb-3" style={{}}>
                       <label htmlFor="review-text" className="col-form-label">
                         Review:
                       </label>
@@ -147,6 +152,7 @@ export default function CampsiteRating({ campsiteId }) {
                         minRows={13}
                         as={TextareaAutosize}
                         className="form-control"
+                        style={{height:'15vw'}}
                         id="review-text"
                         name={"content"}
                         placeholder="Share your experience with us..."
@@ -171,32 +177,24 @@ export default function CampsiteRating({ campsiteId }) {
             </DialogContent>
           </Dialog>
         </div>
-      </div>
+      
       {reviews?.length > 0 ? (
-        reviews.map((review, index) => (
-          <div className="review-card" key={index}>
-            <div className="review-header">
-                    <span className="reviewer-name">{review.user?.username}</span>
-              <div className="review-rating">
-                {[...Array(5)].map((star, i) => (
-                  <i
-                    key={i}
-                    className={
-                      i < review.rate
-                        ? "fa fa-star star-filled"
-                        : "fa fa-star-o star-empty"
-                    }
-                    aria-hidden="true"
-                  ></i>
-                ))}
-              </div>
-            </div>
-            <div className="review-text">{review.content}</div>
-          </div>
-        ))
-      ) : (
-        <p>No reviews yet. Be the first to review!</p>
-      )}
+  reviews.map((review, index) => (
+    <div className="review-card" key={index}>
+      <div className="review-header">
+        <span className="reviewer-name">{review.user?.username}</span>
+        <div className="review-rating">
+          {[...Array(5)].map((_, i) => (
+            i < review.rate ? <StarIcon key={i} /> : <StarBorderIcon key={i} />
+          ))}
+        </div>
+      </div>
+      <div className="review-text">{review.content}</div>
+    </div>
+  ))
+) : (
+  <p>No reviews yet. Be the first to review!</p>
+)}
     </div>
   );
 }

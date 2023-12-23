@@ -41,7 +41,7 @@ export default function Register() {
   return (
     <div className="auth-ctr">
       <div className="form-box">
-        <h2 className="title">Sign Up</h2>
+        <h2 className="title">Register</h2>
         <div className="desc">Please enter the information below to start</div>
         <Formik
           initialValues={initialValues}
@@ -113,7 +113,7 @@ export default function Register() {
                 type="submit"
                 disabled={isSubmitting}
               >
-                Sign Up
+                Register
               </button>
             </Form>
           )}

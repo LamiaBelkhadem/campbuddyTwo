@@ -92,7 +92,7 @@ export default function Navbar() {
               </div>
             </div>
           )}
-          <ArrowDropDownIcon className="dropdown-icon" />
+          <ArrowDropDownIcon className="dropdown-icon" style={{color:'white !important'}} />
         </div>
       </div>
     </div>

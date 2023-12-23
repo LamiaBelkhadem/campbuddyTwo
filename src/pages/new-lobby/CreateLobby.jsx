@@ -103,7 +103,6 @@ export default function CreateLobby() {
                     <Diversity2TwoToneIcon className="create-lobby-icon" />
                     Create a New Lobby
                   </h2>
-                  <div className="username1"></div>
                   <div className="desc">
                     Create your lobby and add your preferences.
                   </div>
@@ -452,7 +451,7 @@ export default function CreateLobby() {
                   </FormControl>
                 </Stack>
 
-                {JSON.stringify(errors)}
+             
                 <button className="submit-lobby-btn" type="submit">
                   Create Lobby
                 </button>

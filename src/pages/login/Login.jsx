@@ -23,7 +23,7 @@ export default function Login() {
   return (
     <div className="auth-ctr">
       <div className="form-box">
-        <h2 className="title">Sign In</h2>
+        <h2 className="title">Login</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={loginSchema}
@@ -79,13 +79,13 @@ export default function Login() {
             </Form>
           )}
         </Formik>
-        <div className="or-section">Not a member? Sign Up now!</div>
+        <div className="or-section">Not a member? Register now!</div>
         <Link to="/register" style={{ textDecoration: "none" }}>
           <button className="other-btn">
             {isLoggingIn ? (
               <CircularProgress color="inherit" size="20px" />
             ) : (
-              "Sign Up"
+              "Register"
             )}
           </button>
         </Link>
