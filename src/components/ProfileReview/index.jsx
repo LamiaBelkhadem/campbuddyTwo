@@ -49,9 +49,9 @@ const ReviewsList = ({
             alignItems="center"
           >
             <Typography variant="h5">Reviews</Typography>
-              <Button onClick={onOpen}>
-                <AddIcon />
-              </Button>
+            <Button onClick={onOpen}>
+              <AddIcon />
+            </Button>
           </Box>
           <Divider style={{ margin: "10px 0" }} />
 
@@ -62,7 +62,7 @@ const ReviewsList = ({
                   {review.user === user._id && (
                     <Stack direction="row" mb={-2}>
                       <Box flex={1} />
-                      <Button onClick={() => deleteReview()}>
+                      <Button onClick={deleteReview}>
                         <Delete />
                       </Button>
                     </Stack>

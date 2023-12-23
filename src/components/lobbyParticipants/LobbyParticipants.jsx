@@ -1,6 +1,7 @@
 import "./lobbyParticipants.css";
 import { Link } from "react-router-dom";
 import { getImageURL } from "../../../utils/getImageURL";
+import { Stack } from "@mui/material";
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
 
 export default function LobbyParticipants({ participants, host }) {
@@ -35,7 +36,16 @@ export default function LobbyParticipants({ participants, host }) {
               className="host-img"
             />
           </Link>
-          <div className="host-name">{`${host.profile.fname}  ${host.profile.lname}`}</div>
+          <Stack justifyContent="center" alignItems="center">
+            <Link
+              to={`/app/profile/${host.profile._id}`}
+              style={{
+                textAlign: "center",
+                width: "fit-content",
+              }}
+              className="host-name"
+            >{`${host.profile.fname}  ${host.profile.lname}`}</Link>
+          </Stack>
           <div className="host-details">
             <div className="detail-header">Rating:</div>
             <div className="detail-text">{host.profile.rating}</div>
@@ -60,22 +70,30 @@ export default function LobbyParticipants({ participants, host }) {
       </div>
       <div className="participants-container">
         <div className="participants-header">
-          <h1>Participants ({participants.length})</h1>
+          <h1>
+            Participants (
+            {participants.length > 0 ? participants.length - 1 : 0})
+          </h1>
         </div>
-        <div className="joined-participants">
+        <div
+          className="joined-participants"
+          style={{ overflow: "hidden", paddingLeft: 7 }}
+        >
           <ul className="participants-list">
-            {participants.map((camper) => (
-              <li className="rightbar-Camper" key={camper._id}>
-                <div className="participants-img-Container">
-                  <img
-                    className="participants-img"
-                    src={getImageURL(camper.profile.profilePic)}
-                    alt=""
-                  />
-                </div>
-                <span className="participants-name">{`${camper.profile.fname} ${camper.profile.lname}`}</span>
-              </li>
-            ))}
+            {participants
+              .filter((c) => c._id !== host._id)
+              .map((camper) => (
+                <li className="rightbar-Camper" key={camper._id}>
+                  <div className="participants-img-Container">
+                    <img
+                      className="participants-img"
+                      src={getImageURL(camper.profile.profilePic)}
+                      alt=""
+                    />
+                  </div>
+                  <span className="participants-name">{`${camper.profile.fname} ${camper.profile.lname}`}</span>
+                </li>
+              ))}
           </ul>
         </div>
       </div>

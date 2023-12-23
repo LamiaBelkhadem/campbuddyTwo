@@ -1,14 +1,14 @@
-import { Search } from "@mui/icons-material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import SearchBar from "./Searchbar.jsx";
 import Diversity2TwoToneIcon from "@mui/icons-material/Diversity2TwoTone";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonTwoToneIcon from "@mui/icons-material/PersonTwoTone";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { getImageURL } from "../../../utils/getImageURL.js";
 import { useAuth } from "../../hooks/useAuth";
 import "./navbar.css";
-import { getImageURL } from "../../../utils/getImageURL.js";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -21,16 +21,8 @@ export default function Navbar() {
           <span className="logo">CampBuddy</span>
         </Link>
       </div>
-      <div className="navbarCenter">
-        <div className="searchbar">
-          <Search className="search-icon" />
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search Lobbies, Campers, etc."
-          />
-        </div>
-      </div>
+
+      <SearchBar />
       <div className="navbarRight">
         <div className="navbar-links">
           <Link to="/" style={{ textDecoration: "none" }}>
@@ -92,7 +84,10 @@ export default function Navbar() {
               </div>
             </div>
           )}
-          <ArrowDropDownIcon className="dropdown-icon" style={{color:'white !important'}} />
+          <ArrowDropDownIcon
+            className="dropdown-icon"
+            style={{ color: "white !important" }}
+          />
         </div>
       </div>
     </div>
