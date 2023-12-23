@@ -27,7 +27,7 @@ body {
   height: 95vh;
   background:
     url("assets/background_landing.png") center/cover no-repeat,
-    linear-gradient(to bottom, white, #ff6a85);
+    linear-gradient(to bottom, white, #ffd7de);
 }
 
 .form-box {

@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     background: url("assets/background_landing.png") center/cover no-repeat,
-    linear-gradient(to bottom, white, #ff6a85);
+    linear-gradient(to bottom, white, #ded3d5);
 }
 
 .create-lobby-container .create-lobby-box {

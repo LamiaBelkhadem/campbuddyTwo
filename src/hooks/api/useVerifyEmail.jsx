@@ -1,17 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { verifyEmailApi } from "../../lib/api/auth";
 
 export const useVerifyEmail = (token) => {
-  return useQuery({
-    queryKey: ["verify-email"],
-    queryFn: () => verifyEmailApi(token),
-    enabled: !!token,
+  return useMutation({
+    mutationKey: ["verify-email"],
+    mutationFn: () => verifyEmailApi(token),
     retry: false,
-    refetchOnMount: false,
   });
 };
-
-/**
- * Caching mechanism
- * verify-email
- */

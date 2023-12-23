@@ -5,7 +5,7 @@
 .profile1-container{
     display: flex;
     width: 100%;
-    background: url("assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #ff6a85 );
+    background: url("assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #f6eaec );
 
 
 }

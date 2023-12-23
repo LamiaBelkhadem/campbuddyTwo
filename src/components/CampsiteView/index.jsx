@@ -22,7 +22,6 @@ export default function SidebarCampsite() {
     }
   }, [campsites, isLoading]);
 
-    console.log(campsites)
   if (isLoading) return <AppSkeleton />;
 
   return (

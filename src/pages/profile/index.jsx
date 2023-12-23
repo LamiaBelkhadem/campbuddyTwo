@@ -8,6 +8,7 @@ import Navbar from "../../components/navbar/Navbar.jsx";
 import ProfileDetails from "../../components/profileDetails/ProfileDetails.jsx";
 import Socials from "../../components/socials/Socials.jsx";
 import { useViewProfile } from "../../hooks/api/profile/useViewProfile.jsx";
+import ProfileReviews from "../../components/ProfileReview/index.jsx";
 
 export default function MyProfile() {
   const { id } = useParams();
@@ -22,6 +23,7 @@ export default function MyProfile() {
         <div className="left-side">
           {profile && (
             <SidebarProfil
+              profile={profile}
               className="sidebar"
               username={profile.fname + " " + profile.lname}
               lobbies={profile.lobbies}
@@ -64,6 +66,7 @@ export default function MyProfile() {
           </div>
         </div>
       </div>
+      <ProfileReviews profile={profile} />
       <Footer />
     </div>
   );

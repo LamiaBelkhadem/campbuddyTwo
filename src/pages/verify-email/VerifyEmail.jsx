@@ -6,30 +6,35 @@ import { useAuth } from "../../hooks/useAuth";
 
 function VerifyEmail() {
   const { token } = useParams();
-
-  console.log(token);
   const navigate = useNavigate();
   const [verificationStatus, setVerificationStatus] = useState(
-    "Verifying your email...",
+    "Verifying your email..."
   );
 
   const { logout } = useAuth();
 
-  const { data, isLoading, error } = useVerifyEmail(token);
+  const { mutate } = useVerifyEmail(token);
+
+  const verifyEmail = async () => {
+    mutate(undefined, {
+      onSuccess: () => {
+        console.log("Email successfully verified!");
+        setVerificationStatus(
+          "Email successfully verified! Redirecting to home..."
+        );
+      },
+      onError: () => {
+        console.log("Something went wrong!");
+        setVerificationStatus("Something went wrong! Redirecting to home...");
+        logout();
+        setTimeout(() => navigate("/"), 3000);
+      },
+    });
+  };
 
   useEffect(() => {
-    if (data && !isLoading) {
-      setVerificationStatus(
-        "Email successfully verified! Redirecting to home...",
-      );
-      setTimeout(() => navigate("/"), 5000);
-    } else if (!isLoading && error) {
-      setVerificationStatus("Something went wrong! Redirecting to home...");
-      logout();
-      setTimeout(() => navigate("/"), 5000);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, isLoading]);
+    verifyEmail();
+  }, []);
 
   return (
     <div className="verify-email-container">

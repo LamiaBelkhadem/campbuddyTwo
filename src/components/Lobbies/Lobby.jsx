@@ -11,6 +11,7 @@ import { useJoinLobby } from "../../hooks/api/lobbies/useJoinLobby";
 import { useLeaveLobby } from "../../hooks/api/lobbies/useLeaveLobby";
 import useAuth from "../../hooks/useAuth";
 import "./lobby.css";
+import { Button } from "@mui/material";
 
 export default function Lobby({ lobby }) {
   const { user } = useAuth();
@@ -60,7 +61,7 @@ export default function Lobby({ lobby }) {
               alt=""
               className="lobby-owner-img"
             />
-            <p>Lamia</p>
+            <p>{lobby.owner.username}</p>
           </div>
           <div className="lobby-info">
             <LocationOnIcon />
@@ -83,7 +84,8 @@ export default function Lobby({ lobby }) {
             </p>
             <div>
               {lobby.joined.find((e) => e === user._id) ? (
-                <button
+                <Button
+                  disabled={isJoining || isLeaving || isNearlyFull}
                   className="leave-btn"
                   onClick={() =>
                     leaveLobby(undefined, {
@@ -95,10 +97,11 @@ export default function Lobby({ lobby }) {
                   }
                 >
                   Leave
-                </button>
+                </Button>
               ) : (
-                <button
+                <Button
                   className="join-btn"
+                  disabled={isJoining || isLeaving || isNearlyFull}
                   onClick={() =>
                     joinLobby(undefined, {
                       onSuccess: () => {
@@ -109,7 +112,7 @@ export default function Lobby({ lobby }) {
                   }
                 >
                   Join
-                </button>
+                </Button>
               )}
               <button className="view-btn" onClick={viewHandler}>
                 View

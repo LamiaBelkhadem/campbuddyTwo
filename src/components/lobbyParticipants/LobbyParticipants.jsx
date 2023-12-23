@@ -4,20 +4,18 @@ import { getImageURL } from "../../../utils/getImageURL";
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
 
 export default function LobbyParticipants({ participants, host }) {
+  const { data: getJoinedLobbies } = useGetLobbiesByParticipants(host._id);
 
-    const { data: getJoinedLobbies, isLoading } = useGetLobbiesByParticipants(host._id);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for consistent date comparison
+  const completedLobbiesCount = getJoinedLobbies
+    ? getJoinedLobbies.filter((lobby) => {
+        const endDate = new Date(lobby.end);
+        return endDate < today; // Check if the end date is before today
+      }).length
+    : 0;
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for consistent date comparison
-    const completedLobbiesCount = getJoinedLobbies
-        ? getJoinedLobbies.filter(lobby => {
-            const endDate = new Date(lobby.end);
-            return endDate < today; // Check if the end date is before today
-        }).length
-        : 0;
-
-    console.log("Number of completed lobbies:", completedLobbiesCount);
-
+  console.log("Number of completed lobbies:", completedLobbiesCount);
 
   return (
     <>
@@ -26,11 +24,17 @@ export default function LobbyParticipants({ participants, host }) {
           <h1>Host</h1>
         </div>
         <div className="host-details-card">
-                  <img src={
-                      host?.profile?.profilePic
-                          ? getImageURL(host.profile.profilePic)
-                          : `defaultpp.jpg`
-                  } alt="" className="host-img" />
+          <Link to={`/app/profile/${host.profile._id}`}>
+            <img
+              src={
+                host?.profile?.profilePic
+                  ? getImageURL(host.profile.profilePic)
+                  : `defaultpp.jpg`
+              }
+              alt=""
+              className="host-img"
+            />
+          </Link>
           <div className="host-name">{`${host.profile.fname}  ${host.profile.lname}`}</div>
           <div className="host-details">
             <div className="detail-header">Rating:</div>
@@ -46,7 +50,7 @@ export default function LobbyParticipants({ participants, host }) {
           </div>
           <div className="host-details">
             <div className="detail-header">Trips Completed:</div>
-                      <div className="detail-text">{completedLobbiesCount}</div>
+            <div className="detail-text">{completedLobbiesCount}</div>
           </div>
 
           <Link to={`/app/profile/${host.profile._id}`}>

@@ -5,20 +5,18 @@ import { useAuth } from "../../hooks/useAuth";
 import CampsiteRating from "../campsiteRating/CampsiteRating";
 import { useAddCampsiteToFavourite } from "../../hooks/api/campsites/useAddCampsiteToFavourite.jsx";
 import { useRemoveCampsiteFromFavorites } from "../../hooks/api/campsites/useRemoveCampsiteFromFavorites.jsx";
-import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function CampsiteDetails({ campsite }) {
   const { user, refetchUser } = useAuth();
   const [isFavourite, setIsFavourite] = useState(false);
   const { mutateAsync: addCampsiteToFavorite } = useAddCampsiteToFavourite(
-    campsite._id,
+    campsite._id
   );
 
   const { mutateAsync: removeCampsiteFromFavorite } =
     useRemoveCampsiteFromFavorites(campsite._id);
-
-  console.log(user);
 
   useEffect(() => {
     setIsFavourite(user.profile.favorites.includes(campsite._id));
@@ -38,43 +36,39 @@ export default function CampsiteDetails({ campsite }) {
     setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
   };
 
-    const calculateAverageRating = (reviews) => {
-        if (!reviews || reviews.length === 0) return 0;
-        const total = reviews.reduce((acc, review) => acc + (review.rate || 0), 0);
-        return total / reviews.length;
-    };
-    const averageRating = calculateAverageRating(campsite.reviews);
+  const calculateAverageRating = (reviews) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const total = reviews.reduce((acc, review) => acc + (review.rate || 0), 0);
 
+    return total / reviews.length;
+  };
+  const averageRating = calculateAverageRating(campsite.reviews);
 
   const categoryTags = campsite.category.split(",").map((tag) => tag.trim());
-    const amenitiesTags = campsite.amenities.split(",").map((tag) => tag.trim());
+  const amenitiesTags = campsite?.amenities
+    ? campsite.amenities.map((tag) => tag.trim())
+    : [];
 
-    const renderStars = (rating) => {
-        console.log("rating", rating)
-
+  const RatingStars = ({ rating }) => {
     // If rating is not available, return "N/A"
     if (rating === 0) {
       return <span>N/A</span>;
     }
 
     // Convert the rating to a number and round it to the nearest whole number if necessary
-      const ratingNumber = Number(rating);
-      console.log("ratingNumber:",ratingNumber)
+    const ratingNumber = Number(rating);
+    console.log("ratingNumber:", ratingNumber);
     let stars = [];
 
     // Loop from 1 to 5 and push either a filled star for ratings or an empty star
     for (let i = 1; i <= 5; i++) {
       if (i <= ratingNumber) {
         stars.push(
-          <i key={i} className="fa fa-star star-filled" aria-hidden="true"></i>,
+          <i key={i} className="fa fa-star star-filled" aria-hidden="true"></i>
         ); // Filled star
       } else {
         stars.push(
-          <i
-            key={i}
-            className="fa fa-star-o star-empty"
-            aria-hidden="true"
-          ></i>,
+          <i key={i} className="fa fa-star-o star-empty" aria-hidden="true"></i>
         ); // Empty star
       }
     }
@@ -106,13 +100,14 @@ export default function CampsiteDetails({ campsite }) {
               className={`favourite-btn ${isFavourite ? "active" : ""}`}
               onClick={toggleFavorite}
             >
-              <i
-                aria-hidden="true"
-                className="heart-icon"
-              >
-                {isFavourite ? <HeartBrokenIcon className="heart-icon"/> : <FavoriteIcon className="heart-icon"/>}
+              <i aria-hidden="true" className="heart-icon">
+                {isFavourite ? (
+                  <HeartBrokenIcon className="heart-icon" />
+                ) : (
+                  <FavoriteIcon className="heart-icon" />
+                )}
               </i>
-              {isFavourite ?  "Remove from Favourites" : " Add to Favourites"}
+              {isFavourite ? "Remove from Favourites" : " Add to Favourites"}
             </button>
           </div>
 
@@ -132,21 +127,23 @@ export default function CampsiteDetails({ campsite }) {
             </div>
           </div>
           <div className="campsite-detail-row">
-            <div className="campsite-detail-type">Users Rating:</div>
+            <div className="campsite-detail-type">Rating:</div>
             <div className="campsite-detail">
-              {renderStars(averageRating)}
+              <RatingStars rating={averageRating} />
             </div>
           </div>
-          <div className="campsite-detail-row">
-            <div className="campsite-detail-type">Amenities:</div>
-            <div className="campsite-detail">
-              {amenitiesTags.map((tag, index) => (
-                <span key={index} className="amenities-tag">
-                  {tag}
-                </span>
-              ))}
+          {campsite.amenities ?? (
+            <div className="campsite-detail-row">
+              <div className="campsite-detail-type">Amenities:</div>
+              <div className="campsite-detail">
+                {amenitiesTags.map((tag, index) => (
+                  <span key={index} className="category-tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           <div className="campsite-detail-row">
             <div className="campsite-detail-type">Safety:</div>
             <div className="campsite-detail">

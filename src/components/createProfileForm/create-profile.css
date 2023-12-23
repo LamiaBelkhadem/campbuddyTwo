@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("../../assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #ff6a85 );
+    background: url("../../assets/background_landing.png") center/cover no-repeat, linear-gradient(to bottom, white, #eadfe1 );
 }
 .profile-container .profile-box{
     height: fit-content;
