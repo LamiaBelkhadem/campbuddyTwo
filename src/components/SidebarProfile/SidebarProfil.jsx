@@ -3,13 +3,16 @@ import { getImageURL } from "../../../utils/getImageURL.js";
 import { useGetLobbiesByOwner } from "../../hooks/api/lobbies/useGetLobbiesByOwner.jsx";
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
 import "./sidebarProfil.css";
+import { useAuth } from "../../hooks/useAuth";
 
 const SidebarProfil = ({ profile }) => {
-  const { data: getCreatedLobbies, isPending } = useGetLobbiesByOwner(
-    profile.user
+      const { user } = useAuth();
+
+    const { data: getCreatedLobbies, isPending } = useGetLobbiesByOwner(
+    user._id
   );
   const { data: getJoinedLobbies, isLoading } = useGetLobbiesByParticipants(
-    profile.user
+      user._id
   );
 
   const today = new Date();
@@ -37,16 +40,16 @@ const SidebarProfil = ({ profile }) => {
           <div className="profilepic">
             <img
               src={
-                profile && profile.profilePic
-                  ? getImageURL(profile.profilePic)
-                  : getImageURL(`defaultpp.jpg`)
+                       user?.profile?.profilePic
+                       ? getImageURL(user.profile.profilePic)
+                       : `defaultpp.jpg`
               }
               alt=""
               className="pic"
             />
           </div>
           <div className="title">
-            <h3>{profile.user.username}</h3>
+            <h3>{user.username}</h3>
           </div>
           <div className="profilepic-container">
             <div className="info">

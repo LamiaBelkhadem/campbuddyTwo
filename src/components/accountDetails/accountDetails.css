@@ -3,49 +3,12 @@
     margin-top: 40px;
 }
 
-
-.account-details .cards mb-4{
-    border:none ;
-    background-color: transparent ;
-}
-.account-details .cards-body{
-    box-shadow: none;
-}
-.account-details.cols-lg-8{
-    border:none ;
-    background-color: transparent ;
-}
-
-.rows{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-.col-sm-3-btn {
-
-}
-.cols-sm-9{
-    text-align:right;
-    }
+.create-btn-container  {
+    text-decoration: none !important;
+  }
 
 
-.account-details .rows{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin: 10px;
-}
-
-.account-details .btn{
-    width: 100%;
-    background-color:#ff6a85;
-    border:#ff6a85;
-    height: 50px;
-    font-size: large;
-    margin-left: -20px;
-
-}
-.account-details .btn:hover {
-    background-color: #963144;
-}
+.create-btn-container :hover  {
+    text-decoration: none !important;
+    color: black !important;
+  }

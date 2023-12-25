@@ -48,7 +48,7 @@ export default function MyProfile() {
             )}
           </div>
 
-          <div className="center-bottom">
+                  <div className="center-bottom" style={{ marginBottom: '20px' }}>
             {profile && (
               <CamperInfo
                 gender={profile.gender}
@@ -57,6 +57,7 @@ export default function MyProfile() {
                 interests={profile.interests}
                 equipment={profile.equipment}
                 favourites={profile.favourites}
+                             
               />
             )}
             <AccountDetails />

@@ -1,94 +1,75 @@
-import EditIcon from "@mui/icons-material/Edit";
-import "./camperInfo.css";
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import InfoIcon from '@mui/icons-material/Info';
+import WcIcon from '@mui/icons-material/Wc';
+import InterestsIcon from '@mui/icons-material/Interests';
+import StarIcon from '@mui/icons-material/Star';
+import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+function createData(caption, value) {
+    return { caption, value };
+}
 
-export default function CamperInfo({
-  gender,
-  experience,
-  aboutme,
-  interests,
-  equipment,
-  favourites,
-}) {
-  return (
-    <div className="camperInfo">
-      <div className="camper-info-container">
-        <div className="details-heading">
-          <h3>Camper Information</h3>
-          <div className="icon-wrapper">
-            <EditIcon className="edit-icon" />
-          </div>
+
+export default function ProfileDetails({ gender,
+    experience,
+    aboutme,
+    interests,
+    equipment,
+    favourites, }) {
+
+    const rows = [
+        createData('Gender', gender),
+        createData('About me', aboutme),
+        createData('Interests/Hobbies', interests),
+        createData('Experience Level', experience),
+        createData('Equipment/Gear', equipment,),
+        createData('Favourites', favourites),
+
+    ];
+
+
+    return (
+        <div className="camper-details">
+            <TableContainer sx={{ mt: 4, border: '2px solid #AD5D5D', borderRadius: '5px' }} component={Paper}>
+                <Table sx={{ minWidth: 800, }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell sx={{
+                                 fontSize: 20, color: 'white', backgroundColor: '#AD5D5D' }}>Camper Information</TableCell>
+                            < TableCell sx={{  fontSize: 20, color: 'white', backgroundColor: ' #AD5D5D', }}></TableCell>
+
+                        </TableRow>
+
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row,index) => (
+                            <TableRow
+                                key={row.caption}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {index === 0 && < WcIcon sx={{ mb: -1, mr: 2 }} />}
+                                    {index === 1 && <InfoIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 2 && <InterestsIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 3 && <StarIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 4 && <HomeRepairServiceIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 5 && <FavoriteIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {row.caption}
+                                </TableCell>
+                                <TableCell align="right">{row.value}</TableCell>
+
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
-
-        <div className="col-lg-8">
-          <div className="card mb-4">
-            <div className="card-body">
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">Gender</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{gender}</p>
-                </div>
-              </div>
-              <hr />
-
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">About me</p>
-                </div>
-                <div className="col-sm-9">
-                  <span className="text-muted mb-0">{aboutme}</span>
-                </div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">Interests/Hobbies</p>
-                </div>
-                <div className="col-sm-9">
-                  {interests.map((tag, index) => (
-                    <span key={index} className="interests-tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <hr />
-
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">Experience Level</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{experience}</p>
-                </div>
-              </div>
-              <hr />
-
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">Equipment/Gear</p>
-                </div>
-                {equipment.map((e) => (
-                  <div className="col-sm-9" key={e}>
-                    <p className="badge rounded-pill text-bg-secondary">{e}</p>
-                  </div>
-                ))}
-              </div>
-              <hr />
-
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">Favourites</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{favourites}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

@@ -1,9 +1,9 @@
-import { Autocomplete, Box, TextField } from "@mui/material";
+import { Autocomplete, Box, TextField, InputAdornment } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
-
+import SearchIcon from '@mui/icons-material/Search';
 const getRecommandations = async (client, searchQuery) => {
   const res = await client
     .get("/recommend?query=" + encodeURI(searchQuery))
@@ -66,10 +66,13 @@ const SearchBar = () => {
       sx={{
         marginRight: 12,
         backgroundColor: "white",
-        height: 40,
+        height: 35,
         borderRadius: 40,
-        width: 300,
+          width: 600,
+
+          border: '0px !important'
       }}
+       
       isOptionEqualToValue={(option, value) => option.name === value.name}
       getOptionLabel={(option) => (option ? option.name : "")}
       inputValue={searchQuery}
@@ -86,7 +89,8 @@ const SearchBar = () => {
       renderOption={(props, option, _, ownerState) => (
         <Box
           sx={{
-            borderRadius: "8px",
+                  border: 'none !important'
+     
           }}
           {...props}
         >
@@ -94,20 +98,40 @@ const SearchBar = () => {
         </Box>
       )}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <React.Fragment>
-                {isLoading ? (
-                  <CircularProgress color="inherit" size={20} />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </React.Fragment>
-            ),
-          }}
-        />
+          <TextField
+              {...params}
+              placeholder="Search for lobbies, campsites, or campers..."
+              sx={{
+                  height: 40,
+                  marginTop: -1,
+                  padding: '0 15px',
+                  borderRadius: '50px',
+                  border: '0px solid !important',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                  '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                          borderColor: 'transparent',
+                          transition: 'all 0.3s',
+                      },
+                
+                  },
+              }}
+              InputProps={{
+                  ...params.InputProps,
+                  startAdornment: (
+                      <InputAdornment position="start">
+                          <SearchIcon color="disabled" />
+                      </InputAdornment>
+                  ),
+                  endAdornment: (
+                      <React.Fragment>
+                          {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                          {params.InputProps.endAdornment}
+                      </React.Fragment>
+                  ),
+              }}
+          />
+
       )}
     />
   );

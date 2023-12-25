@@ -103,6 +103,9 @@ export default function CreateLobby() {
                     <Diversity2TwoToneIcon className="create-lobby-icon" />
                     Create a New Lobby
                   </h2>
+                  <div  className="create-lobby-image">
+                  <img src="camping.png" alt="" />
+                  </div>
                   <div className="desc">
                     Create your lobby and add your preferences.
                   </div>

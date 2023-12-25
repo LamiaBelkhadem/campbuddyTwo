@@ -1,33 +1,35 @@
 import "./accountDetails.css";
+import Button from '@mui/material/Button';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import JoinFullIcon from '@mui/icons-material/JoinFull';
+import AddIcon from '@mui/icons-material/Add';
+import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function AccountDetails() {
-  return (
-    <div className="account-details">
-      <div className="socials-container">
-        <div className="details-heading"></div>
+  const { user } = useAuth();
 
-        <div className="cols-lg-8">
-          <div className="cards mb-4">
-            <div className="cards-body">
-              <div className="rows">
-                <button type="button" className="btn btn-primary">
-                  Created Lobbies
-                </button>
-              </div>
-              <div className="rows">
-                <button type="button" className="btn btn-primary">
-                  Joined Lobbies
-                </button>
-              </div>
-              <div className="rows">
-                <button type="button" className="btn btn-primary">
-                  Friends
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    return (
+
+    <div className="account-details" style={{textDecoration: 'none !important'}}>
+            <Link to={`/app/created/lobbies/${user._id}`} className="create-btn-container" style={{textDecoration: 'none !important'}}>
+            <Button sx={{width:290, height:60, ml:2, mb:2, mt:-1, backgroundColor:'#ff6a85', color:'white'}}variant="outlined" startIcon={<AddCircleOutlineIcon sx={{color:'white !important'}} />}>
+                Created Lobbies
+            </Button>
+            </Link>
+
+            <Link to={`/app/joined/lobbies/${user._id}`} className="create-btn-container" style={{textDecoration: 'none !important'}}>
+            <Button sx={{width:290, height:60, ml:2, mb:2, mt:-1, backgroundColor:'#ff6a85', color:'white'}}variant="outlined" startIcon={<JoinFullIcon sx={{color:'white !important'}} />}>
+                Joined Lobbies
+            </Button>
+            </Link>
+
+            <Link to={"/app/lobby/create"} className="create-btn-container" style={{textDecoration: 'none !important'}}>
+            <Button style={{textDecoration: 'none !important'}} sx={{width:290, height:60, ml:2, mb:3, mt:-1, backgroundColor:'#AD5D5D' , color:'white', fontStyle:'none !important'}}variant="outlined" startIcon={<AddIcon sx={{color:'white !important'}} />}>
+                Create a Lobby
+            </Button>
+            </Link>
+      
     </div>
   );
 }

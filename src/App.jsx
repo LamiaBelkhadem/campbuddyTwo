@@ -31,6 +31,8 @@ import ProfileForm from "./pages/profile-form/ProfileEdit.jsx";
 import MyProfile from "./pages/my-profile/MyProfile.jsx";
 import Register from "./pages/register/Register";
 import VerifyEmail from "./pages/verify-email/VerifyEmail";
+import CreatedLobbies from "./pages/created-lobbies/CreatedLobbies.jsx";
+import JoinedLobbies from "./pages/joined-lobbies/JoinedLobbies.jsx";
 
 function App() {
   return (
@@ -94,6 +96,22 @@ function App() {
                 element={
                   <IsProfileSet>
                     <LobbyPage />
+                  </IsProfileSet>
+                }
+                />
+                <Route
+                path="created/lobbies/:id"
+                element={
+                  <IsProfileSet>
+                    <CreatedLobbies/>
+                  </IsProfileSet>
+                }
+              />
+               <Route
+                path="joined/lobbies/:id"
+                element={
+                  <IsProfileSet>
+                    <JoinedLobbies/>
                   </IsProfileSet>
                 }
               />

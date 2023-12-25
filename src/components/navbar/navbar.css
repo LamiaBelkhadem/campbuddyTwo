@@ -158,7 +158,7 @@
 .dropdown-option:last-child {
     border-bottom: none;
 }
-.dropdown-icon{
+.dropdown-icon .MuiSvgIcon-root{
     margin-top: 5px;
     scale: 1.2;
     color: white !important;
