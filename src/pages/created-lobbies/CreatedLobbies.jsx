@@ -2,33 +2,37 @@ import Navbar from "../../components/navbar/Navbar.jsx";
 import Footer from "../../components/common/footer/index.jsx";
 import Lobby from "../../components/Lobbies/Lobby";
 import { useGetLobbiesByOwner } from "../../hooks/api/lobbies/useGetLobbiesByOwner.jsx";
-import { useAuth } from "../../hooks/useAuth";
+import { useParams } from "react-router-dom";
+import LoadingPage from "../../components/common/loading/LoadingPage.jsx";
 
 export default function createdLobbies() {
 
-  const { user } = useAuth();
+	const { id } = useParams();
 
-  const { data: getCreatedLobbies, isPending } = useGetLobbiesByOwner(user?._id);
+	const { data: createdLobbies, isLoading,isFetching } = useGetLobbiesByOwner(id);
 
-  
 
-  // If there are no created lobbies
-  if (getCreatedLobbies?.length === 0) {
-    return (
-      <div className="alternative">
-        You haven't created any lobbies yet.
-      </div>
-    );
-  }
+	if (isLoading||isFetching) return <LoadingPage />;
 
-  // If there are created lobbies
-  return (
-    <div className="profile">
-      <Navbar />
-      {getCreatedLobbies?.map((l) => (
-        <Lobby key={l._id} lobby={l} />
-      ))}
-      <Footer />
-    </div>
-  );
+
+	// If there are no created lobbies
+	if (createdLobbies?.length === 0) {
+		return (
+			<div className="alternative">
+				You haven't created any lobbies yet.
+			</div>
+		);
+	}
+
+
+	// If there are created lobbies
+	return (
+		<div className="profile">
+			<Navbar />
+			{createdLobbies?.map((l) => (
+				<Lobby key={l._id} lobby={l} />
+			))}
+			<Footer />
+		</div>
+	);
 }

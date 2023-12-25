@@ -100,7 +100,7 @@ function App() {
                 }
                 />
                 <Route
-                path="created/lobbies/:id"
+                path="lobby/created/:id"
                 element={
                   <IsProfileSet>
                     <CreatedLobbies/>
@@ -108,7 +108,7 @@ function App() {
                 }
               />
                <Route
-                path="joined/lobbies/:id"
+                path="lobby/joined/:id"
                 element={
                   <IsProfileSet>
                     <JoinedLobbies/>

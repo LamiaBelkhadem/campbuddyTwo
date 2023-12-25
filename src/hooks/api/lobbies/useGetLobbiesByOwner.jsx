@@ -6,7 +6,7 @@ import { getLobbyByOwner } from "../../../lib/api/lobbies/index.js";
 export const useGetLobbiesByOwner = (userId) => {
     const { axios } = useAxios();
     return useQuery({
-        queryKey: ["lobbiesByOwner", userId],
+        queryKey: ["lobbies","user", userId],
         queryFn: () => getLobbyByOwner(userId, axios),
     });
 };
