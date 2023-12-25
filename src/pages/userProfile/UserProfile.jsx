@@ -1,5 +1,4 @@
-import { useParams } from "react-router-dom";
-import SidebarProfil from "../../components/SidebarProfile/SidebarProfil.jsx";
+import SidebarUserProfil from "../../components/sidebarUserProfile/SidebarUserProfil.jsx";
 import AccountDetails from "../../components/accountDetails/AccountDetails.jsx";
 import CamperInfo from "../../components/camperInfo/CamperInfo.jsx";
 import Footer from "../../components/common/footer/index.jsx";
@@ -10,21 +9,24 @@ import Socials from "../../components/socials/Socials.jsx";
 import { useViewProfile } from "../../hooks/api/profile/useViewProfile.jsx";
 import ProfileReviews from "../../components/ProfileReview/index.jsx";
 
-export default function MyProfile() {
+import "./userProfile.css";
+import {useParams } from "react-router-dom";
+export default function UserProfile() {
   const { id } = useParams();
   const { data: profile, isLoading } = useViewProfile(id);
-  if (isLoading) return <LoadingPage />;
 
+  if (isLoading) return <LoadingPage />;
+console.log("fav:", profile?.favorites)
   return (
     <div className="profile">
       <Navbar />
       <div className="profile1-container">
         <div className="left-side">
           {profile && (
-            <SidebarProfil
-              profile={profile}
+            <SidebarUserProfil
               className="sidebar"
-              username={profile.fname + " " + profile.lname}
+              profile={profile}
+              username={profile.fname}
               lobbies={profile.lobbies}
             />
           )}
@@ -50,7 +52,7 @@ export default function MyProfile() {
             )}
           </div>
 
-          <div className="center-bottom">
+                  <div className="center-bottom" style={{ marginBottom: '20px' }}>
             {profile && (
               <CamperInfo
                 gender={profile.gender}
@@ -58,14 +60,18 @@ export default function MyProfile() {
                 aboutme={profile.desc}
                 interests={profile.interests}
                 equipment={profile.equipment}
-                favourites={profile.favourites}
+                favourites={profile?.favorites}
+                             
               />
             )}
             <AccountDetails />
-          </div>
+          </div>            
+          <div className="user-reviews" style={{ width:'800px', marginBotton:'30px !important', paddingBottom:'50px'}}>
+            <ProfileReviews profile={profile} style={{width:'680px', }}/>
+
+            </div>
         </div>
       </div>
-      <ProfileReviews profile={profile} />
       <Footer />
     </div>
   );

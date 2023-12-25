@@ -14,6 +14,19 @@ import useAuth from "../../hooks/useAuth.jsx";
 import "./lobbyPage.css";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AddIcon from "@mui/icons-material/Add";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import LobbyPreferences from '../../components/lobbyPreferences/lobbyPreferences';
+import LobbyRequirements from "../../components/lobbyRequirements/lobbyRequirements.jsx";
+function createData(caption, value) {
+  return { caption, value };
+}
 
 const getEventDate = (date) => {
   const eventDate = new Date(date);
@@ -26,12 +39,22 @@ const getEventDate = (date) => {
 };
 
 export default function LobbyPage() {
+
+ 
+
   const { id } = useParams();
   const { user } = useAuth();
   const { data: lobby, isLoading } = useGetOneLobby(id);
   const { mutate: joinLobby, isPending: isJoining } = useJoinLobby(id);
   const { mutate: leaveLobby, isPending: isLeaving } = useLeaveLobby(id);
+  const rows = [
+    createData('Hosted by', lobby?.owner.username),
+    createData('Campsite', lobby?.campsite.name),
+    createData('Status', lobby?.open?"Open":"Closed"),
+    createData('Start Date', lobby?.start),
+    createData('End Date', lobby?.end,),
 
+];
   if (isLoading) {
     return <LoadingPage />;
   }
@@ -42,7 +65,7 @@ export default function LobbyPage() {
       <div className="lobby-page">
         <div className="lobby-page-container">
           <div className="lobby-header">
-            <h1>Lobby {lobby.name} - Details</h1>
+            <h1>{lobby.name} </h1>
           </div>
           <div className="lobby-details-card">
             <div className="lobby-details-container">
@@ -51,42 +74,37 @@ export default function LobbyPage() {
               </div>
 
               <div className="lobby-details-container-right">
-                <div className="header-section">
-                  <div className="lobby-info">
-                    <PersonIcon />
-                    <p>Hosted by:</p>
-                    <img
-                      src={getImageURL(lobby.owner.profile.profilePic)}
-                      alt=""
-                      className="lobby-owner-img"
-                    />
-                    <p>{lobby.owner.username}</p>
-                  </div>
-                  <div className="capacity">
-                    <GroupIcon />
-                    <p>10/15</p>
-                  </div>
-                </div>
+              <TableContainer sx={{ mt: 4, border: '2px solid #AD5D5D', borderRadius: '5px' }} component={Paper}>
+                <Table sx={{ minWidth: 500, }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                           
+                        </TableRow>
 
-                <div className="lobby-info">
-                  <LocationOnIcon />
-                  <p>{lobby.campsite.location}</p>
-                </div>
-                <div className="lobby-info">
-                  <LocationOnIcon />
-                  <p>Status:</p>
-                </div>
-                <div className="lobby-info">
-                  <EventIcon />
-                  <p> Start Date : {lobby.start}</p>
-                </div>
-                <div className="lobby-info">
-                  <EventIcon />
-                  <p> End Date : {lobby.end}</p>
-                </div>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row,index) => (
+                            <TableRow
+                                key={row.caption}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {index === 0 && < PersonIcon sx={{ mb: -1, mr: 2 }} />}
+                                    {index === 1 && <LocationOnIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 2 && <AutorenewIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 3 && <EventIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 4 && <EventIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {row.caption}
+                                </TableCell>
+                                <TableCell align="right">{row.value}</TableCell>
 
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
                 <div className="action-buttons">
-                  <p className="days-from-now">
+                  <p className="days-from-now" style={{textAlign:'left'}}>
                     {getEventDate(lobby.start).daysFromNow +
                       ` daysFromNow days from now`}
                   </p>
@@ -97,79 +115,28 @@ export default function LobbyPage() {
               <div className="preferences-header">
                 <h1> Lobby Preferences:</h1>
               </div>
-
-              <div className="preferences-details">
-                <div className="preference">
-                  <div className="lobby-info">
-                    <EventIcon />
-                    <p>Age group : {lobby.age}</p>
-                  </div>
-
-                  <div className="lobby-info">
-                    <EventIcon />
-                    <p>Ambiance : {lobby.ambiance}</p>
-                  </div>
-                </div>
-                <div className="preference">
-                  <div className="lobby-info">
-                    <EventIcon />
-                    <p>Experience : {lobby.experience}</p>
-                  </div>
-
-                  <div className="lobby-info">
-                    <EventIcon />
-                    <p>Gender: {lobby.gender}</p>
-                  </div>
-                </div>
-                <div className="preference">
-                  <div className="lobby-info">
-                    <EventIcon />
-                    <p>Kid-Friendly : {lobby.kids ? "Yes" : "No"}</p>
-                  </div>
-
-                  <div className="lobby-info">
-                    <EventIcon />
-                    <p>Pet-Friendly : {lobby.pet ? "Yes" : "No"}</p>
-                  </div>
-                </div>
-              </div>
+              <LobbyPreferences
+              age={lobby.age}
+              ambiance={lobby.ambiance}
+              experience={lobby.experience}
+              gender={lobby.gender}
+              kid={lobby.kid ? "Yes" : "No"}
+              pet={lobby.pet ? "Yes" : "No"}
+              />
+                            
             </div>
 
             <div className="lobby-preferences">
-              <div className="preferences-header">
-                <h1> Lobby Details:</h1>
+              <div className="preferences-header" >
+                <h1 > Lobby Requirements:</h1>
               </div>
-
-              <div className="preferences-details">
-                <div className="lobby-info">
-                  <EventIcon />
-                  <p>
-                    Food and Drinks :{" "}
-                    {lobby.food ? "Included" : "Bring your own"}
-                  </p>
-                </div>
-
-                <div className="lobby-info">
-                  <EventIcon />
-                  <p>
-                    Transportation:{" "}
-                    {lobby.transport ? "Provided" : "Not Provided"}
-                  </p>
-                </div>
-              </div>
-              <div className="preferences-details_bottom">
-                <div className="lobby-info">
-                  <EventIcon />
-                  <p>
-                    Equipment Provided : {lobby.equipmentProvided.join(", ")}
-                  </p>
-                </div>
-
-                <div className="lobby-info">
-                  <EventIcon />
-                  <p>Equipment Needed : {lobby.equipmentNeeded.join(", ")}</p>
-                </div>
-              </div>
+               <LobbyRequirements
+               food={lobby.food ? "Included" : "Bring your own"}
+               equipmentNeeded={lobby.equipmentNeeded}
+               equipmentProvided={lobby.equipmentProvided}
+               transport={lobby.transport ? "Provided" : "Not Provided"}/>         
+              
+              
             </div>
           </div>
         </div>

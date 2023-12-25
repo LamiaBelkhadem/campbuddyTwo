@@ -7,7 +7,9 @@ import { useAddCampsiteToFavourite } from "../../hooks/api/campsites/useAddCamps
 import { useRemoveCampsiteFromFavorites } from "../../hooks/api/campsites/useRemoveCampsiteFromFavorites.jsx";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
+import { StarBorderTwoTone } from "@mui/icons-material";
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 export default function CampsiteDetails({ campsite }) {
   const { user, refetchUser } = useAuth();
   const [isFavourite, setIsFavourite] = useState(false);
@@ -37,19 +39,17 @@ export default function CampsiteDetails({ campsite }) {
   };
 
   const calculateAverageRating = (reviews) => {
-    if (!reviews || reviews.length === 0) return 0;
-    const total = reviews.reduce((acc, review) => acc + (review.rate || 0), 0);
-
-    return total / reviews.length;
-  };
-  const averageRating = calculateAverageRating(campsite.reviews);
-
+    if (!reviews || reviews?.length === 0) return 0;
+    const total = reviews?.reduce((acc, review) => acc + (review?.rate || 0), 0);
+    return total / reviews?.length;
+};
+const averageRating = calculateAverageRating(campsite?.reviews);
+console.log("average",averageRating)
   const categoryTags = campsite.category.split(",").map((tag) => tag.trim());
-  const amenitiesTags = campsite?.amenities
-    ? campsite.amenities.map((tag) => tag.trim())
-    : [];
+  const amenitiesTags = campsite?.amenities?.split(",").map((tag) => tag.trim());
 
-  const RatingStars = ({ rating }) => {
+  const renderStars = ({ rating }) => {
+    console.log("rating",rating)
     // If rating is not available, return "N/A"
     if (rating === 0) {
       return <span>N/A</span>;
@@ -64,12 +64,10 @@ export default function CampsiteDetails({ campsite }) {
     for (let i = 1; i <= 5; i++) {
       if (i <= ratingNumber) {
         stars.push(
-          <i key={i} className="fa fa-star star-filled" aria-hidden="true"></i>
+          <StarIcon sx={{color:'#ffc107 !important'}}/>
         ); // Filled star
       } else {
-        stars.push(
-          <i key={i} className="fa fa-star-o star-empty" aria-hidden="true"></i>
-        ); // Empty star
+        stars.push(<StarBorderIcon sx={{color:'#ffc107 !important'}}/>        ); // Empty star
       }
     }
     return <div>{stars}</div>;
@@ -114,7 +112,7 @@ export default function CampsiteDetails({ campsite }) {
           <div className="campsite-desc">{campsite.desc}</div>
           <div className="campsite-detail-row">
             <div className="campsite-detail-type">Location:</div>
-            <div className="campsite-detail">{campsite.location}</div>
+            <div className="campsite-detail" style={{marginTop:'2px'}}>{campsite.location}</div>
           </div>
           <div className="campsite-detail-row">
             <div className="campsite-detail-type">Category:</div>
@@ -129,24 +127,23 @@ export default function CampsiteDetails({ campsite }) {
           <div className="campsite-detail-row">
             <div className="campsite-detail-type">Rating:</div>
             <div className="campsite-detail">
-              <RatingStars rating={averageRating} />
+            {renderStars({ rating: averageRating })}
             </div>
           </div>
-          {campsite.amenities ?? (
-            <div className="campsite-detail-row">
-              <div className="campsite-detail-type">Amenities:</div>
-              <div className="campsite-detail">
-                {amenitiesTags.map((tag, index) => (
-                  <span key={index} className="category-tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
+          <div className="campsite-detail-row">
+            <div className="campsite-detail-type">Amenities:</div>
+            <div className="campsite-detail">
+              {amenitiesTags.map((tag, index) => (
+                <span key={index} className="amenities-tag">
+                  {tag}
+                </span>
+              ))}
             </div>
-          )}
+          </div>
+          
           <div className="campsite-detail-row">
             <div className="campsite-detail-type">Safety:</div>
-            <div className="campsite-detail">
+            <div className="campsite-detail" style={{marginTop:'2px'}}>
               {campsite.security === true ? "Yes" : "No"}
             </div>
           </div>

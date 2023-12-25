@@ -92,9 +92,27 @@
 .create-lobby-btn{
     background-color: #a65d5d;
     color: white;
+    width: 100%;
+    border-radius: 5px;
+    height: 40px;
+
+}
+.create-lobby-btn1{
+    background-color: #a65d5d;
+    color: white;
     width: 80%;
     border-radius: 5px;
     height: 40px;
+
+}
+.create-lobby-btn :hover{
+    background-color: #764141 !important;
+    color:white !important;
+
+}
+.create-lobby-btn1 :hover{
+    background-color: #764141 !important;
+    color:white !important;
 
 }
 .create-btn-container{

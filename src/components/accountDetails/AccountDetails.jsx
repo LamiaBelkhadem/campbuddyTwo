@@ -5,7 +5,7 @@ import JoinFullIcon from '@mui/icons-material/JoinFull';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-
+import EditIcon from '@mui/icons-material/Edit';
 export default function AccountDetails() {
   const { user } = useAuth();
 
@@ -25,8 +25,14 @@ export default function AccountDetails() {
             </Link>
 
             <Link to={"/app/lobby/create"} className="create-btn-container" style={{textDecoration: 'none !important'}}>
-            <Button style={{textDecoration: 'none !important'}} sx={{width:290, height:60, ml:2, mb:3, mt:-1, backgroundColor:'#AD5D5D' , color:'white', fontStyle:'none !important'}}variant="outlined" startIcon={<AddIcon sx={{color:'white !important'}} />}>
+            <Button style={{textDecoration: 'none !important'}} sx={{width:290, height:60, ml:2, mb:2, mt:-1, backgroundColor:'#AD5D5D' , color:'white', fontStyle:'none !important'}}variant="outlined" startIcon={<AddIcon sx={{color:'white !important'}} />}>
                 Create a Lobby
+            </Button>
+            </Link>
+
+            <Link to={"/app/my-profile/edit"} className="create-btn-container" style={{textDecoration: 'none !important'}}>
+            <Button style={{textDecoration: 'none !important'}} sx={{width:290, height:60, ml:2, mb:2, mt:-1, backgroundColor:'#AD5D5D' , color:'white', fontStyle:'none !important'}}variant="outlined" startIcon={<EditIcon sx={{color:'white !important'}} />}>
+                Edit Profile
             </Button>
             </Link>
       

@@ -33,7 +33,8 @@ import Register from "./pages/register/Register";
 import VerifyEmail from "./pages/verify-email/VerifyEmail";
 import CreatedLobbies from "./pages/created-lobbies/CreatedLobbies.jsx";
 import JoinedLobbies from "./pages/joined-lobbies/JoinedLobbies.jsx";
-
+import ProfileReviews from "./components/ProfileReview/index.jsx";
+import UserProfile from "./pages/userProfile/UserProfile.jsx";
 function App() {
   return (
     <>
@@ -100,6 +101,14 @@ function App() {
                 }
                 />
                 <Route
+                path="profile/view/:id"
+                element={
+                  <IsProfileSet>
+                    <UserProfile />
+                  </IsProfileSet>
+                }
+                />
+                <Route
                 path="created/lobbies/:id"
                 element={
                   <IsProfileSet>
@@ -129,6 +138,14 @@ function App() {
                 element={
                   <IsProfileSet>
                     <MyProfile />
+                  </IsProfileSet>
+                }
+              />
+              <Route
+                path="profile/reviews/"
+                element={
+                  <IsProfileSet>
+                    <ProfileReviews />
                   </IsProfileSet>
                 }
               />

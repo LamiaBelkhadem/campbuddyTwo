@@ -12,6 +12,7 @@ import InterestsIcon from '@mui/icons-material/Interests';
 import StarIcon from '@mui/icons-material/Star';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+
 function createData(caption, value) {
     return { caption, value };
 }
@@ -22,7 +23,7 @@ export default function ProfileDetails({ gender,
     aboutme,
     interests,
     equipment,
-    favourites, }) {
+    favorites, }) {
 
     const rows = [
         createData('Gender', gender),
@@ -30,9 +31,12 @@ export default function ProfileDetails({ gender,
         createData('Interests/Hobbies', interests),
         createData('Experience Level', experience),
         createData('Equipment/Gear', equipment,),
-        createData('Favourites', favourites),
+        createData('Favourites', favorites),
 
     ];
+    const interestsTags = interests.split(",").map((tag) => tag.trim());
+    const equipmentTags = equipment.split(",").map((tag) => tag.trim());
+
 
 
     return (
@@ -56,14 +60,53 @@ export default function ProfileDetails({ gender,
                             >
                                 <TableCell component="th" scope="row">
                                     {index === 0 && < WcIcon sx={{ mb: -1, mr: 2 }} />}
-                                    {index === 1 && <InfoIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-                                    {index === 2 && <InterestsIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-                                    {index === 3 && <StarIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-                                    {index === 4 && <HomeRepairServiceIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-                                    {index === 5 && <FavoriteIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 1 && <InfoIcon sx={{ mb: -1, mr: 2 }} />}  
+                                    {index === 2 && <InterestsIcon sx={{ mb: -1, mr: 2 }} />}  
+                                    {index === 3 && <StarIcon sx={{ mb: -1, mr: 2 }} />}  
+                                    {index === 4 && <HomeRepairServiceIcon sx={{ mb: -1, mr: 2 }} />}  
+                                    {index === 5 && <FavoriteIcon sx={{ mb: -1, mr: 2 }} />}  
                                     {row.caption}
                                 </TableCell>
-                                <TableCell align="right">{row.value}</TableCell>
+                                                                <TableCell align="right">
+                                {/* Show interests tags when index is 2 */}
+                                {index === 2 && (
+                                    <div className="campsite-detail-row">
+                                    <div className="campsite-detail">
+                                        {interestsTags.map((tag, index) => (
+                                        <span key={index} className="amenities-tag">
+                                            {tag}
+                                        </span>
+                                        ))}
+                                    </div>
+                                    </div>
+                                )}
+
+                                {/* Show equipment tags when index is 4 */}
+                                {index === 4 && (
+                                    <div className="campsite-detail-row">
+                                    <div className="campsite-detail">
+                                        {equipmentTags.map((tag, index) => (
+                                        <span key={index} className="amenities-tag">
+                                            {tag}
+                                        </span>
+                                        ))}
+                                    </div>
+                                    </div>
+                                )}
+                                {index === 5 && (  // assuming index 3 is where you want to show the favourites
+                                    <div className="campsite-detail-row">
+                                    <div className="campsite-detail">
+                                        {favorites?.map((campsite, index) => (
+                                        <span key={index} className="amenities-tag">
+                                            {favorites.name} {/* Display the campsite name */}
+                                        </span>
+                                        ))}
+                                    </div>
+                                    </div>
+                                )}
+                                {/* Show row.value only when index is not 2 or 4 */}
+                                {(index !== 2 && index !== 4 && index !== 5) && row.value}
+                                </TableCell>
 
                             </TableRow>
                         ))}

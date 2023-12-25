@@ -43,8 +43,8 @@ export default function ProfileDetails({ instagram, facebook, twitter }) {
                             >
                                 <TableCell component="th" scope="row">
                                     {index === 0 && < FacebookIcon sx={{ mb: -1, mr: 2, color:'#3b5998 !Important' }} />}
-                                    {index === 1 && <InstagramIcon sx={{ mb: -1, mr: 2, color:'#E4405F !Important' }}/>} {/* Replace with actual icons */}
-                                    {index === 2 && <TwitterIcon sx={{ mb: -1, mr: 2,color:' #1DA1F2 !Important' }} />} {/* Replace with actual icons */}
+                                    {index === 1 && <InstagramIcon sx={{ mb: -1, mr: 2, color:'#E4405F !Important' }}/>}  
+                                    {index === 2 && <TwitterIcon sx={{ mb: -1, mr: 2,color:' #1DA1F2 !Important' }} />}  
                               
                                     
                                     {row.caption}

@@ -6,6 +6,7 @@ import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbi
 
 export default function LobbyParticipants({ participants, host }) {
   const { data: getJoinedLobbies } = useGetLobbiesByParticipants(host._id);
+  const memberSince = new Date(host?.profile.createdAt).toLocaleDateString();
 
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for consistent date comparison
@@ -25,7 +26,7 @@ export default function LobbyParticipants({ participants, host }) {
           <h1>Host</h1>
         </div>
         <div className="host-details-card">
-          <Link to={`/app/profile/${host.profile._id}`}>
+          <Link to={`/app/profile/view/${host.profile._id}`}>
             <img
               src={
                 host?.profile?.profilePic
@@ -44,15 +45,15 @@ export default function LobbyParticipants({ participants, host }) {
                 width: "fit-content",
               }}
               className="host-name"
-            >{`${host.profile.fname}  ${host.profile.lname}`}</Link>
+            >{host.username}</Link>
           </Stack>
           <div className="host-details">
             <div className="detail-header">Rating:</div>
             <div className="detail-text">{host.profile.rating}</div>
           </div>
           <div className="host-details">
-            <div className="detail-header">Member since:</div>
-            <div className="detail-text"></div>
+            <div className="detail-header">Member since: </div>
+            <div className="detail-text">{memberSince}</div>
           </div>
           <div className="host-details">
             <div className="detail-header">Experience:</div>
@@ -63,8 +64,8 @@ export default function LobbyParticipants({ participants, host }) {
             <div className="detail-text">{completedLobbiesCount}</div>
           </div>
 
-          <Link to={`/app/profile/${host.profile._id}`}>
-            <div className="more-details">More Details</div>
+          <Link to={`/app/profile/${host.profile._id}`} className="more-details">
+            <div >More Details</div>
           </Link>
         </div>
       </div>

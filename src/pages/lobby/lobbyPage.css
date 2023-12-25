@@ -1,6 +1,10 @@
 *{
     font-size:15px;
 }
+.lobby-header, .host-header, .participants-header h1{
+    color:white !important;details
+    font-weight: normal !important;
+}
 .lobby-page{
     display:flex;
     padding-right: 50px;
@@ -14,7 +18,7 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 2px solid #4CAF50;
+    border: 2px solid #a65e5d;
 
 }
 
@@ -42,11 +46,12 @@
 .lobby-details-card {
     padding: 20px;
     background-color: #FAFAFA;
-    border-top: 2px solid #4CAF50;
+    border-top: 2px solid #a65e5d;
 
 }
 
 .lobby-details-container {
+    height:300px;
     display: flex;
     margin-bottom: 20px;
 }
@@ -199,7 +204,7 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     display:flex;
-    color: black;
+    color: black !important;
     justify-content: space-between;
     font-size: 20px;
     margin-top: 40px;

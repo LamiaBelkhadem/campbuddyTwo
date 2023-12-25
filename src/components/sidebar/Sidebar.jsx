@@ -5,7 +5,7 @@ import "./sidebar.css";
 import { getImageURL } from "../../../utils/getImageURL.js";
 import { useGetLobbiesByOwner } from "../../hooks/api/lobbies/useGetLobbiesByOwner.jsx";
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
-
+import AddIcon from '@mui/icons-material/Add';
 export default function Sidebar() {
   const { user } = useAuth();
   const lobbies_created = 0;
@@ -106,9 +106,10 @@ export default function Sidebar() {
           </div>
 
           <Link to={"/app/lobby/create"} className="create-btn-container">
+            <div className="create-lobby-btn1">
             <button className="create-lobby-btn">
-              <i className="fa fa-plus"></i> Create a Lobby
-            </button>
+              <AddIcon sx={{mb:-0.5, color:'white !important'}}/> Create a Lobby
+            </button></div>
           </Link>
         </div>
       </div>

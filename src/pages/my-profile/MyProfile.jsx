@@ -13,7 +13,7 @@ export default function MyProfile() {
   const { data: profile, isLoading } = useGetMyProfile();
 
   if (isLoading) return <LoadingPage />;
-
+console.log("fav:", profile?.favorites)
   return (
     <div className="profile">
       <Navbar />
@@ -56,7 +56,7 @@ export default function MyProfile() {
                 aboutme={profile.desc}
                 interests={profile.interests}
                 equipment={profile.equipment}
-                favourites={profile.favourites}
+                favourites={profile?.favorites}
                              
               />
             )}

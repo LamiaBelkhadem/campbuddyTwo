@@ -35,7 +35,7 @@ const createProfileSchema = Yup.object().shape({
   desc: Yup.string().min(2, "Too Short!").max(500, "Too Long!"),
   area: Yup.string().min(2, "Too Short!").max(500, "Too Long!"),
   equipment: Yup.string().min(2, "Choose the equipments you have").defined(),
-  interests: Yup.string().min(2, "Too Short!").max(500, "Too Long!"),
+  interests: Yup.string().min(2, "State your").defined(),
 });
 
 const _initialValues = {
@@ -77,8 +77,9 @@ function ProfileForm({ profile }) {
   };
 
   const [equipment, setEquipment] = useState('');
-  const [equipmentList, setEquipmentList] = useState(initialValues.equipment ? initialValues.equipment.split(',') : []);
-
+  const [equipmentList, setEquipmentList] = useState(
+    typeof initialValues.equipment === 'string' ? initialValues.equipment.split(',') : []
+  );
   const handleEquipmentKeyDown = ({ key }) => {
     if (key === "Enter" && equipment.trim() !== '') {
       event.preventDefault(); // Prevent the default form submit action
@@ -88,14 +89,14 @@ function ProfileForm({ profile }) {
     }
   };
 
-  const [interest, setInterest] = useState('');
-  const [interestList, setInterestList] = useState(initialValues.interest ? initialValues.interest.split(',') : []);
+  const [interests, setInterest] = useState('');
+  const [interestList, setInterestList] = useState( typeof initialValues.interests === 'string' ? initialValues.interests.split(',') : []);
 
   const handleInterestKeyDown = ({ key }) => {
-    if (key === "Enter" && interest.trim() !== '') {
+    if (key === "Enter" && interests.trim() !== '') {
       event.preventDefault(); // Prevent the default form submit action
 
-      setInterestList(prev => [...prev, interest]);
+      setInterestList(prev => [...prev, interests]);
       setInterest('');
     }
   };
@@ -218,7 +219,7 @@ function ProfileForm({ profile }) {
                   <Field
                     name="age"
                     className="input-box"
-                    type="age"
+                    type="number"
                     placeholder="Age"
                   />
                 </div>
@@ -260,7 +261,7 @@ function ProfileForm({ profile }) {
           fullWidth
           name="interest"
           placeholder="Please type your interests one at a time and hit enter"
-          value={interest}
+          value={interests}
           onChange={(e) => setInterest(e.target.value)}
           onKeyDown={handleInterestKeyDown}
           id="interest"
