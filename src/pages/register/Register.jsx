@@ -29,6 +29,8 @@ export default function Register() {
   };
 
   const registerHandler = async (values) => {
+    console.log(values);
+
     try {
       await register(values);
       onOpen(); // Show modal on successful registration

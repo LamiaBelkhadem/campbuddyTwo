@@ -9,9 +9,9 @@ export default function Feed() {
   return (
     <div className="feed-container">
       <div className="heading">
-        <h2>
+        <h1>
           <Diversity2TwoToneIcon /> Available Camping Lobbies
-        </h2>
+        </h1>
       </div>
 
       {lobbies?.map((l) => (

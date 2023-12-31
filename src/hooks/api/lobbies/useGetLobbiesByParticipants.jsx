@@ -6,7 +6,7 @@ import { getLobbyByParticipants } from "../../../lib/api/lobbies/index.js";
 export const useGetLobbiesByParticipants = (userId) => {
     const { axios } = useAxios();
     return useQuery({
-        queryKey: ["lobbiesByParticipant", userId],
+        queryKey: ["lobbies","user",userId],
         queryFn: () => getLobbyByParticipants(userId, axios),
     });
 };

@@ -162,6 +162,12 @@
         color: white;
     }
 
+    .lobby-page .leave-btn:disabled{
+       
+            background-color: hsl(120, 1%, 26%) !important;
+            cursor:not-allowed;
+       
+    }
 .view-btn {
     background-color: transparent;
     border: 2px solid #4CAF50;

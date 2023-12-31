@@ -20,9 +20,12 @@ export default function CampsiteDetails({ campsite }) {
   const { mutateAsync: removeCampsiteFromFavorite } =
     useRemoveCampsiteFromFavorites(campsite._id);
 
-  useEffect(() => {
-    setIsFavourite(user.profile.favorites.includes(campsite._id));
-  }, [campsite._id, user.profile.favorites]);
+    useEffect(() => {
+      if (user && user.profile && user.profile.favorites) {
+        setIsFavourite(user.profile.favorites.includes(campsite._id));
+      }
+    }, [campsite._id, user]);
+    
 
   const images = campsite.images
     ? campsite.images.map((image) => image)
@@ -55,12 +58,10 @@ console.log("average",averageRating)
       return <span>N/A</span>;
     }
 
-    // Convert the rating to a number and round it to the nearest whole number if necessary
     const ratingNumber = Number(rating);
     console.log("ratingNumber:", ratingNumber);
     let stars = [];
 
-    // Loop from 1 to 5 and push either a filled star for ratings or an empty star
     for (let i = 1; i <= 5; i++) {
       if (i <= ratingNumber) {
         stars.push(

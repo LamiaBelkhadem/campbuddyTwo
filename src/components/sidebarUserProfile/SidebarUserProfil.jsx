@@ -43,7 +43,7 @@ const SidebarUserProfil = ({ profile,username,
             <img
               src={
                        profile?.profilePic
-                       ? getImageURL(user.profile.profilePic)
+                       ? getImageURL(profile.profilePic)
                        : `defaultpp.jpg`
               }
               alt=""
@@ -51,7 +51,7 @@ const SidebarUserProfil = ({ profile,username,
             />
           </div>
           <div className="title">
-            <h3>{user.username}</h3>
+            <h3>{profile.fname}</h3>
           </div>
           <div className="profilepic-container">
             <div className="info">

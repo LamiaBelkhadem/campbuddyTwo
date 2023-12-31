@@ -24,6 +24,8 @@ export default function LobbyRequirements({ food,equipmentNeeded,equipmentProvid
      
 
     ];
+    const equipmentNeededTags = equipmentNeeded.map((tag) => tag.trim());
+    const equipmentProvidedTags = equipmentProvided.map((tag) => tag.trim());
 
 
     return (
@@ -50,7 +52,39 @@ export default function LobbyRequirements({ food,equipmentNeeded,equipmentProvid
                                  
                                     {row.caption}
                                 </TableCell>
-                                <TableCell align="right">{row.value}</TableCell>
+
+                                <TableCell align="right">
+                                    
+                                {index === 2 && (
+                                    <div className="campsite-detail-row">
+                                    <div className="campsite-detail">
+                                        {equipmentNeededTags.map((tag, index) => (
+                                        <span key={index} className="equipment-tag" style={{backgroundColor:'#AD5D5D', color:'white', display: 'inline-block',
+                                        borderRadius: '15px',
+                                        padding: '5px 10px',
+                                        margin: '0 5px 5px 0',
+                                        fontSize: '0.85em',
+                                        marginTop: '-10px',}}>
+                                            {tag}
+                                        </span>
+                                        ))}
+                                    </div>
+                                    </div>
+                                )}
+                                {index === 1 && (
+                                    <div className="campsite-detail-row">
+                                    <div className="campsite-detail">
+                                        {equipmentProvidedTags.map((tag, index) => (
+                                        <span key={index} className="amenities-tag" style={{ color:'white'}}>
+                                            {tag}
+                                        </span>
+                                        ))}
+                                    </div>
+                                    </div>
+                                )}
+                                
+                                {(index !== 2 && index !== 1 ) && row.value}                                
+                                </TableCell>
                                 
 
                             </TableRow>

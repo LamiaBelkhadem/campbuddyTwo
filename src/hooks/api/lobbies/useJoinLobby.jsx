@@ -9,7 +9,7 @@ export const useJoinLobby = (lobbyId) => {
     mutationKey: ["lobbies", lobbyId],
     mutationFn: async () => joinLobby(lobbyId, axios),
     onSuccess: () => {
-      queryClient.invalidateQueries(["lobbies", lobbyId]);
+      queryClient.invalidateQueries(["lobbies"]);
     },
   });
 };

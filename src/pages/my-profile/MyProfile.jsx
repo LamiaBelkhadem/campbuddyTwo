@@ -11,7 +11,7 @@ import "./my-profile.css";
 
 export default function MyProfile() {
   const { data: profile, isLoading } = useGetMyProfile();
-
+const me=true;
   if (isLoading) return <LoadingPage />;
 console.log("fav:", profile?.favorites)
   return (
@@ -60,7 +60,7 @@ console.log("fav:", profile?.favorites)
                              
               />
             )}
-            <AccountDetails />
+            <AccountDetails bool={me} />
           </div>
         </div>
       </div>

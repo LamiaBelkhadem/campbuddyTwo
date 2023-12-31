@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { getImageURL } from "../../../utils/getImageURL";
 import { Stack } from "@mui/material";
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
-
-export default function LobbyParticipants({ participants, host }) {
+import RateReviewIcon from '@mui/icons-material/RateReview';
+import StarIcon from '@mui/icons-material/Star';
+export default function LobbyParticipants({ participants, host, isOpen}) {
   const { data: getJoinedLobbies } = useGetLobbiesByParticipants(host._id);
   const memberSince = new Date(host?.profile.createdAt).toLocaleDateString();
 
@@ -49,7 +50,7 @@ export default function LobbyParticipants({ participants, host }) {
           </Stack>
           <div className="host-details">
             <div className="detail-header">Rating:</div>
-            <div className="detail-text">{host.profile.rating}</div>
+            <div className="detail-text">{host.profile.rating}<StarIcon sx={{color:'#ffc107 !important'}} /><StarIcon sx={{color:'#ffc107 !important'}}/><StarIcon sx={{color:'#ffc107 !important'}}/><StarIcon sx={{color:'#ffc107 !important'}}/><StarIcon sx={{color:'#ffc107 !important'}}/></div>
           </div>
           <div className="host-details">
             <div className="detail-header">Member since: </div>
@@ -64,10 +65,13 @@ export default function LobbyParticipants({ participants, host }) {
             <div className="detail-text">{completedLobbiesCount}</div>
           </div>
 
-          <Link to={`/app/profile/${host.profile._id}`} className="more-details">
+          <Link to={`/app/profile/view/${host.profile._id}`} className="more-details">
             <div >More Details</div>
           </Link>
         </div>
+      </div>
+      <div className="completion-note" style={{width:'80%', margin:'10px', marginTop:'10px'}}>
+        You can now review your experience with other participants!
       </div>
       <div className="participants-container">
         <div className="participants-header">
@@ -85,14 +89,24 @@ export default function LobbyParticipants({ participants, host }) {
               .filter((c) => c._id !== host._id)
               .map((camper) => (
                 <li className="rightbar-Camper" key={camper._id}>
-                  <div className="participants-img-Container">
+        <Link to={`/app/profile/view/${host.profile._id}`}>                
+            <div className="participants-img-Container">
                     <img
                       className="participants-img"
                       src={getImageURL(camper.profile.profilePic)}
                       alt=""
                     />
                   </div>
+                  </Link>
                   <span className="participants-name">{`${camper.profile.fname} ${camper.profile.lname}`}</span>
+                  {!isOpen ? (
+                    <Link to={`/app/profile/view/${camper._id}`} >
+                      <RateReviewIcon sx={{ml:16,color:'green !important'}}/>
+                    </Link>
+                  ) : (
+                    <RateReviewIcon sx={{ml:16, }}/>
+                  )}
+                 
                 </li>
               ))}
           </ul>

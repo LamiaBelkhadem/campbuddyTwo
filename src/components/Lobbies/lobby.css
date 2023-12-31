@@ -128,6 +128,15 @@
 .lobby-card.join-btn:hover {
     background-color: #274A11 !important;
 }
+.lobby-card  .leave-btn ,.join-btn:disabled {
+    background-color: hsl(100, 2%, 27%) !important;
+    color:white !important;
+
+}
+.lobby-card  .leave-btn :disabled {
+    background-color: hsl(100, 2%, 27%) !important;
+    color:white;
+}
 
 .view-btn:hover {
     background-color: black;

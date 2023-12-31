@@ -50,7 +50,7 @@ export default function Sidebar() {
                 src={
                   user?.profile?.profilePic
                     ? getImageURL(user.profile.profilePic)
-                    : `defaultpp.jpg`
+                    :  getImageURL(`defaultpp.jpg`)
                 }
                 alt=""
                 className="sidebar-profilepic"

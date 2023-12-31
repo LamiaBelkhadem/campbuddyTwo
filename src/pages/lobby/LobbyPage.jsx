@@ -29,12 +29,14 @@ function createData(caption, value) {
 }
 
 const getEventDate = (date) => {
+
   const eventDate = new Date(date);
   const year = eventDate.getFullYear();
   const month = eventDate.getMonth() + 1; // Because months are 0-indexed
   const day = eventDate.getDate();
   const today = new Date();
   const daysFromNow = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
+
   return { eventDate, untilEvent: `${day}/${month}/${year}`, daysFromNow };
 };
 
@@ -47,6 +49,9 @@ export default function LobbyPage() {
   const { data: lobby, isLoading } = useGetOneLobby(id);
   const { mutate: joinLobby, isPending: isJoining } = useJoinLobby(id);
   const { mutate: leaveLobby, isPending: isLeaving } = useLeaveLobby(id);
+  const isOpen=getEventDate(lobby?.start).daysFromNow>0;
+console.log(isOpen)
+const message="[COMPLETE]";
   const rows = [
     createData('Hosted by', lobby?.owner.username),
     createData('Campsite', lobby?.campsite.name),
@@ -65,7 +70,7 @@ export default function LobbyPage() {
       <div className="lobby-page">
         <div className="lobby-page-container">
           <div className="lobby-header">
-            <h1>{lobby.name} </h1>
+          <h1>{isOpen ? lobby.name : `${lobby.name} ${message}`}</h1>
           </div>
           <div className="lobby-details-card">
             <div className="lobby-details-container">
@@ -146,7 +151,7 @@ export default function LobbyPage() {
             {!lobby.joined.find((u) => u._id === user._id) ? (
               <button
                 className="join-btn"
-                disabled={isJoining}
+                disabled={isJoining||!isOpen}
                 onClick={() => joinLobby()}
               >
                 <AddIcon className="leave-icon" />
@@ -155,7 +160,7 @@ export default function LobbyPage() {
             ) : (
               <button
                 className="leave-btn"
-                disabled={isLeaving}
+                disabled={isLeaving||!isOpen}
                 onClick={() => leaveLobby()}
               >
                 <ExitToAppIcon className="leave-icon" />
@@ -163,7 +168,8 @@ export default function LobbyPage() {
               </button>
             )}
           </div>
-          <LobbyParticipants participants={lobby.joined} host={lobby.owner} />
+          <LobbyParticipants participants={lobby.joined} isOpen={isOpen}
+ host={lobby.owner} />
         </div>
       </div>
     </>

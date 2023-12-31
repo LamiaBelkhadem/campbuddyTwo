@@ -14,7 +14,8 @@ import {useParams } from "react-router-dom";
 export default function UserProfile() {
   const { id } = useParams();
   const { data: profile, isLoading } = useViewProfile(id);
-
+  console.log("profile",profile);
+  const me=false;
   if (isLoading) return <LoadingPage />;
 console.log("fav:", profile?.favorites)
   return (
@@ -64,7 +65,7 @@ console.log("fav:", profile?.favorites)
                              
               />
             )}
-            <AccountDetails />
+            <AccountDetails bool={me}/>
           </div>            
           <div className="user-reviews" style={{ width:'800px', marginBotton:'30px !important', paddingBottom:'50px'}}>
             <ProfileReviews profile={profile} style={{width:'680px', }}/>
