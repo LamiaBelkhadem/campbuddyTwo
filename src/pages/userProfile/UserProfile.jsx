@@ -27,6 +27,7 @@ console.log("fav:", profile?.favorites)
             <SidebarUserProfil
               className="sidebar"
               profile={profile}
+              reviews={profile.reviews}
               username={profile.fname}
               lobbies={profile.lobbies}
             />
@@ -68,7 +69,7 @@ console.log("fav:", profile?.favorites)
             <AccountDetails bool={me}/>
           </div>            
           <div className="user-reviews" style={{ width:'800px', marginBotton:'30px !important', paddingBottom:'50px'}}>
-            <ProfileReviews profile={profile} style={{width:'680px', }}/>
+            <ProfileReviews bool={me} profile={profile} style={{width:'680px', }}/>
 
             </div>
         </div>

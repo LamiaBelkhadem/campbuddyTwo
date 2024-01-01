@@ -6,6 +6,8 @@ import { getImageURL } from "../../../utils/getImageURL.js";
 import { useGetLobbiesByOwner } from "../../hooks/api/lobbies/useGetLobbiesByOwner.jsx";
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
 import AddIcon from '@mui/icons-material/Add';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+
 export default function Sidebar() {
   const { user } = useAuth();
   const lobbies_created = 0;
@@ -36,7 +38,36 @@ export default function Sidebar() {
         : 0;
 
     console.log("Number of upcoming lobbies:", upcomingLobbiesCount);
-
+    const calculateAverageRating = (reviews) => {
+      if (!reviews || reviews?.length === 0) return 0;
+      const total = reviews?.reduce((acc, review) => acc + (review?.rating || 0), 0);
+      return total / reviews?.length;
+  };
+  const averageRating = calculateAverageRating(user.profile.reviews);
+  console.log("average",averageRating)
+   
+    const renderStars = ({ rating }) => {
+      console.log("rating",rating)
+      // If rating is not available, return 5 stars
+      if (rating === 0) {
+      rating=5
+      }
+  
+      const ratingNumber = Number(rating);
+      console.log("ratingNumber:", ratingNumber);
+      let stars = [];
+  
+      for (let i = 1; i <= 5; i++) {
+        if (i <= ratingNumber) {
+          stars.push(
+            <StarIcon sx={{color:'#ffc107 !important'}}/>
+          ); // Filled star
+        } else {
+          stars.push(<StarBorderIcon sx={{color:'#ffc107 !important'}}/>        ); // Empty star
+        }
+      }
+      return <div>{stars}</div>;
+    };
   return (
     <div className="sidebar">
       <div className="sidebar-container">
@@ -62,11 +93,8 @@ export default function Sidebar() {
               <div className="info-container">
                 <div className="info-caption"> Rating:</div>
                 <div className="stars-container">
-                  <StarIcon className="stars" />
-                  <StarIcon className="stars" />
-                  <StarIcon className="stars" />
-                  <StarIcon className="stars" />
-                  <StarIcon className="stars" />
+                {renderStars({ rating: averageRating })}
+
                 </div>
               </div>
             </div>

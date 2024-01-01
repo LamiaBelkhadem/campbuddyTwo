@@ -5,6 +5,8 @@ import { Stack } from "@mui/material";
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+
 export default function LobbyParticipants({ participants, host, isOpen}) {
   const { data: getJoinedLobbies } = useGetLobbiesByParticipants(host._id);
   const memberSince = new Date(host?.profile.createdAt).toLocaleDateString();
@@ -19,7 +21,39 @@ export default function LobbyParticipants({ participants, host, isOpen}) {
     : 0;
 
   console.log("Number of completed lobbies:", completedLobbiesCount);
+  const calculateAverageRating = (reviews) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const total = reviews.reduce((acc, review) => acc + (review.rating || 0), 0);
+    return total / reviews.length;
+  };
+  
+  const averageRating = calculateAverageRating(host.profile.reviews);
+  
+console.log("average",averageRating)
+ 
 
+  const renderStars = ({ rating }) => {
+    console.log("rating",rating)
+    // If rating is not available, return 5 stars
+    if (rating === 0) {
+    rating=5
+    }
+
+    const ratingNumber = Number(rating);
+    console.log("ratingNumber:", ratingNumber);
+    let stars = [];
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= ratingNumber) {
+        stars.push(
+          <StarIcon sx={{color:'#ffc107 !important'}}/>
+        ); // Filled star
+      } else {
+        stars.push(<StarBorderIcon sx={{color:'#ffc107 !important'}}/>        ); // Empty star
+      }
+    }
+    return <div>{stars}</div>;
+  };
   return (
     <>
       <div className="participants-container">
@@ -50,7 +84,9 @@ export default function LobbyParticipants({ participants, host, isOpen}) {
           </Stack>
           <div className="host-details">
             <div className="detail-header">Rating:</div>
-            <div className="detail-text">{host.profile.rating}<StarIcon sx={{color:'#ffc107 !important'}} /><StarIcon sx={{color:'#ffc107 !important'}}/><StarIcon sx={{color:'#ffc107 !important'}}/><StarIcon sx={{color:'#ffc107 !important'}}/><StarIcon sx={{color:'#ffc107 !important'}}/></div>
+            <div className="detail-text">               
+             {renderStars({ rating: averageRating })}
+            </div>
           </div>
           <div className="host-details">
             <div className="detail-header">Member since: </div>

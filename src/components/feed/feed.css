@@ -10,3 +10,7 @@
     display: flex;
     align-items: start;
 }
+.feed-heading{
+    display: flex;
+    justify-content:space-between;
+}

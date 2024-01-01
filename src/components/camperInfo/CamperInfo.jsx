@@ -12,7 +12,7 @@ import InterestsIcon from '@mui/icons-material/Interests';
 import StarIcon from '@mui/icons-material/Star';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-  import { useGetMultipleCampsite } from '/src/hooks/api/campsites/useGetMultipleCampsite.jsx';
+  import { useGetAllCampsites } from '/src/hooks/api/campsites/useGetAllCampsites.jsx';
 import { useState, useEffect } from 'react';
 function createData(caption, value) {
     return { caption, value };
@@ -24,15 +24,18 @@ export default function ProfileDetails({ gender,
     equipment,
     favourites, }) {
         
-
-        const { data: campsites, isLoading, error } = useGetMultipleCampsite(favourites);
+        const { data: campsites, isLoading, error } = useGetAllCampsites();
+        const [favouriteCampsites, setFavouriteCampsites] = useState([]);
+        
         useEffect(() => {
             if (campsites) {
-                campsites.forEach(campsite => {
-                    console.log(campsite.name);
-                });
+                const matchedCampsites = campsites.filter(campsite => favourites.includes(campsite._id));
+                setFavouriteCampsites(matchedCampsites.map(campsite => campsite.name));
             }
-        }, [campsites]);
+            console.log(favouriteCampsites)
+            console.log("all campsites",campsites)
+        }, [campsites, favourites]);
+    
             const rows = [
         createData('Gender', gender),
         createData('About me', aboutme),
@@ -108,9 +111,14 @@ export default function ProfileDetails({ gender,
                                         ) : error ? (
                                             <span>Error: {error.message}</span>
                                         ) : (
-                                            campsites?.map((campsite, index) => (
-                                                <span key={index} className="amenities-tag">
-                                                    {campsite.name}
+                                            favouriteCampsites?.map((campsite, index) => (
+                                                <span key={index} className="campsite-tag" style={{backgroundColor:'#9E6C39', color:'white', display: 'inline-block',
+                                                borderRadius: '15px',
+                                                padding: '5px 10px',
+                                                margin: '0 5px 5px 0',
+                                                fontSize: '0.85em',
+                                                marginTop: '-10px',}}>
+                                                    {campsite}
                                                 </span>
                                             ))
                                         )}

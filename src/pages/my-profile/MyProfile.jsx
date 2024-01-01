@@ -8,12 +8,13 @@ import ProfileDetails from "../../components/profileDetails/ProfileDetails.jsx";
 import Socials from "../../components/socials/Socials.jsx";
 import { useGetMyProfile } from "../../hooks/api/profile/useGetMyProfile.jsx";
 import "./my-profile.css";
-
+import ProfileReviews from "../../components/ProfileReview/index.jsx";
 export default function MyProfile() {
   const { data: profile, isLoading } = useGetMyProfile();
 const me=true;
   if (isLoading) return <LoadingPage />;
 console.log("fav:", profile?.favorites)
+console.log(profile, "reviews 1")
   return (
     <div className="profile">
       <Navbar />
@@ -23,6 +24,8 @@ console.log("fav:", profile?.favorites)
             <SidebarProfil
               className="sidebar"
               username={profile.fname + " " + profile.lname}
+              rate={profile.rate}
+              reviews={profile.reviews}
               lobbies={profile.lobbies}
             />
           )}
@@ -62,6 +65,10 @@ console.log("fav:", profile?.favorites)
             )}
             <AccountDetails bool={me} />
           </div>
+          <div className="user-reviews" style={{ width:'800px', marginBotton:'30px !important', paddingBottom:'50px'}}>
+            <ProfileReviews bool={me} profile={profile} style={{width:'680px', }}/>
+
+            </div>
         </div>
       </div>
       <Footer />

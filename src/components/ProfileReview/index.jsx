@@ -31,6 +31,7 @@ const initialValues = {
 };
 
 const ReviewsList = ({
+  bool,
   reviews,
   onAddReview,
   deleteReview,
@@ -40,19 +41,21 @@ const ReviewsList = ({
 }) => {
   const { user } = useAuth();
   console.log(user);
+  console.log("bool2", bool)
   return (
     <Fragment>
       <Card>
         <CardContent>
           <Box
+          
             display="flex"
             justifyContent="space-between"
             alignItems="center"
           >
             <Typography variant="h5">Reviews</Typography>
-            <Button onClick={onOpen}>
+            {!bool && (<Button onClick={onOpen}>
               <AddIcon />
-            </Button>
+            </Button>)}
           </Box>
           <Divider style={{ margin: "10px 0" }} />
 
@@ -80,7 +83,13 @@ const ReviewsList = ({
     </div>
   ))
 ) : (
-  <p>No reviews yet. Be the first to review!</p>
+  
+  bool ? (
+    <p>No reviews yet. Be the first to review!</p>
+  ) : (
+    <p>No reviews yet.</p>
+  )
+  
 )}
         </CardContent>
       </Card>
@@ -90,6 +99,7 @@ const ReviewsList = ({
         open={isOpen}
         sx={{
           width: "600px",
+          alignContent:"center"
         }}
       >
         <DialogTitle className="modal-header">
@@ -176,9 +186,9 @@ const ReviewsList = ({
   );
 };
 
-const ProfileReviews = ({ profile }) => {
+const ProfileReviews = ({ profile, bool }) => {
   const { mutate: addReview } = useAddProfileReview(profile?._id);
-
+  console.log("bool1", bool)
   const { onOpen, onClose, isOpen } = useDisclosure();
   const { mutate: deleteReview } = useDeleteProfileReview(profile?._id);
 
@@ -205,6 +215,7 @@ const ProfileReviews = ({ profile }) => {
 
   return (
     <ReviewsList
+        bool={bool}
       reviews={profile?.reviews}
       onAddReview={onAddReview}
       deleteReview={onDeleteReview}

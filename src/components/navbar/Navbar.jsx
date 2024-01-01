@@ -70,7 +70,7 @@ export default function Navbar() {
                   My Profile
                 </div>
               </Link>
-              
+            
               <div className="dropdown-option" onClick={logout}>
                 <div className="dropdown-option-icon">
                   <LogoutIcon />

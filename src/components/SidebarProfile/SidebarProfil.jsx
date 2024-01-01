@@ -4,8 +4,9 @@ import { useGetLobbiesByOwner } from "../../hooks/api/lobbies/useGetLobbiesByOwn
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
 import "./sidebarProfil.css";
 import { useAuth } from "../../hooks/useAuth";
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
-const SidebarProfil = ({ profile }) => {
+const SidebarProfil = ({ profile , rate, reviews}) => {
       const { user } = useAuth();
 
     const { data: getCreatedLobbies, isPending } = useGetLobbiesByOwner(
@@ -14,7 +15,7 @@ const SidebarProfil = ({ profile }) => {
   const { data: getJoinedLobbies, isLoading } = useGetLobbiesByParticipants(
       user._id
   );
-
+console.log(reviews, "reviews")
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for consistent date comparison
 
@@ -32,7 +33,38 @@ const SidebarProfil = ({ profile }) => {
     : 0;
 
   console.log("Number of completed lobbies:", completedLobbiesCount);
+  const calculateAverageRating = (reviews) => {
+    if (!reviews || reviews?.length === 0) return 0;
+    const total = reviews?.reduce((acc, review) => acc + (review?.rating || 0), 0);
+    return total / reviews?.length;
+};
+const averageRating = calculateAverageRating(reviews);
+console.log("average",averageRating)
+ 
+  const renderStars = ({ rating }) => {
+    console.log("rating",rating)
+    // If rating is not available, return 5 stars
+    if (rating === 0) {
+    rating=5
+    }
 
+    const ratingNumber = Number(rating);
+    console.log("ratingNumber:", ratingNumber);
+    let stars = [];
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= ratingNumber) {
+        stars.push(
+          <StarIcon sx={{color:'#ffc107 !important'}}/>
+        ); // Filled star
+      } else {
+        stars.push(<StarBorderIcon sx={{color:'#ffc107 !important'}}/>        ); // Empty star
+      }
+    }
+    return <div>{stars}</div>;
+  };
+
+    
   return (
     <div className="profile-sidebar">
       <div className="sidebar-container">
@@ -54,13 +86,10 @@ const SidebarProfil = ({ profile }) => {
           <div className="profilepic-container">
             <div className="info">
               <div className="info-container">
-                <div className="info-caption"> Current Rating:</div>
+                <div className="info-caption"> Rating:</div>
                 <div className="stars-container">
-                  <StarIcon className="stars" />
-                  <StarIcon className="stars" />
-                  <StarIcon className="stars" />
-                  <StarIcon className="stars" />
-                  <StarIcon className="stars" />
+                {renderStars({ rating: averageRating })}
+
                 </div>
               </div>
             </div>
