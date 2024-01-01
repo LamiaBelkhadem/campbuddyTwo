@@ -29,8 +29,8 @@ export default function ProfileDetails({ instagram, facebook, twitter }) {
                 <Table sx={{ minWidth: 250, }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell sx={{  fontSize: 20,color:'white', backgroundColor: '#AD5D5D',maxWidth:50 }}>Camper Details</TableCell>
-                            <TableCell sx={{fontSize: 20, color: 'white', backgroundColor: '#AD5D5D',maxWidth:50 }}></TableCell>
+                            <TableCell sx={{fontSize: 20,color:'white', backgroundColor: '#AD5D5D',maxWidth:180 }}>Socials</TableCell>
+                            <TableCell sx={{fontSize: 20, color: 'white', backgroundColor: '#AD5D5D' }}></TableCell>
 
                         </TableRow>
 

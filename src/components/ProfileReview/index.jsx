@@ -99,7 +99,6 @@ const ReviewsList = ({
         open={isOpen}
         sx={{
           width: "600px",
-          alignContent:"center"
         }}
       >
         <DialogTitle className="modal-header">

@@ -35,6 +35,8 @@ import CreatedLobbies from "./pages/created-lobbies/CreatedLobbies.jsx";
 import JoinedLobbies from "./pages/joined-lobbies/JoinedLobbies.jsx";
 import ProfileReviews from "./components/ProfileReview/index.jsx";
 import UserProfile from "./pages/userProfile/UserProfile.jsx";
+import HowItWorks from"./pages/HowItWorks/HowItWorks.jsx";
+import Features from "./pages/Features/Features.jsx";
 function App() {
   return (
     <>
@@ -71,6 +73,22 @@ function App() {
                 element={
                   <PublicRoute>
                     <Register />
+                  </PublicRoute>
+                }
+              />
+               <Route
+                path="how"
+                element={
+                  <PublicRoute>
+                    <HowItWorks />
+                  </PublicRoute>
+                }
+              />
+               <Route
+                path="features"
+                element={
+                  <PublicRoute>
+                    <Features />
                   </PublicRoute>
                 }
               />

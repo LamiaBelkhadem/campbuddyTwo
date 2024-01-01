@@ -23,7 +23,7 @@ export default function Login() {
   return (
     <div className="auth-ctr">
       <div className="form-box">
-        <h2 className="title">Login</h2>
+        <h1 className="title">Login</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={loginSchema}

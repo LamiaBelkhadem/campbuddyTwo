@@ -28,7 +28,7 @@ export default function Lobby({ lobby }) {
   const today = new Date();
 
   const daysFromNow = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
-  const numberOfParticipants = lobby.joined.length;
+  const numberOfParticipants = lobby.joined?.length;
   const isOpen=daysFromNow>0;
   const isNearlyFull = numberOfParticipants / lobby.maximumParticipants > 0.8;
 
@@ -41,7 +41,7 @@ export default function Lobby({ lobby }) {
 		<div className="lobby-card">
 			<div className="lobby-card-container">
 				<div className="campsite-lobby-image">
-					<img src={getImageURL(lobby.campsite.mainImg)} alt="" />
+					<img src={getImageURL(lobby.campsite?.mainImg)} alt="" />
 				</div>
 
 				<div className="lobby-card-container-right">
@@ -58,15 +58,15 @@ export default function Lobby({ lobby }) {
 						<PersonIcon />
 						<p>Hosted by:</p>
 						<img
-							src={getImageURL(lobby.owner.profile?.profilePic)}
+							src={getImageURL(lobby.owner?.profile?.profilePic)}
 							alt=""
 							className="lobby-owner-img"
 						/>
-						<p>{lobby.owner.username}</p>
+						<p>{lobby.owner?.username}</p>
 					</div>
 					<div className="lobby-info">
 						<LocationOnIcon />
-						<p>{lobby.campsite.location}</p>
+						<p>{lobby.campsite?.location}</p>
 					</div>
 					<div className="lobby-info">
 						<EventIcon />
@@ -84,7 +84,7 @@ export default function Lobby({ lobby }) {
 							{daysFromNow ? `${daysFromNow} days from now` : "Invalid Date"}
 						</p>
 						<div>
-							{lobby.joined.find((e) => e._id ? e._id === user._id : e === user._id) ? (
+							{lobby.joined?.find((e) => e._id ? e._id === user._id : e === user._id) ? (
 								<Button
 									disabled={isJoining || isLeaving||!isOpen}
 									className="leave-btn"

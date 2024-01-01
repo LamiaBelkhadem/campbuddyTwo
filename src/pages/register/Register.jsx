@@ -43,7 +43,7 @@ export default function Register() {
   return (
     <div className="auth-ctr">
       <div className="form-box">
-        <h2 className="title">Register</h2>
+        <h1 className="title">Register</h1>
         <div className="desc">Please enter the information below to start</div>
         <Formik
           initialValues={initialValues}

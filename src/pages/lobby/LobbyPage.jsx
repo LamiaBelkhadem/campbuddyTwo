@@ -24,6 +24,7 @@ import Paper from '@mui/material/Paper';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LobbyPreferences from '../../components/lobbyPreferences/lobbyPreferences';
 import LobbyRequirements from "../../components/lobbyRequirements/lobbyRequirements.jsx";
+import LobbyDescription from "../../components/lobbyDescription/lobbyDescripton.jsx";
 function createData(caption, value) {
   return { caption, value };
 }
@@ -50,6 +51,8 @@ export default function LobbyPage() {
   const { mutate: joinLobby, isPending: isJoining } = useJoinLobby(id);
   const { mutate: leaveLobby, isPending: isLeaving } = useLeaveLobby(id);
   const isOpen=getEventDate(lobby?.start).daysFromNow>0;
+  const joined=lobby?.joined?.find((u) => u._id === user._id) 
+  console.log(joined, "joined")
 console.log(isOpen)
 const message="[COMPLETE]";
   const rows = [
@@ -108,19 +111,31 @@ const message="[COMPLETE]";
                     </TableBody>
                 </Table>
             </TableContainer>
-                <div className="action-buttons">
+                <div className="days-from-now-container">
+                  <div></div>
+                  <div>
                   <p className="days-from-now" style={{textAlign:'left'}}>
                     {getEventDate(lobby.start).daysFromNow +
-                      ` daysFromNow days from now`}
+                      ` Days from Now`}
                   </p>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div className="lobby-preferences">
+              <div className="preferences-header" >
+                <h1 > Lobby Description:</h1>
+                </div>
+                <LobbyDescription
+                description={lobby.desc}/>
+                </div>
             <div className="lobby-preferences">
               <div className="preferences-header">
                 <h1> Lobby Preferences:</h1>
               </div>
               <LobbyPreferences
+              
               age={lobby.age}
               ambiance={lobby.ambiance}
               experience={lobby.experience}
@@ -169,6 +184,7 @@ const message="[COMPLETE]";
             )}
           </div>
           <LobbyParticipants participants={lobby.joined} isOpen={isOpen}
+          joined={joined}
  host={lobby.owner} />
         </div>
       </div>

@@ -238,3 +238,7 @@
     color:white !important;
     font-size:30px !important;
 }
+.days-from-now-container{
+    display: flex;
+    justify-content: space-between;
+}

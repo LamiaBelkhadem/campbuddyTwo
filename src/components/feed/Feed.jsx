@@ -12,31 +12,40 @@ import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import Box from '@mui/material/Box';
 import { useRecommendedLobbies } from '../../hooks/api/lobbies/useRecommendedLobbies';
+
 export default function Feed() {
   const [value, setValue] = useState(0);
   const { data: allLobbies } = useAllLobbies();
-  const { data: recommendedLobbies } = useRecommendedLobbies(); // Assuming this exists
+  const { data: recommendedLobbies } = useRecommendedLobbies();
 
   const [displayedLobbies, setDisplayedLobbies] = useState([]);
 
   useEffect(() => {
     switch (value) {
       case 0:
-        setDisplayedLobbies(recommendedLobbies);
+        // Extract the lobby objects from recommendedLobbies.lobbies
+        const recommendedLobbyData = recommendedLobbies?.lobbies?.map(item => item.lobby) || [];
+        setDisplayedLobbies(recommendedLobbyData);
         break;
       case 1:
-        setDisplayedLobbies(allLobbies);
+        setDisplayedLobbies(allLobbies || []);
         break;
       case 2:
         // Sort all lobbies by creation date in descending order for "New"
         const sortedLobbies = allLobbies?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        setDisplayedLobbies(sortedLobbies);
+        setDisplayedLobbies(sortedLobbies || []);
         break;
       default:
         setDisplayedLobbies([]);
     }
   }, [value, allLobbies, recommendedLobbies]);
-
+  useEffect(() => {
+    console.log("Recommended Lobbies:", recommendedLobbies);
+    console.log("All Lobbies:", allLobbies);
+  
+    // existing switch statement
+  }, [value, allLobbies, recommendedLobbies]);
+  
   return (
     <div className="feed-container">
       <div className="feed-heading">

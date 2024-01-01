@@ -6,10 +6,11 @@ import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbi
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-
-export default function LobbyParticipants({ participants, host, isOpen}) {
+import Chip from '@mui/material/Chip';
+export default function LobbyParticipants({ participants, host, isOpen, joined}) {
   const { data: getJoinedLobbies } = useGetLobbiesByParticipants(host._id);
   const memberSince = new Date(host?.profile.createdAt).toLocaleDateString();
+  console.log(joined, "joined")
 
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for consistent date comparison
@@ -106,9 +107,21 @@ console.log("average",averageRating)
           </Link>
         </div>
       </div>
-      <div className="completion-note" style={{width:'80%', margin:'10px', marginTop:'10px'}}>
-        You can now review your experience with other participants!
-      </div>
+      {(joined && !isOpen)&& (
+      <div className="completion-note" style={{ width: '60%', margin: '10px', marginTop: '20px' }}>
+  <Stack direction="row" spacing={1}>
+    <Chip 
+      sx={{
+        width: '450px',
+        whiteSpace: 'normal', // Allow text to wrap
+        overflow: 'hidden', // Hide overflow
+        textOverflow: 'ellipsis', // Add ellipsis to text that overflows
+      }}
+      label=" Review your Fellow Campers!"
+    />
+  </Stack>
+
+      </div>)}
       <div className="participants-container">
         <div className="participants-header">
           <h1>
@@ -125,7 +138,7 @@ console.log("average",averageRating)
               .filter((c) => c._id !== host._id)
               .map((camper) => (
                 <li className="rightbar-Camper" key={camper._id}>
-        <Link to={`/app/profile/view/${host.profile._id}`}>                
+        <Link to={`/app/profile/view/${camper.profile._id}`}>                
             <div className="participants-img-Container">
                     <img
                       className="participants-img"

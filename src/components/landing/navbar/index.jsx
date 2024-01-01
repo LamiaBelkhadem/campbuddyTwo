@@ -13,9 +13,12 @@ export default function Navbar() {
       <div className="navbarCenter"></div>
       <div className="navbarRight">
         <div className="navbar-links">
+        <Link to="/how" style={{ textDecoration: "none" }}>
           <span className="navbar-link">How It Works</span>
+          </Link>
+          <Link to="/features" style={{ textDecoration: "none" }}>
           <span className="navbar-link">Features</span>
-          <span className="navbar-link">FAQ</span>
+          </Link>
         </div>
         <div className="buttons">
           <Link to="/register" style={{ textDecoration: "none" }}>
