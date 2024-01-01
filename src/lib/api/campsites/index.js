@@ -29,3 +29,6 @@ export const addCampsiteToFavorites = (id, client) =>
 
 export const removeCampsiteFromFavorites = (id, client) =>
   client.delete(`/campsites/favourites/${id}`).then((res) => res.data.profile);
+
+  export const getMultipleCampsites = (ids, client) =>
+  client.post("/campsites/multiple", { ids }).then((res) => res.data.campsites);

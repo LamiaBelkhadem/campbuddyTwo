@@ -12,32 +12,39 @@ import InterestsIcon from '@mui/icons-material/Interests';
 import StarIcon from '@mui/icons-material/Star';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
+  import { useGetMultipleCampsite } from '/src/hooks/api/campsites/useGetMultipleCampsite.jsx';
+import { useState, useEffect } from 'react';
 function createData(caption, value) {
     return { caption, value };
 }
-
-
 export default function ProfileDetails({ gender,
     experience,
     aboutme,
     interests,
     equipment,
-    favorites, }) {
+    favourites, }) {
+        
 
-    const rows = [
+        const { data: campsites, isLoading, error } = useGetMultipleCampsite(favourites);
+        useEffect(() => {
+            if (campsites) {
+                campsites.forEach(campsite => {
+                    console.log(campsite.name);
+                });
+            }
+        }, [campsites]);
+            const rows = [
         createData('Gender', gender),
         createData('About me', aboutme),
         createData('Interests/Hobbies', interests),
         createData('Experience Level', experience),
         createData('Equipment/Gear', equipment,),
-        createData('Favourites', favorites),
-
+        createData('Favourites', favourites),
     ];
     const interestsTags = interests.split(",").map((tag) => tag.trim());
     const equipmentTags = equipment.split(",").map((tag) => tag.trim());
 
-
+    console.log("favourites",favourites)
 
     return (
         <div className="camper-details">
@@ -68,7 +75,7 @@ export default function ProfileDetails({ gender,
                                     {row.caption}
                                 </TableCell>
                                                                 <TableCell align="right">
-                                {/* Show interests tags when index is 2 */}
+                                {}
                                 {index === 2 && (
                                     <div className="campsite-detail-row">
                                     <div className="campsite-detail">
@@ -81,7 +88,7 @@ export default function ProfileDetails({ gender,
                                     </div>
                                 )}
 
-                                {/* Show equipment tags when index is 4 */}
+                                {}
                                 {index === 4 && (
                                     <div className="campsite-detail-row">
                                     <div className="campsite-detail">
@@ -93,18 +100,23 @@ export default function ProfileDetails({ gender,
                                     </div>
                                     </div>
                                 )}
-                                {index === 5 && (  // assuming index 3 is where you want to show the favourites
+                                {index === 5 && ( 
                                     <div className="campsite-detail-row">
                                     <div className="campsite-detail">
-                                        {favorites?.map((campsite, index) => (
-                                        <span key={index} className="amenities-tag">
-                                            {favorites.name} {/* Display the campsite name */}
-                                        </span>
-                                        ))}
+                                        {isLoading ? (
+                                            <span>Loading...</span>
+                                        ) : error ? (
+                                            <span>Error: {error.message}</span>
+                                        ) : (
+                                            campsites?.map((campsite, index) => (
+                                                <span key={index} className="amenities-tag">
+                                                    {campsite.name}
+                                                </span>
+                                            ))
+                                        )}
                                     </div>
-                                    </div>
+                                </div>
                                 )}
-                                {/* Show row.value only when index is not 2 or 4 */}
                                 {(index !== 2 && index !== 4 && index !== 5) && row.value}
                                 </TableCell>
 

@@ -16,6 +16,10 @@ import useDisclosure from "../../hooks/useDisclosure";
 import AppModal from "../common/Modal";
 import "./create-profile.css";
 import { getImageURL } from "../../../utils/getImageURL.js";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+
 
 const createProfileSchema = Yup.object().shape({
   gender: Yup.string(),
@@ -49,6 +53,9 @@ const _initialValues = {
   area: "",
   interests: "",
   equipment: "",
+  twitter:"",
+  instagram:"",
+  facebook:"",
 };
 
 function ProfileForm({ profile }) {
@@ -134,6 +141,10 @@ function ProfileForm({ profile }) {
     formData.append("fname", values.fname);
     formData.append("gender", values.gender);
     formData.append("lname", values.lname);
+    formData.append("twitter", values.twitter);
+    formData.append("instagram", values.instagram);
+    formData.append("facebook", values.facebook);
+
     updateProfile(formData, {
       onSuccess: () => {
         navigate("/app/my-profile");
@@ -365,7 +376,41 @@ function ProfileForm({ profile }) {
                   {values.desc.length}/500
                 </p>
                 </div>
+
+
               </div>
+
+              <div className="box1">
+                <div className="input-icon">
+                  <TwitterIcon className="icon" />
+                  <Field
+                    name="twitter"
+                    className="input-box"
+                    type="text"
+                    placeholder="Twitter"
+                  />
+                </div>
+
+                <div className="input-icon">
+                  <FacebookIcon className="icon" />
+                  <Field
+                    name="facebook"
+                    className="input-box"
+                    type="text"
+                    placeholder="Facebook"
+                  />
+                </div>
+                <div className="input-icon">
+                  <InstagramIcon className="icon" />
+                  <Field
+                    name="instagram"
+                    className="input-box"
+                    type="text"
+                    placeholder="Instagram"
+                  />
+                </div>
+              </div>
+
               {JSON.stringify(errors)}
 
               <button
