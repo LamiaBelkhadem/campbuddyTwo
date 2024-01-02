@@ -12,28 +12,42 @@ import InterestsIcon from '@mui/icons-material/Interests';
 import StarIcon from '@mui/icons-material/Star';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+  import { useGetAllCampsites } from '/src/hooks/api/campsites/useGetAllCampsites.jsx';
+import { useState, useEffect } from 'react';
 function createData(caption, value) {
     return { caption, value };
 }
-
-
 export default function ProfileDetails({ gender,
     experience,
     aboutme,
     interests,
     equipment,
     favourites, }) {
-
-    const rows = [
+        
+        const { data: campsites, isLoading, error } = useGetAllCampsites();
+        const [favouriteCampsites, setFavouriteCampsites] = useState([]);
+        
+        useEffect(() => {
+            if (campsites) {
+                const matchedCampsites = campsites.filter(campsite => favourites.includes(campsite._id));
+                setFavouriteCampsites(matchedCampsites.map(campsite => campsite.name));
+            }
+            console.log(favouriteCampsites)
+            console.log("all campsites",campsites)
+        }, [campsites, favourites]);
+    
+            const rows = [
         createData('Gender', gender),
         createData('About me', aboutme),
         createData('Interests/Hobbies', interests),
         createData('Experience Level', experience),
         createData('Equipment/Gear', equipment,),
         createData('Favourites', favourites),
-
     ];
+    const interestsTags = interests.split(",").map((tag) => tag.trim());
+    const equipmentTags = equipment.split(",").map((tag) => tag.trim());
 
+    console.log("favourites",favourites)
 
     return (
         <div className="camper-details">
@@ -56,14 +70,63 @@ export default function ProfileDetails({ gender,
                             >
                                 <TableCell component="th" scope="row">
                                     {index === 0 && < WcIcon sx={{ mb: -1, mr: 2 }} />}
-                                    {index === 1 && <InfoIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-                                    {index === 2 && <InterestsIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-                                    {index === 3 && <StarIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-                                    {index === 4 && <HomeRepairServiceIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-                                    {index === 5 && <FavoriteIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
+                                    {index === 1 && <InfoIcon sx={{ mb: -1, mr: 2 }} />}  
+                                    {index === 2 && <InterestsIcon sx={{ mb: -1, mr: 2 }} />}  
+                                    {index === 3 && <StarIcon sx={{ mb: -1, mr: 2 }} />}  
+                                    {index === 4 && <HomeRepairServiceIcon sx={{ mb: -1, mr: 2 }} />}  
+                                    {index === 5 && <FavoriteIcon sx={{ mb: -1, mr: 2 }} />}  
                                     {row.caption}
                                 </TableCell>
-                                <TableCell align="right">{row.value}</TableCell>
+                                                                <TableCell align="right">
+                                {}
+                                {index === 2 && (
+                                    <div className="campsite-detail-row">
+                                    <div className="campsite-detail">
+                                        {interestsTags.map((tag, index) => (
+                                        <span key={index} className="amenities-tag">
+                                            {tag}
+                                        </span>
+                                        ))}
+                                    </div>
+                                    </div>
+                                )}
+
+                                {}
+                                {index === 4 && (
+                                    <div className="campsite-detail-row">
+                                    <div className="campsite-detail">
+                                        {equipmentTags.map((tag, index) => (
+                                        <span key={index} className="amenities-tag">
+                                            {tag}
+                                        </span>
+                                        ))}
+                                    </div>
+                                    </div>
+                                )}
+                                {index === 5 && ( 
+                                    <div className="campsite-detail-row">
+                                    <div className="campsite-detail">
+                                        {isLoading ? (
+                                            <span>Loading...</span>
+                                        ) : error ? (
+                                            <span>Error: {error.message}</span>
+                                        ) : (
+                                            favouriteCampsites?.map((campsite, index) => (
+                                                <span key={index} className="campsite-tag" style={{backgroundColor:'#9E6C39', color:'white', display: 'inline-block',
+                                                borderRadius: '15px',
+                                                padding: '5px 10px',
+                                                margin: '0 5px 5px 0',
+                                                fontSize: '0.85em',
+                                                marginTop: '-10px',}}>
+                                                    {campsite}
+                                                </span>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+                                )}
+                                {(index !== 2 && index !== 4 && index !== 5) && row.value}
+                                </TableCell>
 
                             </TableRow>
                         ))}

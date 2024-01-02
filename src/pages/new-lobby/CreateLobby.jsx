@@ -37,6 +37,7 @@ import { Field, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import { createLobbySchema } from "../../lib/api/lobbies/validation.js";
 import { equipmentList } from "../../lib/constants.js";
+import { getImageURL } from "../../../utils/getImageURL.js";
 
 const initialValues = {
   name: "",
@@ -104,7 +105,7 @@ export default function CreateLobby() {
                     Create a New Lobby
                   </h2>
                   <div  className="create-lobby-image">
-                  <img src="camping.png" alt="" />
+                  <img src={ getImageURL(`camping.png`)} alt="" />
                   </div>
                   <div className="desc">
                     Create your lobby and add your preferences.

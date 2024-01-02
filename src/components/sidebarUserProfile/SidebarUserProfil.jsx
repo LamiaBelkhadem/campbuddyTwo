@@ -2,12 +2,16 @@ import StarIcon from "@mui/icons-material/Star";
 import { getImageURL } from "../../../utils/getImageURL.js";
 import { useGetLobbiesByOwner } from "../../hooks/api/lobbies/useGetLobbiesByOwner.jsx";
 import { useGetLobbiesByParticipants } from "../../hooks/api/lobbies/useGetLobbiesByParticipants.jsx";
-import "./sidebarProfil.css";
-import { useAuth } from "../../hooks/useAuth";
+import "./sidebarUserProfil.css";
+import { useAuth } from "../../hooks/useAuth.jsx";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
-const SidebarProfil = ({ profile , rate, reviews}) => {
+const SidebarUserProfil = ({ profile,username, reviews,rate,
+  lobbies }) => {
       const { user } = useAuth();
+
+      console.log(reviews, "reviews")
+
 
     const { data: getCreatedLobbies, isPending } = useGetLobbiesByOwner(
     user._id
@@ -15,10 +19,11 @@ const SidebarProfil = ({ profile , rate, reviews}) => {
   const { data: getJoinedLobbies, isLoading } = useGetLobbiesByParticipants(
       user._id
   );
-console.log(reviews, "reviews")
+
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for consistent date comparison
 
+  console.log("user profile",profile);
   const completedLobbiesCount = getJoinedLobbies
     ? getJoinedLobbies.filter((lobby) => {
         const endDate = new Date(lobby.end);
@@ -33,7 +38,7 @@ console.log(reviews, "reviews")
     : 0;
 
   console.log("Number of completed lobbies:", completedLobbiesCount);
-  const calculateAverageRating = (reviews) => {
+ const calculateAverageRating = (reviews) => {
     if (!reviews || reviews?.length === 0) return 0;
     const total = reviews?.reduce((acc, review) => acc + (review?.rating || 0), 0);
     return total / reviews?.length;
@@ -41,6 +46,7 @@ console.log(reviews, "reviews")
 const averageRating = calculateAverageRating(reviews);
 console.log("average",averageRating)
  
+
   const renderStars = ({ rating }) => {
     console.log("rating",rating)
     // If rating is not available, return 5 stars
@@ -64,7 +70,6 @@ console.log("average",averageRating)
     return <div>{stars}</div>;
   };
 
-    
   return (
     <div className="profile-sidebar">
       <div className="sidebar-container">
@@ -72,8 +77,8 @@ console.log("average",averageRating)
           <div className="profilepic">
             <img
               src={
-                       user?.profile?.profilePic
-                       ? getImageURL(user.profile.profilePic)
+                       profile?.profilePic
+                       ? getImageURL(profile.profilePic)
                        : `defaultpp.jpg`
               }
               alt=""
@@ -81,7 +86,7 @@ console.log("average",averageRating)
             />
           </div>
           <div className="title">
-            <h3>{user.username}</h3>
+            <h3>{profile.fname}</h3>
           </div>
           <div className="profilepic-container">
             <div className="info">
@@ -120,4 +125,4 @@ console.log("average",averageRating)
   );
 };
 
-export default SidebarProfil;
+export default SidebarUserProfil;

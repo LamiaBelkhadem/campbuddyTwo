@@ -48,8 +48,9 @@ p {
     margin-left: -250px;
 }
 
-#sidebar .sidebar-header {
+#sidebar .campsites-sidebar-header h4 {
     padding: 30px;
+    font-size: 20px !important;
     background: #7a4646
 ;
 }

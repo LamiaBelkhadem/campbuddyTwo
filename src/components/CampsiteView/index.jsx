@@ -28,7 +28,7 @@ export default function SidebarCampsite() {
     <div className="sidebar-campsite-page">
       <div className="wrapper">
         <nav id="sidebar">
-          <div className="sidebar-header">
+          <div className="campsites-sidebar-header">
             <h4>Tunisian Campsites</h4>
           </div>
 

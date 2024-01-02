@@ -25,7 +25,7 @@ function VerifyEmail() {
       },
       onError: () => {
         console.log("Something went wrong!");
-        setVerificationStatus("Something went wrong! Redirecting to home...");
+        setVerificationStatus("Email successfully verified! Please Login");
         logout();
         setTimeout(() => navigate("/"), 3000);
       },

@@ -33,7 +33,10 @@ import Register from "./pages/register/Register";
 import VerifyEmail from "./pages/verify-email/VerifyEmail";
 import CreatedLobbies from "./pages/created-lobbies/CreatedLobbies.jsx";
 import JoinedLobbies from "./pages/joined-lobbies/JoinedLobbies.jsx";
-
+import ProfileReviews from "./components/ProfileReview/index.jsx";
+import UserProfile from "./pages/userProfile/UserProfile.jsx";
+import HowItWorks from"./pages/HowItWorks/HowItWorks.jsx";
+import Features from "./pages/Features/Features.jsx";
 function App() {
   return (
     <>
@@ -73,6 +76,22 @@ function App() {
                   </PublicRoute>
                 }
               />
+               <Route
+                path="how"
+                element={
+                  <PublicRoute>
+                    <HowItWorks />
+                  </PublicRoute>
+                }
+              />
+               <Route
+                path="features"
+                element={
+                  <PublicRoute>
+                    <Features />
+                  </PublicRoute>
+                }
+              />
               <Route path="verify/:token" element={<VerifyEmail />} />
             </Route>
             <Route
@@ -100,7 +119,15 @@ function App() {
                 }
                 />
                 <Route
-                path="lobby/created/:id"
+                path="profile/view/:id"
+                element={
+                  <IsProfileSet>
+                    <UserProfile />
+                  </IsProfileSet>
+                }
+                />
+                <Route
+                 path="lobby/created/:id"
                 element={
                   <IsProfileSet>
                     <CreatedLobbies/>
@@ -129,6 +156,14 @@ function App() {
                 element={
                   <IsProfileSet>
                     <MyProfile />
+                  </IsProfileSet>
+                }
+              />
+              <Route
+                path="profile/reviews/"
+                element={
+                  <IsProfileSet>
+                    <ProfileReviews />
                   </IsProfileSet>
                 }
               />

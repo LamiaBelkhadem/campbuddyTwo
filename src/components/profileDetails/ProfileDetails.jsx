@@ -37,30 +37,27 @@ export default function ProfileDetails({ fname, lname, area, age }) {
 
 						</TableRow>
 
-					</TableHead>
-					<TableBody>
-						{rows.map((row, index) => (
-							<TableRow
-								key={row.caption}
-								sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-							>
-								<TableCell component="th" scope="row">
-									{index === 0 && <DriveFileRenameOutlineIcon sx={{ mb: -1, mr: 2 }} />}
-									{index === 1 && <DriveFileRenameOutlineIcon
-										sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-									{index === 2 &&
-										<LocationOnIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-									{index === 3 &&
-										<ContactPageIcon sx={{ mb: -1, mr: 2 }} />} {/* Replace with actual icons */}
-									{row.caption}
-								</TableCell>
-								<TableCell align="right">{row.value}</TableCell>
-
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
-		</div>
-	);
+                </TableHead>
+                <TableBody>
+                    {rows.map((row, index) => (
+                        <TableRow
+                            key={row.caption}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                            <TableCell component="th" scope="row" >
+                                {index === 0 && <DriveFileRenameOutlineIcon sx={{ mb: -1, mr: 2 }} />}
+                                {index === 1 && <DriveFileRenameOutlineIcon sx={{ mb: -1, mr: 2 }} />}  
+                                {index === 2 && <LocationOnIcon sx={{ mb: -1, mr: 2 }} />}  
+                                {index === 3 && <ContactPageIcon sx={{ mb: -1, mr: 2 }} />}  
+                                {row.caption}
+                            </TableCell>
+                            <TableCell align="right" >{row.value}</TableCell>
+                          
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+            </TableContainer>
+    </div>
+    );
 }

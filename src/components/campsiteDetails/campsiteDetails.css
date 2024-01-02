@@ -34,7 +34,8 @@
 .campsite-details-container .campsite-img {
 
     width: 400px;
-    height: auto;
+    height: 500px;
+    overflow: hidden;
 }
 
 .campsite-details-text .campsite-name {
@@ -112,8 +113,8 @@
 /* Controls (next/prev) */
 .carousel-control {
     position: absolute;
-    top: 50%; /* center vertically */
-    transform: translateY(-50%); /* adjust the position to truly center it */
+    top: 50%; 
+    transform: translateY(-50%); 
     z-index: 10;
     cursor: pointer;
 }
@@ -194,9 +195,9 @@
 
 }
 .star-filled {
-    color: #ffc107; /* Gold color for filled stars */
+    color: #ffc107; 
 }
 
 .star-empty {
-    color: #e4e5e9; /* Light gray for empty parts of stars */
+    color: #e4e5e9; 
 }

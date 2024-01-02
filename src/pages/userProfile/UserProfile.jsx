@@ -1,4 +1,4 @@
-import SidebarProfil from "../../components/SidebarProfile/SidebarProfil.jsx";
+import SidebarUserProfil from "../../components/sidebarUserProfile/SidebarUserProfil.jsx";
 import AccountDetails from "../../components/accountDetails/AccountDetails.jsx";
 import CamperInfo from "../../components/camperInfo/CamperInfo.jsx";
 import Footer from "../../components/common/footer/index.jsx";
@@ -6,26 +6,29 @@ import LoadingPage from "../../components/common/loading/LoadingPage.jsx";
 import Navbar from "../../components/navbar/Navbar.jsx";
 import ProfileDetails from "../../components/profileDetails/ProfileDetails.jsx";
 import Socials from "../../components/socials/Socials.jsx";
-import { useGetMyProfile } from "../../hooks/api/profile/useGetMyProfile.jsx";
-import "./my-profile.css";
+import { useViewProfile } from "../../hooks/api/profile/useViewProfile.jsx";
 import ProfileReviews from "../../components/ProfileReview/index.jsx";
-export default function MyProfile() {
-  const { data: profile, isLoading } = useGetMyProfile();
-const me=true;
+
+import "./userProfile.css";
+import {useParams } from "react-router-dom";
+export default function UserProfile() {
+  const { id } = useParams();
+  const { data: profile, isLoading } = useViewProfile(id);
+  console.log("profile",profile);
+  const me=false;
   if (isLoading) return <LoadingPage />;
 console.log("fav:", profile?.favorites)
-console.log(profile, "reviews 1")
   return (
     <div className="profile">
       <Navbar />
       <div className="profile1-container">
         <div className="left-side">
           {profile && (
-            <SidebarProfil
+            <SidebarUserProfil
               className="sidebar"
-              username={profile.fname + " " + profile.lname}
-              rate={profile.rate}
+              profile={profile}
               reviews={profile.reviews}
+              username={profile.fname}
               lobbies={profile.lobbies}
             />
           )}
@@ -63,8 +66,8 @@ console.log(profile, "reviews 1")
                              
               />
             )}
-            <AccountDetails bool={me} />
-          </div>
+            <AccountDetails bool={me}/>
+          </div>            
           <div className="user-reviews" style={{ width:'800px', marginBotton:'30px !important', paddingBottom:'50px'}}>
             <ProfileReviews bool={me} profile={profile} style={{width:'680px', }}/>
 

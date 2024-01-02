@@ -5,7 +5,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    border: 2px solid #4CAF50;
+    border: 2px solid #a65e5d;
 
 }
 .host-header {
@@ -39,7 +39,7 @@
 .host-details-card{
     padding: 20px;
     background-color: #FAFAFA;
-    border-top: 2px solid #4CAF50;
+    border-top: 2px solid #a65e5d;
 
 
 }
@@ -76,8 +76,9 @@ host{
 
 /* Styling for the variable */
 .detail-text {
-    color: #007bff;
-    font-size: 18px;
+    color: #000000;
+    font-size: 14px;
+    font-weight: normal !important;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -90,18 +91,21 @@ host{
     padding: 10px;
     margin-top: 15px;
     display: block;
+    text-decoration: none !important;
 }
 
 .more-details:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 .host-name{
-    margin:10px;
+    color: black;
+    margin:15px;
     text-align: center;
+    text-decoration: none;
 }
 
 .joined-participants{
-    border-top: 2px solid #4CAF50 ;
+    border-top: 2px solid #a65e5d ;
     max-height: 500px;
     overflow: scroll;
     scroll-behavior: smooth;

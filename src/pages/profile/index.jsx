@@ -13,7 +13,6 @@ import ProfileReviews from "../../components/ProfileReview/index.jsx";
 export default function MyProfile() {
   const { id } = useParams();
   const { data: profile, isLoading } = useViewProfile(id);
-
   if (isLoading) return <LoadingPage />;
 
   return (

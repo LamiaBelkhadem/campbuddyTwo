@@ -10,6 +10,9 @@ export const deleteCampsite = (id, client) =>
 export const getOneCampsite = (id, client) =>
   client.get(`/campsites/${id}`).then((res) => res.data);
 
+  export const getMultipleCampsites = (ids, client) =>
+  client.post("/campsites/multiple", { ids }).then((res) => res.data.campsites);
+  
 export const createCampsite = (data, client) => client.post("/campsites", data);
 
 export const uploadCampsiteImage = (data, client) =>
@@ -29,3 +32,5 @@ export const addCampsiteToFavorites = (id, client) =>
 
 export const removeCampsiteFromFavorites = (id, client) =>
   client.delete(`/campsites/favourites/${id}`).then((res) => res.data.profile);
+
+

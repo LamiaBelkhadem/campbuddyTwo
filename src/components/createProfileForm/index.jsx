@@ -15,6 +15,11 @@ import useAuth from "../../hooks/useAuth";
 import useDisclosure from "../../hooks/useDisclosure";
 import AppModal from "../common/Modal";
 import "./create-profile.css";
+import { getImageURL } from "../../../utils/getImageURL.js";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+
 
 const createProfileSchema = Yup.object().shape({
   gender: Yup.string(),
@@ -34,8 +39,7 @@ const createProfileSchema = Yup.object().shape({
     .required("Experience is required"),
   desc: Yup.string().min(2, "Too Short!").max(500, "Too Long!"),
   area: Yup.string().min(2, "Too Short!").max(500, "Too Long!"),
-  equipment: Yup.string().min(2, "Choose the equipments you have").defined(),
-  interests: Yup.string().min(2, "Too Short!").max(500, "Too Long!"),
+  interests: Yup.string().min(2, "State your interests").defined(),
 });
 
 const _initialValues = {
@@ -46,8 +50,9 @@ const _initialValues = {
   experience: "",
   desc: "",
   area: "",
-  interests: "",
-  equipment: "",
+  twitter:"",
+  instagram:"",
+  facebook:"",
 };
 
 function ProfileForm({ profile }) {
@@ -65,7 +70,7 @@ function ProfileForm({ profile }) {
     useUpdateProfile();
 
   useEffect(() => {
-    // Only try to show the modal if both the profile object and bootstrapModal are set
+
     if (user && !user.emailVerified) {
       onOpen();
     }
@@ -77,8 +82,9 @@ function ProfileForm({ profile }) {
   };
 
   const [equipment, setEquipment] = useState('');
-  const [equipmentList, setEquipmentList] = useState(initialValues.equipment ? initialValues.equipment.split(',') : []);
-
+  const [equipmentList, setEquipmentList] = useState(
+    typeof initialValues.equipment === 'string' ? initialValues.equipment.split(',') : []
+  );
   const handleEquipmentKeyDown = ({ key }) => {
     if (key === "Enter" && equipment.trim() !== '') {
       event.preventDefault(); // Prevent the default form submit action
@@ -88,19 +94,26 @@ function ProfileForm({ profile }) {
     }
   };
 
-  const [interest, setInterest] = useState('');
-  const [interestList, setInterestList] = useState(initialValues.interest ? initialValues.interest.split(',') : []);
+  const [interests, setInterest] = useState('');
+  const [interestList, setInterestList] = useState( typeof initialValues.interests === 'string' ? initialValues.interests.split(',') : []);
 
-  const handleInterestKeyDown = ({ key }) => {
-    if (key === "Enter" && interest.trim() !== '') {
+  const handleInterestKeyDown = ({ key }, setFieldValue) => {
+    if (key === "Enter" && interests.trim() !== '') {
       event.preventDefault(); // Prevent the default form submit action
-
-      setInterestList(prev => [...prev, interest]);
+  
+      const newInterestList = [...interestList, interests];
+      setInterestList(newInterestList);
       setInterest('');
+  
+      // Update Formik's state
+      setFieldValue('interests', newInterestList.join(','));
+      console.log('Updated interests in Formik:', newInterestList.join(','));
+
     }
   };
 
   const submitHandler = async (values) => {
+    console.log("valuesL", values);
     console.log("Here", { selectedImage });
     if (!selectedImage) {
       console.log("here");
@@ -119,15 +132,19 @@ function ProfileForm({ profile }) {
     formData.append("equipment", equipmentList.join(','));
     formData.append("age", values.age);
     formData.append("bio", values.bio);
-    formData.append("interests",  interestList.join(','));
+    formData.append("interests", interestList.join(','));
     formData.append("area", values.area);
     formData.append("experience", values.experience);
     formData.append("fname", values.fname);
     formData.append("gender", values.gender);
     formData.append("lname", values.lname);
+    formData.append("twitter", values.twitter);
+    formData.append("instagram", values.instagram);
+    formData.append("facebook", values.facebook);
+
     updateProfile(formData, {
       onSuccess: () => {
-        navigate("/app/my-profile");
+        navigate("/app/");
       },
       onError: (error) => {
         toast.error(error.response.data.error);
@@ -153,7 +170,10 @@ function ProfileForm({ profile }) {
           validationSchema={createProfileSchema}
           onSubmit={submitHandler}
         >
-          {({ errors, values }) => (
+            {({ errors, values, setFieldValue }) => {
+    // Log the current Formik values
+    console.log('Formik values:', values);
+    return(
             <Form>
               <div
                 className="profile-pic-container"
@@ -164,9 +184,10 @@ function ProfileForm({ profile }) {
                 <img
                   className="profile-pic"
                   src={
-                    selectedImage.picturePath
+                    selectedImage?.picturePath
                       ? selectedImage.picturePath
-                      : "/assets/defaultpp.jpg"
+                      :getImageURL(`defaultpp.jpg`)
+
                   }
                   alt=""
                 />
@@ -218,7 +239,7 @@ function ProfileForm({ profile }) {
                   <Field
                     name="age"
                     className="input-box"
-                    type="age"
+                    type="number"
                     placeholder="Age"
                   />
                 </div>
@@ -255,31 +276,31 @@ function ProfileForm({ profile }) {
               </div>
 
               <Box sx={{ mt: 2 , mb:3}}>
-        <InputLabel htmlFor="interest">Interest</InputLabel>
+        <InputLabel htmlFor="interests">Interests</InputLabel>
         <Input
           fullWidth
-          name="interest"
+          name="interests"
           placeholder="Please type your interests one at a time and hit enter"
-          value={interest}
+          value={interests}
           onChange={(e) => setInterest(e.target.value)}
-          onKeyDown={handleInterestKeyDown}
-          id="interest"
+          onKeyDown={(e) => handleInterestKeyDown(e, setFieldValue)}
+          id="interests"
           sx={{
             border: '1px solid #e0e0e0', // light grey border
             backgroundColor:'#E8E8E8',
             borderRadius: '4px', // rounded corners
-            padding: '10px 12px', // some padding inside the input
-            fontSize: '0.875rem', // smaller font size
-            '&::placeholder': { // styles for the placeholder
+            padding: '10px 12px', 
+            fontSize: '0.875rem', 
+            '&::placeholder': {
               color: 'grey.500',
               opacity: 1,
             },
             '&:hover': {
-              borderColor: 'grey.400', // darker border on hover
+              borderColor: 'grey.400', 
             },
             '&:focus': {
-              borderColor: 'primary.main', // primary color border on focus
-              boxShadow: `0 0 0 2px rgba(25, 118, 210, 0.3)`, // optional - add a subtle shadow effect on focus
+              borderColor: 'primary.main',
+              boxShadow: `0 0 0 2px rgba(25, 118, 210, 0.3)`, 
             },
           }}
         />
@@ -352,8 +373,43 @@ function ProfileForm({ profile }) {
                   {values.desc.length}/500
                 </p>
                 </div>
+
+
               </div>
-            
+
+              <div className="box1">
+                <div className="input-icon">
+                  <TwitterIcon className="icon" />
+                  <Field
+                    name="twitter"
+                    className="input-box"
+                    type="text"
+                    placeholder="Twitter"
+                  />
+                </div>
+
+                <div className="input-icon">
+                  <FacebookIcon className="icon" />
+                  <Field
+                    name="facebook"
+                    className="input-box"
+                    type="text"
+                    placeholder="Facebook"
+                  />
+                </div>
+                <div className="input-icon">
+                  <InstagramIcon className="icon" />
+                  <Field
+                    name="instagram"
+                    className="input-box"
+                    type="text"
+                    placeholder="Instagram"
+                  />
+                </div>
+              </div>
+
+              {JSON.stringify(errors)}
+
               <button
                 className="update-btn submit-btn"
                 type="submit"
@@ -362,7 +418,7 @@ function ProfileForm({ profile }) {
                 Update Profile
               </button>
             </Form>
-          )}
+          );}}
         </Formik>
         <div className="skip-container">
         </div>

@@ -23,13 +23,15 @@ import { useAddProfileReview } from "../../hooks/api/profile/useAddProfileReview
 import { useDeleteProfileReview } from "../../hooks/api/profile/useDeleteProfileReview";
 import useDisclosure from "../../hooks/useDisclosure";
 import useAuth from "../../hooks/useAuth";
-
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 const initialValues = {
   rating: "",
   comment: "",
 };
 
 const ReviewsList = ({
+  bool,
   reviews,
   onAddReview,
   deleteReview,
@@ -39,50 +41,56 @@ const ReviewsList = ({
 }) => {
   const { user } = useAuth();
   console.log(user);
+  console.log("bool2", bool)
   return (
     <Fragment>
       <Card>
         <CardContent>
           <Box
+          
             display="flex"
             justifyContent="space-between"
             alignItems="center"
           >
             <Typography variant="h5">Reviews</Typography>
-            <Button onClick={onOpen}>
+            {!bool && (<Button onClick={onOpen}>
               <AddIcon />
-            </Button>
+            </Button>)}
           </Box>
           <Divider style={{ margin: "10px 0" }} />
 
+        
           {reviews?.length > 0 ? (
-            reviews.map((review, index) => (
-              <Card key={index}>
-                <Stack>
-                  {review.user === user._id && (
-                    <Stack direction="row" mb={-2}>
-                      <Box flex={1} />
-                      <Button onClick={deleteReview}>
-                        <Delete />
-                      </Button>
-                    </Stack>
-                  )}
-                  <Typography variant="body1">
-                    <strong>User:</strong> {review.user.username}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Rating:</strong> {review.rating}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Comment:</strong> {review.comment}
-                  </Typography>
-                  <Divider style={{ margin: "10px 0" }} />
-                </Stack>
-              </Card>
-            ))
-          ) : (
-            <Typography variant="body2">No reviews available.</Typography>
-          )}
+  reviews.map((review, index) => (
+    <div className="review-card" key={index}>
+      <div className="review-header">
+        <span className="reviewer-name">{review.user?.username}</span>
+        <div className="review-rating">
+          {[...Array(5)].map((_, i) => {
+            // Debugging: Log the rate and compare value
+            console.log(`Rate: ${review?.rating}, Compare: ${i < review?.rating}`);
+            return (
+              i < review?.rating ? (
+                <StarIcon sx={{color:'#ffc107 !important'}} key={i} />
+              ) : (
+                <StarBorderIcon  sx={{color:'#ffc107 !important'}}key={i} />
+              )
+            );
+          })}
+        </div>
+      </div>
+      <div className="review-text">{review.comment}</div>
+    </div>
+  ))
+) : (
+  
+  bool ? (
+    <p>No reviews yet. Be the first to review!</p>
+  ) : (
+    <p>No reviews yet.</p>
+  )
+  
+)}
         </CardContent>
       </Card>
 
@@ -90,7 +98,7 @@ const ReviewsList = ({
         className="modal-dialog"
         open={isOpen}
         sx={{
-          width: "100vw",
+          width: "600px",
         }}
       >
         <DialogTitle className="modal-header">
@@ -177,11 +185,11 @@ const ReviewsList = ({
   );
 };
 
-const ProfileReviews = ({ profile }) => {
-  const { mutate: addReview } = useAddProfileReview(profile._id);
-
+const ProfileReviews = ({ profile, bool }) => {
+  const { mutate: addReview } = useAddProfileReview(profile?._id);
+  console.log("bool1", bool)
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const { mutate: deleteReview } = useDeleteProfileReview(profile._id);
+  const { mutate: deleteReview } = useDeleteProfileReview(profile?._id);
 
   const onAddReview = (values) => {
     addReview(
@@ -206,7 +214,8 @@ const ProfileReviews = ({ profile }) => {
 
   return (
     <ReviewsList
-      reviews={profile.reviews}
+        bool={bool}
+      reviews={profile?.reviews}
       onAddReview={onAddReview}
       deleteReview={onDeleteReview}
       onOpen={onOpen}
