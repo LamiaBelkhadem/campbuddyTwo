@@ -49,7 +49,7 @@ export default function CampsiteDetails({ campsite }) {
 const averageRating = calculateAverageRating(campsite?.reviews);
 console.log("average",averageRating)
   const categoryTags = campsite.category.split(",").map((tag) => tag.trim());
-  const amenitiesTags = campsite?.amenities?.split(",").map((tag) => tag.trim());
+  const amenitiesTags = campsite.amenities?.length ?campsite.amenities:campsite?.amenities?.split(",").map((tag) => tag.trim());
 
   const renderStars = ({ rating }) => {
     console.log("rating",rating)

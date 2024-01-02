@@ -1,18 +1,17 @@
 import EventIcon from "@mui/icons-material/Event";
-import { toast } from "react-toastify";
-import LoadingPage from "../common/loading/LoadingPage";
 import GroupIcon from "@mui/icons-material/Group";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PersonIcon from "@mui/icons-material/Person";
+import { Button } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { getImageURL } from "../../../utils/getImageURL";
 import { useJoinLobby } from "../../hooks/api/lobbies/useJoinLobby";
 import { useLeaveLobby } from "../../hooks/api/lobbies/useLeaveLobby";
 import useAuth from "../../hooks/useAuth";
+import LoadingPage from "../common/loading/LoadingPage";
 import "./lobby.css";
-import { Button } from "@mui/material";
-import LoadingPage from "../common/loading/LoadingPage.jsx";
 
 export default function Lobby({ lobby }) {
   const { user } = useAuth();

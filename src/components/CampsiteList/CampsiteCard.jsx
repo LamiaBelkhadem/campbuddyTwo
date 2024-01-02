@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-import CampsitePictureCarousel from "./CampsitePictureCarousel.jsx";
 import {
   Button,
   Card,
@@ -8,6 +7,8 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { getImageURL } from "../../../utils/getImageURL.js";
+import CampsitePictureCarousel from "./CampsitePictureCarousel.jsx";
 
 const CampsiteCard = ({ campsite }) => {
   const {
@@ -24,7 +25,12 @@ const CampsiteCard = ({ campsite }) => {
 
   return (
     <Card>
-      <CardMedia component={"img"} height={200} image={mainImg} alt={name} />
+      <CardMedia
+        component={"img"}
+        height={200}
+        image={getImageURL(mainImg)}
+        alt={name}
+      />
       <CampsitePictureCarousel imgs={images} />
       <CardContent>
         <Typography variant="h5" component="div">
