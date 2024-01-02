@@ -1,3 +1,4 @@
+import { Delete } from "@mui/icons-material";
 import {
   Box,
   Grid,
@@ -8,8 +9,6 @@ import {
 } from "@mui/material";
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { Delete } from "@mui/icons-material";
-import { getImageURL } from "../../../utils/getImageURL.js";
 
 export const ImageUpload = ({
   images,
@@ -96,17 +95,17 @@ export const ImageUpload = ({
         <Grid item xs={5}>
           {mainImg && (
             <Box sx={{ height: 400, overflow: "hidden" }}>
-            <Typography variant="h6" gutterBottom>
-            Main Campsite Image:
-          </Typography>
+              <Typography variant="h6" gutterBottom>
+                Main Campsite Image:
+              </Typography>
               <img
                 src={mainImg}
                 alt="Main"
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
-                  alignItems:"center",
-                  justifyContent:"center",
+                  alignItems: "center",
+                  justifyContent: "center",
                   width: "100%",
                 }}
               />

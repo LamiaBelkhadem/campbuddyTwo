@@ -9,6 +9,7 @@ export const useCreateCampsite = () => {
   const navigate = useNavigate();
 
   return useMutation({
+    mutationKey: "campsite",
     mutationFn: (values) => createCampsite(values, axios),
     onSuccess: () => {
       invalidateQueries(["campsites"]);

@@ -1,4 +1,4 @@
-import { Check } from "@mui/icons-material";
+import { Add, Check } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -26,16 +26,13 @@ const initialValues = {
   category: "",
   security: true,
   desc: "",
-  images: [],
-  amenities: [],
+  amenities: "",
   location: "",
 };
 
 export const CampsiteForm = ({ campsite, mutate, isLoading }) => {
   const [mainImg, setMainImg] = useState(campsite?.mainImg ?? "bnimtir.jpg");
-  const [images, setImages] = useState(
-    campsite?.images ?? initialValues.images
-  );
+  const [images, setImages] = useState(campsite?.images ?? []);
   const navigate = useNavigate();
   const [amenity, setAmenity] = useState("");
   const { mutateAsync: uploadImage, isPending } = useUploadCampsiteImage();
@@ -49,20 +46,13 @@ export const CampsiteForm = ({ campsite, mutate, isLoading }) => {
   };
 
   const onSubmit = (values) => {
-    console.log(values);
-    mutate(
+     mutate(
       {
         ...values,
         images,
         mainImg,
       },
       {
-        onSuccess: () => {
-          toast.success("Operation was  successful");
-          setTimeout(() => {
-            navigate("/app/admin");
-          }, 2000);
-        },
         onError: (error) => {
           toast.error(error.response.data.error);
         },
@@ -157,31 +147,34 @@ export const CampsiteForm = ({ campsite, mutate, isLoading }) => {
 
             <Box sx={{ mt: 5 }}>
               <InputLabel htmlFor="amenities">Amenities</InputLabel>
-              <Field
-                as={Input}
-                fullWidth
-                name={"amenities"}
-                label={"Amenities"}
-                value={amenity}
-                onChange={({ target }) => setAmenity(target.value)}
-                onKeyDown={({ key }) => {
-                  if (key === "Enter" && (amenity != "" || amenity !== "\n")) {
-                    setFieldValue(
-                      "amenities",
-                      values.amenities.concat(amenity)
-                    );
+              <Stack direction="row">
+                <Field
+                  as={Input}
+                  fullWidth
+                  name={"amenities"}
+                  label={"Amenities"}
+                  value={amenity}
+                  onChange={({ target }) => setAmenity(target.value)}
+                  id={"amenities"}
+                />
+                <Add
+                  onClick={() => {
+                    if (amenity !== "\n" && amenity !== "")
+                      setFieldValue(
+                        "amenities",
+                        values.amenities + "," + amenity
+                      );
                     setAmenity("");
-                  }
-                }}
-                id={"amenities"}
-              />
+                  }}
+                />
+              </Stack>
               <Stack
                 direction="row"
                 flexWrap={"wrap"}
                 columnGap={2}
                 sx={{ marginTop: 3 }}
               >
-                {values.amenities.map((a, i) => (
+                {values.amenities.split(",").map((a, i) => (
                   <Chip label={a} key={i} />
                 ))}
               </Stack>
