@@ -19,9 +19,16 @@ export default function createdLobbies() {
 	// If there are no created lobbies
 	if (createdLobbies?.length === 0) {
 		return (
-			<div className="alternative">
+			<div className="profile">
+			<Navbar />
+			<div style={{height:"25vw"}}>
+			<div className="alternative" style={{textAlign:"center", marginTop:"20vw" }}>
 				You haven't created any lobbies yet.
 			</div>
+			</div>
+			<Footer />
+		</div>
+			
 		);
 	}
 

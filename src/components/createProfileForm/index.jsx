@@ -39,7 +39,6 @@ const createProfileSchema = Yup.object().shape({
     .required("Experience is required"),
   desc: Yup.string().min(2, "Too Short!").max(500, "Too Long!"),
   area: Yup.string().min(2, "Too Short!").max(500, "Too Long!"),
-  equipment: Yup.string().min(2, "Choose the equipments you have").defined(),
   interests: Yup.string().min(2, "State your interests").defined(),
 });
 
@@ -51,8 +50,6 @@ const _initialValues = {
   experience: "",
   desc: "",
   area: "",
-  interests: "",
-  equipment: "",
   twitter:"",
   instagram:"",
   facebook:"",
@@ -147,7 +144,7 @@ function ProfileForm({ profile }) {
 
     updateProfile(formData, {
       onSuccess: () => {
-        navigate("/app/my-profile");
+        navigate("/app/");
       },
       onError: (error) => {
         toast.error(error.response.data.error);
@@ -187,7 +184,7 @@ function ProfileForm({ profile }) {
                 <img
                   className="profile-pic"
                   src={
-                    selectedImage.picturePath
+                    selectedImage?.picturePath
                       ? selectedImage.picturePath
                       :getImageURL(`defaultpp.jpg`)
 

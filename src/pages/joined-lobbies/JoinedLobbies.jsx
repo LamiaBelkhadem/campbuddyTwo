@@ -17,9 +17,12 @@ export default function joinedLobbies() {
 	return (
 		<div className="profile">
 			<Navbar />
+			<div style={{minHeight:"45vw"}}>
+				<h1 style={{marginTop:"5vw", marginLeft:"25vw"}}>Joined Lobbies</h1>
 			{joinedLobbies?.map((l) => (
 				<Lobby key={l._id} lobby={l} />
 			))}
+			</div>
 
 			<Footer />
 		</div>
